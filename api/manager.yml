@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - AccountService
-      summary: ListAccounts returns the list of accounts
+      summary: Returns the list of accounts
       operationId: AccountService_ListAccounts
       responses:
         200:
@@ -65,7 +65,7 @@ paths:
     put:
       tags:
       - AccountService
-      summary: Update Password updates an account's password to a new value
+      summary: Updates an account's password to a new value
       operationId: AccountService_UpdatePassword
       requestBody:
         content:
@@ -116,7 +116,7 @@ paths:
     post:
       tags:
       - AccountService
-      summary: CreateToken creates a token
+      summary: Creates a token for the account
       operationId: AccountService_CreateToken
       parameters:
       - name: name
@@ -148,7 +148,7 @@ paths:
     delete:
       tags:
       - AccountService
-      summary: DeleteToken deletes a token
+      summary: Deletes a token for the account
       operationId: AccountService_DeleteToken
       parameters:
       - name: name
@@ -178,7 +178,7 @@ paths:
     get:
       tags:
       - EnvironmentService
-      summary: List returns list of environments
+      summary: Returns list of available environments. It supports parameters to limit the obtained results
       operationId: EnvironmentService_List
       parameters:
       - name: name
@@ -199,7 +199,7 @@ paths:
           type: string
       - name: selector
         in: query
-        description: the selector to to restrict returned list to environments only
+        description: the selector to restrict returned list to environments only
           with matched labels.
         schema:
           type: string
@@ -224,15 +224,17 @@ paths:
     post:
       tags:
       - EnvironmentService
-      summary: Create creates an environment
+      summary: Creates an environment
       operationId: EnvironmentService_Create
       parameters:
       - name: upsert
         in: query
+        description: update if already created
         schema:
           type: boolean
       - name: validate
         in: query
+        description: validates and execute a dry run
         schema:
           type: boolean
       requestBody:
@@ -243,7 +245,7 @@ paths:
         required: true
       responses:
         200:
-          description: A successful response.
+          description: A successful response with the created environment
           content:
             environment/json:
               schema:
@@ -666,7 +668,7 @@ paths:
     delete:
       tags:
       - EnvironmentService
-      summary: Terminate Operation terminates the currently running operation
+      summary: Terminates the currently running operation
       operationId: EnvironmentService_TerminateOperation
       parameters:
       - name: name
@@ -687,7 +689,7 @@ paths:
             environment/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments/{name}/device/{deviceName}/logs:
+  /api/v1/environments/{name}/device/{resourceName}/logs:
     get:
       tags:
       - EnvironmentService
@@ -774,8 +776,6 @@ paths:
                 description: Stream result of environmentLogEntry
                 type: object
                 properties:
-                  error:
-                    $ref: '#/components/schemas/runtimeError'
                   result:
                     $ref: '#/components/schemas/environmentLogEntry'
         default:
@@ -940,7 +940,7 @@ paths:
     get:
       tags:
       - EnvironmentService
-      summary: ListResourceActions returns list of resource actions
+      summary: Returns a list of resource actions
       operationId: EnvironmentService_ListResourceActions
       parameters:
       - name: name
@@ -984,7 +984,7 @@ paths:
     post:
       tags:
       - EnvironmentService
-      summary: RunResourceAction run resource action
+      summary: Run resource action
       operationId: EnvironmentService_RunResourceAction
       parameters:
       - name: name
@@ -2555,13 +2555,6 @@ components:
           type: object
           additionalProperties:
             type: string
-        providerName:
-          description: |-
-            The name of the provider which the object belongs to.
-            This is used to distinguish resources with same name and namespace in different providers.
-            This field is not set anywhere right now and apiserver is going to ignore it if set in create or update request.
-            +optional
-          type: string
         creationTimestamp:
           $ref: '#/components/schemas/v1Time'
         deletionGracePeriodSeconds:
@@ -2617,8 +2610,6 @@ components:
             Map of string keys and values that can be used to organize and categorize
             (scope and select) objects. May match selectors of replication controllers
             and services.
-            More info: http://kubernetes.io/docs/user-guide/labels
-            +optional
           type: object
           additionalProperties:
             type: string
@@ -2632,7 +2623,6 @@ components:
             controller's name, or the name of a specific apply path like
             "ci-cd". The set of fields is always in the version that the
             workflow used when modifying the object.
-
             +optional
           items:
             $ref: '#/components/schemas/v1ManagedFieldsEntry'
@@ -2653,7 +2643,6 @@ components:
             equivalent to the "default" namespace, but "default" is the canonical representation.
             Not all objects are required to be scoped to a namespace - the value of this field for
             those objects will be empty.
-
             Must be a DNS_LABEL.
             Cannot be updated.
             More info: http://kubernetes.io/docs/user-guide/namespaces
@@ -2831,6 +2820,7 @@ components:
           $ref: '#/components/schemas/v1alphaOperation'
         spec:
           $ref: '#/components/schemas/v1alphaEnvironmentSpec'
+          description: information for managing the environment
         status:
           $ref: '#/components/schemas/v1alphaEnvironmentStatus'
     v1alphaEnvironmentCondition:
@@ -2880,10 +2870,6 @@ components:
         of an environment
       type: object
       properties:
-        chart:
-          type: string
-          description: Chart is a Helm chart name, and must be specified for environments
-            sourced from a Helm repo.
         directory:
           $ref: '#/components/schemas/v1alphaEnvironmentSourceDirectory'
         path:
@@ -2902,7 +2888,7 @@ components:
             TargetRevision defines the revision of the source to sync the environment to.
     v1alphaEnvironmentSourceDirectory:
       description: EnvironmentSourceDirectory holds options for environments of type plain
-        YAML or Jsonnet
+        YAML
       type: object
       properties:
         exclude:
@@ -3011,7 +2997,6 @@ components:
     v1alphaEnvironmentTree:
       description: |-
         EnvironmentTree holds nodes which belongs to the environment
-        TODO: describe purpose of this type
       type: object
       properties:
         hosts:
@@ -3053,7 +3038,7 @@ components:
             strategy
           type: string
     v1alphaProvider:
-      description: Provider is the definition of a provider resource
+      description: Provider is the definition of a resource provider
       type: object
       properties:
         annotations:
@@ -3245,8 +3230,6 @@ components:
     v1alphaHostInfo:
       description: |-
         HostInfo holds host name and resources metrics
-        TODO: describe purpose of this type
-        TODO: describe members of this type
       type: object
       properties:
         name:
@@ -3695,7 +3678,7 @@ components:
       type: object
       properties:
         group:
-          description: Group specifies the API group of the resource
+          description: Group specifies the  group of the resource
           type: string
         hookPhase:
           type: string
@@ -3706,7 +3689,7 @@ components:
           description: HookType specifies the type of the hook. Empty for non-hook resources
           type: string
         kind:
-          description: Kind specifies the API kind of the resource
+          description: Kind specifies the  kind of the resource
           type: string
         message:
           description: Message contains an informational or error message for the last sync
@@ -3774,7 +3757,7 @@ components:
         deployedAt:
           $ref: '#/components/schemas/v1Time'
         id:
-          description: ID is an auto incrementing identifier of the RevisionHistory
+          description: ID is an auto incrementing identifier of the Revision History
           type: string
           format: int64
         revision:
@@ -3790,7 +3773,6 @@ components:
           description: |-
             who authored this revision,
             typically their name and email, e.g. "John Doe <john_doe@my-company.com>",
-            but might not match this example
           type: string
         date:
           $ref: '#/components/schemas/v1Time'
@@ -3799,10 +3781,6 @@ components:
             Message contains the message associated with the revision, most likely the commit message.
             The message is truncated to the first newline or 64 characters (which ever comes first)
           type: string
-        signatureInfo:
-          type: string
-          description: SignatureInfo contains a hint on the signer if the revision
-            was signed with GPG, and signature verification is enabled.
         tags:
           description: |-
             Tags specifies any tags currently attached to the revision
@@ -3810,14 +3788,6 @@ components:
           type: array
           items:
             type: string
-    v1alphaSignatureKey:
-      description: SignatureKey is the specification of a key required to verify commit
-        signatures with
-      type: object
-      properties:
-        keyID:
-          description: The ID of the key in hexadecimal notation
-          type: string
     v1alphaSyncOperation:
       type: object
       properties:
@@ -3940,7 +3910,6 @@ components:
         force:
           type: boolean
           description: |-
-            Force indicates whether or not to supply the --force flag to `kubectl apply`.
             The --force flag deletes and re-create the resource, when PATCH encounters conflict and has
             retried for 5 times.
     v1alphaSyncStrategyHook:
@@ -3950,7 +3919,6 @@ components:
           $ref: '#/components/schemas/v1alphaSyncStrategyApply'
       description: |-
         SyncStrategyHook will perform a sync using hooks annotations.
-        If no hook annotation is specified falls back to `kubectl apply`.
     v1alphaSyncWindow:
       description: SyncWindow contains the kind, time, duration and attributes that are
         used to assign the syncWindows to environments
@@ -4033,18 +4001,6 @@ components:
         GitTag:
           type: string
         GitTreeState:
-          type: string
-        GoVersion:
-          type: string
-        HelmVersion:
-          type: string
-        JsonnetVersion:
-          type: string
-        KsonnetVersion:
-          type: string
-        KubectlVersion:
-          type: string
-        KustomizeVersion:
           type: string
         Platform:
           type: string
