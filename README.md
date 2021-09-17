@@ -1,104 +1,104 @@
 # veaas
 Virtual Environment as a Service repository
 
-This reposotory contains the implementation of the Virtual Environment as a Service Project:
+This reposotory contains the implementation of the Virtual Environment as a Service Project. It will be implemented following the operator pattern offering an API that will provide the required operations to allow the management and operation required by the service.
 
 
-- api, contains the description of the services required to provide the service. It's done using OpenApi 3.0 specification.
+- [api](api), contains the description of the services required to provide the service. It's done using OpenApi 3.0 specification.
 
 
 ## Dominios
 
-Four domains for data:
+Four data domains have been identified. Each regarding 
 
 - Infrastructure, the physical/virtual computing resources where the environments will be created and the service providers.
 
 Phisical/Virtual infrastructure
 
-v1alphaHostInfo
+v1HostInfo
 v1HostSystemInfo
-v1alphaHostResourceInfo
+v1HostResourceInfo
 v1NetworkIngress
 v1PortStatus
 
 Providers
 
-v1alphaProvider
-v1alphaProviderConfig
-v1alphaProviderInfo
-v1alphaProviderList
-v1alphaProviderCacheInfo
+v1Provider
+v1ProviderConfig
+v1ProviderInfo
+v1ProviderList
+v1ProviderCacheInfo
 
  
 - Environments, this includes the resources required to create the desired environment workspace (devices).
 
-v1alphaWorkSpace
-v1alphaWorkSpaceSpec
-v1alphaWorkSpaceStatus
-v1alphaWorkSpaceCondition
-v1alphaWorkSpaceDestination
-v1alphaWorkSpaceSource
-v1alphaWorkSpaceSourceDirectory
-v1alphaWorkSpaceSourcePlugin
-v1alphaWorkSpaceSummary
-v1alphaWorkSpaceTree
-v1alphaWorkSpaceList
+v1WorkSpace
+v1WorkSpaceSpec
+v1WorkSpaceStatus
+v1WorkSpaceCondition
+v1WorkSpaceDestination
+v1WorkSpaceSource
+v1WorkSpaceSourceDirectory
+v1WorkSpaceSourcePlugin
+v1WorkSpaceSummary
+v1WorkSpaceTree
+v1WorkSpaceList
 
 
-v1alphaWorkSpaceWatchEvent (Git)
+v1WorkSpaceWatchEvent (Git)
 
 Resource (requires Spec?)
-v1alphaResource
-v1alphaResourceStatus
-v1alphaResourceRef
-v1alphaResourceDiff
-v1alphaResourceIgnoreDifferences
-v1alphaResourceNetworkingInfo
-v1alphaResourceOverride
-v1alphaResourceResult
+v1Resource
+v1ResourceStatus
+v1ResourceRef
+v1ResourceDiff
+v1ResourceIgnoreDifferences
+v1ResourceNetworkingInfo
+v1ResourceOverride
+v1ResourceResult
 
 
-v1alphaConnectionState
-v1alphaHealthStatus
+v1ConnectionState
+v1HealthStatus
 
 
 - Control, that should include operation & managment data structures.
 
 
-v1alphaOperation
-v1alphaOperationInitiator
-v1alphaOperationState
+v1Operation
+v1OperationInitiator
+v1OperationState
 
-v1alphaCommand
-v1alphaComparedTo
+v1Command
+v1ComparedTo
 
-v1alphaResourceAction
-v1alphaResourceActionParam
+v1ResourceAction
+v1ResourceActionParam
 
-v1alphaSyncOperation
-v1alphaSyncOperationResource
-v1alphaSyncOperationResult
-v1alphaSyncPolicy
-v1alphaSyncPolicyAutomated
+v1SyncOperation
+v1SyncOperationResource
+v1SyncOperationResult
+v1SyncPolicy
+v1SyncPolicyAutomated
 
-v1alphaSyncStatus
-v1alphaSyncStrategy
-v1alphaSyncStrategyApply
-v1alphaSyncStrategyHook
-v1alphaSyncWindow
-v1alphaBackoff
+v1SyncStatus
+v1SyncStrategy
+v1SyncStrategyApply
+v1SyncStrategyHook
+v1SyncWindow
+v1Backoff
 
-v1alphaRevisionHistory
-v1alphaRevisionMetadata
-v1alphaOrphanedResourcesMonitorSettings
+v1RevisionHistory
+v1RevisionMetadata
+v1OrphanedResourcesMonitorSettings
 
 
 - GitOps, data model required to implement the flow.
 
-v1alphaRepoCreds
-v1alphaRepoCredsList
-v1alphaRepository
-v1alphaRepositoryList
+v1RepoCreds
+v1RepoCredsList
+v1Repository
+v1RepositoryList
 
 
 - Common
@@ -108,13 +108,13 @@ v1ObjectMeta
 v1ListMeta
 v1ObjectReference
 v1OwnerReference
-v1alphaInfo
-v1alphaInfoItem
+v1Info
+v1InfoItem
 
-v1alphaJWTToken
-v1alphaJWTTokens
+v1JWTToken
+v1JWTTokens
 
-v1alphaTLSClientConfig
+v1TLSClientConfig
 
 v1Event
 v1EventList
@@ -122,14 +122,28 @@ v1EventSeries
 v1EventSource
 
 
-v1alphaKnownTypeField
+v1KnownTypeField
 
-v1alphaOrphanedResourceKey
+v1OrphanedResourceKey
 
-v1alphaOverrideIgnoreDiff
+v1OverrideIgnoreDiff
 
-v1alphaRetryStrategy
+v1RetryStrategy
 
 
+## References
 
+[IoT Edge Challenges and Functions](https://datatracker.ietf.org/doc/draft-irtf-t2trg-iot-edge/)
+
+[Simulating Fog and Edge Computing
+Scenarios: An Overview and Research Challenges](https://doi.org/10.3390/fi11030055)
+
+[Mobile Edge Emulation Platform](https://github.com/InterDigitalInc/AdvantEDGE)
+
+
+[Resource Management Approaches in Fog Computing: a Comprehensive Review](https://doi.org/10.1007/s10723-019-09491-1)
+
+- https://www.gitops.tech/
+- https://www.redhat.com/en/topics/devops/what-is-gitops
+- 
 
