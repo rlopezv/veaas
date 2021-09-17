@@ -17,13 +17,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/accountAccountsList'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
   /api/v1/account/check/{resource}/{action}/{subresource}:
@@ -52,13 +52,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/accountCheckResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
   /api/v1/account/password:
@@ -69,7 +69,7 @@ paths:
       operationId: AccountService_UpdatePassword
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
               $ref: '#/components/schemas/accountUpdatePasswordRequest'
         required: true
@@ -77,13 +77,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/accountUpdatePasswordResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
@@ -103,13 +103,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/accountAccount'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
   /api/v1/account/{name}/token:
@@ -126,7 +126,7 @@ paths:
           type: string
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
               $ref: '#/components/schemas/accountCreateTokenRequest'
         required: true
@@ -134,13 +134,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/accountCreateTokenResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
@@ -165,30 +165,30 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/accountEmptyResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments:
+  /api/v1/workSpaces:
     get:
       tags:
-      - EnvironmentService
-      summary: Returns list of available environments. It supports parameters to limit the obtained results
-      operationId: EnvironmentService_List
+      - WorkSpaceService
+      summary: Returns list of available workSpaces. It supports parameters to limit the obtained results
+      operationId: WorkSpaceService_List
       parameters:
       - name: name
         in: query
-        description: the environment's name.
+        description: the workSpace's name.
         schema:
           type: string
       - name: refresh
         in: query
-        description: forces environment reconciliation if set to true.
+        description: forces workSpace reconciliation if set to true.
         schema:
           type: string
       - name: resourceVersion
@@ -199,33 +199,33 @@ paths:
           type: string
       - name: selector
         in: query
-        description: the selector to restrict returned list to environments only
+        description: the selector to restrict returned list to workSpaces only
           with matched labels.
         schema:
           type: string
       - name: repo
         in: query
-        description: the repoURL to restrict returned list environments.
+        description: the repoURL to restrict returned list workSpaces.
         schema:
           type: string
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaEnvironmentList'
+                $ref: '#/components/schemas/v1WorkSpaceList'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
     post:
       tags:
-      - EnvironmentService
-      summary: Creates an environment
-      operationId: EnvironmentService_Create
+      - WorkSpaceService
+      summary: Creates an workSpace
+      operationId: WorkSpaceService_Create
       parameters:
       - name: upsert
         in: query
@@ -239,32 +239,32 @@ paths:
           type: boolean
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1alphaEnvironment'
+              $ref: '#/components/schemas/v1WorkSpace'
         required: true
       responses:
         200:
-          description: A successful response with the created environment
+          description: A successful response with the created workSpace
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaEnvironment'
+                $ref: '#/components/schemas/v1WorkSpace'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/environments/{environment.metadata.name}:
+  /api/v1/workSpaces/{workSpace.metadata.name}:
     put:
       tags:
-      - EnvironmentService
-      summary: Update updates an environment
-      operationId: EnvironmentService_Update
+      - WorkSpaceService
+      summary: Update updates an workSpace
+      operationId: WorkSpaceService_Update
       parameters:
-      - name: environment.metadata.name
+      - name: workSpace.metadata.name
         in: path
         description: |-
           Name must be unique within a namespace. Is required when creating resources, although
@@ -283,32 +283,32 @@ paths:
           type: boolean
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1alphaEnvironment'
+              $ref: '#/components/schemas/v1WorkSpace'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaEnvironment'
+                $ref: '#/components/schemas/v1WorkSpace'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/environments/{environmentName}/managed-resources:
+  /api/v1/workSpaces/{workSpaceName}/managed-resources:
     get:
       tags:
-      - EnvironmentService
+      - WorkSpaceService
       summary: ManagedResources returns list of managed resources
-      operationId: EnvironmentService_ManagedResources
+      operationId: WorkSpaceService_ManagedResources
       parameters:
-      - name: environmentName
+      - name: workSpaceName
         in: path
         required: true
         schema:
@@ -337,23 +337,23 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/environmentManagedResourcesResponse'
+                $ref: '#/components/schemas/workSpaceManagedResourcesResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments/{environmentName}/resource-tree:
+  /api/v1/workSpaces/{workSpaceName}/resource-tree:
     get:
       tags:
-      - EnvironmentService
+      - WorkSpaceService
       summary: ResourceTree returns resource tree
-      operationId: EnvironmentService_ResourceTree
+      operationId: WorkSpaceService_ResourceTree
       parameters:
-      - name: environmentName
+      - name: workSpaceName
         in: path
         required: true
         schema:
@@ -382,31 +382,31 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaEnvironmentTree'
+                $ref: '#/components/schemas/v1WorkSpaceTree'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments/{name}:
+  /api/v1/workSpaces/{name}:
     get:
       tags:
-      - EnvironmentService
-      summary: Get returns an environment by name
-      operationId: EnvironmentService_Get
+      - WorkSpaceService
+      summary: Get returns an workSpace by name
+      operationId: WorkSpaceService_Get
       parameters:
       - name: name
         in: path
-        description: the environment's name
+        description: the workSpace's name
         required: true
         schema:
           type: string
       - name: refresh
         in: query
-        description: forces environment reconciliation if set to true.
+        description: forces workSpace reconciliation if set to true.
         schema:
           type: string
       - name: resourceVersion
@@ -417,33 +417,33 @@ paths:
           type: string
       - name: selector
         in: query
-        description: the selector to to restrict returned list to environments only
+        description: the selector to to restrict returned list to workSpaces only
           with matched labels.
         schema:
           type: string
       - name: repo
         in: query
-        description: the repoURL to restrict returned list environments.
+        description: the repoURL to restrict returned list workSpaces.
         schema:
           type: string
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaEnvironment'
+                $ref: '#/components/schemas/v1WorkSpace'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
     delete:
       tags:
-      - EnvironmentService
-      summary: Delete deletes an environment
-      operationId: EnvironmentService_Delete
+      - WorkSpaceService
+      summary: Delete deletes an workSpace
+      operationId: WorkSpaceService_Delete
       parameters:
       - name: name
         in: path
@@ -462,20 +462,20 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/environmentEnvironmentResponse'
+                $ref: '#/components/schemas/workSpaceWorkSpaceResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
     patch:
       tags:
-      - EnvironmentService
-      summary: Patch patch an environment
-      operationId: EnvironmentService_Patch
+      - WorkSpaceService
+      summary: Patch patch an workSpace
+      operationId: WorkSpaceService_Patch
       parameters:
       - name: name
         in: path
@@ -484,30 +484,30 @@ paths:
           type: string
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/environmentEnvironmentPatchRequest'
+              $ref: '#/components/schemas/workSpaceWorkSpacePatchRequest'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaEnvironment'
+                $ref: '#/components/schemas/v1WorkSpace'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/environments/{name}/events:
+  /api/v1/workSpaces/{name}/events:
     get:
       tags:
-      - EnvironmentService
+      - WorkSpaceService
       summary: ListResourceEvents returns a list of event resources
-      operationId: EnvironmentService_ListResourceEvents
+      operationId: WorkSpaceService_ListResourceEvents
       parameters:
       - name: name
         in: path
@@ -530,21 +530,21 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/v1EventList'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments/{name}/logs:
+  /api/v1/workSpaces/{name}/logs:
     get:
       tags:
-      - EnvironmentService
-      summary: Returns stream of log entries for the specified environment
-      operationId: EnvironmentService_EnvironmentLogs
+      - WorkSpaceService
+      summary: Returns stream of log entries for the specified workSpace
+      operationId: WorkSpaceService_WorkSpaceLogs
       parameters:
       - name: name
         in: path
@@ -620,27 +620,27 @@ paths:
         200:
           description: A successful response.(streaming responses)
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                description: Stream result of environmentLogEntry
+                description: Stream result of workSpaceLogEntry
                 type: object
                 properties:
                   error:
                     $ref: '#/components/schemas/runtimeError'
                   result:
-                    $ref: '#/components/schemas/environmentLogEntry'
+                    $ref: '#/components/schemas/workSpaceLogEntry'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments/{name}/manifests:
+  /api/v1/workSpaces/{name}/manifests:
     get:
       tags:
-      - EnvironmentService
-      summary: GetManifests returns environment manifests
-      operationId: EnvironmentService_GetManifests
+      - WorkSpaceService
+      summary: GetManifests returns workSpace manifests
+      operationId: WorkSpaceService_GetManifests
       parameters:
       - name: name
         in: path
@@ -655,21 +655,21 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/repositoryManifestResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments/{name}/operation:
+  /api/v1/workSpaces/{name}/operation:
     delete:
       tags:
-      - EnvironmentService
+      - WorkSpaceService
       summary: Terminates the currently running operation
-      operationId: EnvironmentService_TerminateOperation
+      operationId: WorkSpaceService_TerminateOperation
       parameters:
       - name: name
         in: path
@@ -680,21 +680,21 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/environmentOperationTerminateResponse'
+                $ref: '#/components/schemas/workSpaceOperationTerminateResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments/{name}/device/{resourceName}/logs:
+  /api/v1/workSpaces/{name}/device/{resourceName}/logs:
     get:
       tags:
-      - EnvironmentService
+      - WorkSpaceService
       summary: DeviceLogs returns stream of log entries for the specified device.
-      operationId: EnvironmentService_DeviceLogs
+      operationId: WorkSpaceService_DeviceLogs
       parameters:
       - name: name
         in: path
@@ -771,25 +771,25 @@ paths:
         200:
           description: A successful response.(streaming responses)
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                description: Stream result of environmentLogEntry
+                description: Stream result of workSpaceLogEntry
                 type: object
                 properties:
                   result:
-                    $ref: '#/components/schemas/environmentLogEntry'
+                    $ref: '#/components/schemas/workSpaceLogEntry'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments/{name}/resource:
+  /api/v1/workSpaces/{name}/resource:
     get:
       tags:
-      - EnvironmentService
-      summary: GetResource returns single environment resource
-      operationId: EnvironmentService_GetResource
+      - WorkSpaceService
+      summary: GetResource returns single workSpace resource
+      operationId: WorkSpaceService_GetResource
       parameters:
       - name: name
         in: path
@@ -820,20 +820,20 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/environmentEnvironmentResourceResponse'
+                $ref: '#/components/schemas/workSpaceWorkSpaceResourceResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
     post:
       tags:
-      - EnvironmentService
-      summary: PatchResource patch single environment resource
-      operationId: EnvironmentService_PatchResource
+      - WorkSpaceService
+      summary: PatchResource patch single workSpace resource
+      operationId: WorkSpaceService_PatchResource
       parameters:
       - name: name
         in: path
@@ -866,7 +866,7 @@ paths:
           type: string
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
               type: string
         required: true
@@ -874,21 +874,21 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/environmentEnvironmentResourceResponse'
+                $ref: '#/components/schemas/workSpaceWorkSpaceResourceResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
     delete:
       tags:
-      - EnvironmentService
-      summary: DeleteResource deletes a single environment resource
-      operationId: EnvironmentService_DeleteResource
+      - WorkSpaceService
+      summary: DeleteResource deletes a single workSpace resource
+      operationId: WorkSpaceService_DeleteResource
       parameters:
       - name: name
         in: path
@@ -927,21 +927,21 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/environmentEnvironmentResponse'
+                $ref: '#/components/schemas/workSpaceWorkSpaceResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments/{name}/resource/actions:
+  /api/v1/workSpaces/{name}/resource/actions:
     get:
       tags:
-      - EnvironmentService
+      - WorkSpaceService
       summary: Returns a list of resource actions
-      operationId: EnvironmentService_ListResourceActions
+      operationId: WorkSpaceService_ListResourceActions
       parameters:
       - name: name
         in: path
@@ -972,20 +972,20 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/environmentResourceActionsListResponse'
+                $ref: '#/components/schemas/workSpaceResourceActionsListResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
     post:
       tags:
-      - EnvironmentService
+      - WorkSpaceService
       summary: Run resource action
-      operationId: EnvironmentService_RunResourceAction
+      operationId: WorkSpaceService_RunResourceAction
       parameters:
       - name: name
         in: path
@@ -1014,7 +1014,7 @@ paths:
           type: string
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
               type: string
         required: true
@@ -1022,27 +1022,27 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/environmentEnvironmentResponse'
+                $ref: '#/components/schemas/workSpaceWorkSpaceResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/environments/{name}/revisions/{revision}/metadata:
+  /api/v1/workSpaces/{name}/revisions/{revision}/metadata:
     get:
       tags:
-      - EnvironmentService
+      - WorkSpaceService
       summary: Get the meta-data (author, date, tags, message) for a specific revision
-        of the environment
-      operationId: EnvironmentService_RevisionMetadata
+        of the workSpace
+      operationId: WorkSpaceService_RevisionMetadata
       parameters:
       - name: name
         in: path
-        description: the environment's name
+        description: the workSpace's name
         required: true
         schema:
           type: string
@@ -1056,21 +1056,21 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaRevisionMetadata'
+                $ref: '#/components/schemas/v1RevisionMetadata'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/environments/{name}/rollback:
+  /api/v1/workSpaces/{name}/rollback:
     post:
       tags:
-      - EnvironmentService
-      summary: Rollback syncs an environment to its target state
-      operationId: EnvironmentService_Rollback
+      - WorkSpaceService
+      summary: Rollback syncs an workSpace to its target state
+      operationId: WorkSpaceService_Rollback
       parameters:
       - name: name
         in: path
@@ -1079,30 +1079,30 @@ paths:
           type: string
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/environmentEnvironmentRollbackRequest'
+              $ref: '#/components/schemas/workSpaceWorkSpaceRollbackRequest'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaEnvironment'
+                $ref: '#/components/schemas/v1WorkSpace'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/environments/{name}/spec:
+  /api/v1/workSpaces/{name}/spec:
     put:
       tags:
-      - EnvironmentService
-      summary: UpdateSpec updates an environment spec
-      operationId: EnvironmentService_UpdateSpec
+      - WorkSpaceService
+      summary: UpdateSpec updates an workSpace spec
+      operationId: WorkSpaceService_UpdateSpec
       parameters:
       - name: name
         in: path
@@ -1115,30 +1115,30 @@ paths:
           type: boolean
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1alphaEnvironmentSpec'
+              $ref: '#/components/schemas/v1WorkSpaceSpec'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaEnvironmentSpec'
+                $ref: '#/components/schemas/v1WorkSpaceSpec'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/environments/{name}/sync:
+  /api/v1/workSpaces/{name}/sync:
     post:
       tags:
-      - EnvironmentService
-      summary: Sync syncs an environment to its target state
-      operationId: EnvironmentService_Sync
+      - WorkSpaceService
+      summary: Sync syncs an workSpace to its target state
+      operationId: WorkSpaceService_Sync
       parameters:
       - name: name
         in: path
@@ -1147,30 +1147,30 @@ paths:
           type: string
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/environmentEnvironmentSyncRequest'
+              $ref: '#/components/schemas/workSpaceWorkSpaceSyncRequest'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaEnvironment'
+                $ref: '#/components/schemas/v1WorkSpace'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/environments/{name}/syncwindows:
+  /api/v1/workSpaces/{name}/syncwindows:
     get:
       tags:
-      - EnvironmentService
-      summary: Get returns sync windows of the environment
-      operationId: EnvironmentService_GetEnvironmentSyncWindows
+      - WorkSpaceService
+      summary: Get returns sync windows of the workSpace
+      operationId: WorkSpaceService_GetWorkSpaceSyncWindows
       parameters:
       - name: name
         in: path
@@ -1181,13 +1181,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/environmentEnvironmentSyncWindowsResponse'
+                $ref: '#/components/schemas/workSpaceWorkSpaceSyncWindowsResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
 
@@ -1210,13 +1210,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaProviderList'
+                $ref: '#/components/schemas/v1ProviderList'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
     post:
@@ -1231,21 +1231,21 @@ paths:
           type: boolean
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1alphaProvider'
+              $ref: '#/components/schemas/v1Provider'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaProvider'
+                $ref: '#/components/schemas/v1Provider'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
@@ -1272,21 +1272,21 @@ paths:
             type: string
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1alphaProvider'
+              $ref: '#/components/schemas/v1Provider'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaProvider'
+                $ref: '#/components/schemas/v1Provider'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
@@ -1310,13 +1310,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaProvider'
+                $ref: '#/components/schemas/v1Provider'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
     delete:
@@ -1338,13 +1338,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/providerProviderResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
   /api/v1/providers/{server}/invalidate-cache:
@@ -1363,13 +1363,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaProvider'
+                $ref: '#/components/schemas/v1Provider'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
   /api/v1/providers/{server}/rotate-auth:
@@ -1388,13 +1388,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/providerProviderResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
   /api/v1/repocreds:
@@ -1414,13 +1414,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaRepoCredsList'
+                $ref: '#/components/schemas/v1RepoCredsList'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
     post:
@@ -1437,21 +1437,21 @@ paths:
       requestBody:
         description: Repository definition
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1alphaRepoCreds'
+              $ref: '#/components/schemas/v1RepoCreds'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaRepoCreds'
+                $ref: '#/components/schemas/v1RepoCreds'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
@@ -1470,21 +1470,21 @@ paths:
           type: string
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1alphaRepoCreds'
+              $ref: '#/components/schemas/v1RepoCreds'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaRepoCreds'
+                $ref: '#/components/schemas/v1RepoCreds'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
@@ -1505,13 +1505,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/repocredsRepoCredsResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
   /api/v1/repositories:
@@ -1535,13 +1535,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaRepositoryList'
+                $ref: '#/components/schemas/v1RepositoryList'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
     post:
@@ -1563,21 +1563,21 @@ paths:
       requestBody:
         description: Repository definition
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1alphaRepository'
+              $ref: '#/components/schemas/v1Repository'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaRepository'
+                $ref: '#/components/schemas/v1Repository'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
@@ -1596,21 +1596,21 @@ paths:
           type: string
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1alphaRepository'
+              $ref: '#/components/schemas/v1Repository'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaRepository'
+                $ref: '#/components/schemas/v1Repository'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
@@ -1636,13 +1636,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1alphaRepository'
+                $ref: '#/components/schemas/v1Repository'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
     delete:
@@ -1666,20 +1666,20 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/repositoryRepoResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/repositories/{repo}/environments:
+  /api/v1/repositories/{repo}/workSpaces:
     get:
       tags:
       - RepositoryService
-      summary: ListApps returns list of environments in the repo
+      summary: ListApps returns list of workSpaces in the repo
       operationId: RepositoryService_ListApps
       parameters:
       - name: repo
@@ -1695,13 +1695,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/repositoryRepoEnvironmentsResponse'
+                $ref: '#/components/schemas/repositoryRepoWorkSpacesResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
   /api/v1/repositories/{repo}/refs:
@@ -1725,13 +1725,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/repositoryRefs'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
   /api/v1/repositories/{repo}/validate:
@@ -1795,7 +1795,7 @@ paths:
       requestBody:
         description: The URL to the repo
         content:
-          environment/json:
+          workSpace/json:
             schema:
               type: string
         required: true
@@ -1803,13 +1803,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/repositoryRepoResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
@@ -1817,33 +1817,33 @@ paths:
     post:
       tags:
       - RepositoryService
-      summary: GetAppDetails returns environment details by given path
+      summary: GetAppDetails returns workSpace details by given path
       operationId: RepositoryService_GetAppDetails
       parameters:
       - name: source.repoURL
         in: path
         description: RepoURL is the URL to the repository (Git or Helm) that contains
-          the environment manifests
+          the workSpace manifests
         required: true
         schema:
           type: string
       requestBody:
         content:
-          environment/json:
+          workSpace/json:
             schema:
-              $ref: '#/components/schemas/repositoryRepoEnvironmentDetailsQuery'
+              $ref: '#/components/schemas/repositoryRepoWorkSpaceDetailsQuery'
         required: true
       responses:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
-                $ref: '#/components/schemas/repositoryRepoEnvironmentDetailsResponse'
+                $ref: '#/components/schemas/repositoryRepoWorkSpaceDetailsResponse'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
@@ -1857,13 +1857,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/providerSettings'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
   /api/version:
@@ -1876,13 +1876,13 @@ paths:
         200:
           description: A successful response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/versionVersionMessage'
         default:
           description: An unexpected error response.
           content:
-            environment/json:
+            workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
 components:
@@ -1954,8 +1954,8 @@ components:
           type: string
     accountUpdatePasswordResponse:
       type: object
-    environmentEnvironmentPatchRequest:
-      description: EnvironmentPatchRequest is a request to patch an environment
+    workSpaceWorkSpacePatchRequest:
+      description: WorkSpacePatchRequest is a request to patch an workSpace
       type: object
       properties:
         name:
@@ -1964,19 +1964,19 @@ components:
           type: string
         patchType:
           type: string
-    environmentEnvironmentResourceResponse:
+    workSpaceWorkSpaceResourceResponse:
       type: object
       properties:
         manifest:
           type: string
-    environmentEnvironmentResponse:
+    workSpaceWorkSpaceResponse:
       type: object
       properties:
          manifests:
           type: array
           items:
             type: string
-    environmentEnvironmentRollbackRequest:
+    workSpaceWorkSpaceRollbackRequest:
       type: object
       properties:
         dryRun:
@@ -1988,8 +1988,8 @@ components:
           type: string
         prune:
           type: boolean
-    environmentEnvironmentSyncRequest:
-      description: EnvironmentSyncRequest is a request to apply the config state to live state
+    workSpaceWorkSpaceSyncRequest:
+      description: WorkSpaceSyncRequest is a request to apply the config state to live state
       type: object
       properties:
         dryRun:
@@ -1997,7 +1997,7 @@ components:
         infos:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaInfo'
+            $ref: '#/components/schemas/v1Info'
         manifests:
           type: array
           items:
@@ -2009,16 +2009,16 @@ components:
         resources:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaSyncOperationResource'
+            $ref: '#/components/schemas/v1SyncOperationResource'
         retryStrategy:
-          $ref: '#/components/schemas/v1alphaRetryStrategy'
+          $ref: '#/components/schemas/v1RetryStrategy'
         revision:
           type: string
         strategy:
-          $ref: '#/components/schemas/v1alphaSyncStrategy'
+          $ref: '#/components/schemas/v1SyncStrategy'
         syncOptions:
-          $ref: '#/components/schemas/environmentSyncOptions'
-    environmentEnvironmentSyncWindow:
+          $ref: '#/components/schemas/workSpaceSyncOptions'
+    workSpaceWorkSpaceSyncWindow:
       type: object
       properties:
         duration:
@@ -2029,20 +2029,20 @@ components:
           type: boolean
         schedule:
           type: string
-    environmentEnvironmentSyncWindowsResponse:
+    workSpaceWorkSpaceSyncWindowsResponse:
       type: object
       properties:
         activeWindows:
           type: array
           items:
-            $ref: '#/components/schemas/environmentEnvironmentSyncWindow'
+            $ref: '#/components/schemas/workSpaceWorkSpaceSyncWindow'
         assignedWindows:
           type: array
           items:
-            $ref: '#/components/schemas/environmentEnvironmentSyncWindow'
+            $ref: '#/components/schemas/workSpaceWorkSpaceSyncWindow'
         canSync:
           type: boolean
-    environmentLogEntry:
+    workSpaceLogEntry:
       type: object
       properties:
         content:
@@ -2055,31 +2055,31 @@ components:
           $ref: '#/components/schemas/v1Time'
         timeStampStr:
           type: string
-    environmentManagedResourcesResponse:
+    workSpaceManagedResourcesResponse:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaResourceDiff'
-    environmentOperationTerminateResponse:
+            $ref: '#/components/schemas/v1ResourceDiff'
+    workSpaceOperationTerminateResponse:
       type: object
-    environmentResourceActionsListResponse:
+    workSpaceResourceActionsListResponse:
       type: object
       properties:
         actions:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaResourceAction'
-    environmentSyncOptions:
+            $ref: '#/components/schemas/v1ResourceAction'
+    workSpaceSyncOptions:
       type: object
       properties:
         items:
           type: array
           items:
             type: string
-    environmentv1alphaEnvEntry:
-      description: EnvEntry represents an entry in the environment's environment
+    workSpacev1EnvEntry:
+      description: EnvEntry represents an entry in the workSpace's workSpace
       type: object
       properties:
         name:
@@ -2142,7 +2142,7 @@ components:
         configManagementPlugins:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaConfigManagementPlugin'
+            $ref: '#/components/schemas/v1ConfigManagementPlugin'
         help:
           $ref: '#/components/schemas/providerHelp'
         accessConfig:
@@ -2156,7 +2156,7 @@ components:
         resourceOverrides:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/v1alphaResourceOverride'
+            $ref: '#/components/schemas/v1ResourceOverride'
         statusBadgeEnabled:
           type: boolean
         uiBannerContent:
@@ -2192,16 +2192,16 @@ components:
     repocredsRepoCredsResponse:
       description: RepoCredsResponse is a response to most repository credentials requests
       type: object
-    repositoryEnvironmentInfo:
-      description: EnvironmentInfo contains environment type and app file path
+    repositoryWorkSpaceInfo:
+      description: WorkSpaceInfo contains workSpace type and app file path
       type: object
       properties:
         path:
           type: string
         type:
           type: string
-    repositoryDirectoryEnvironmentSpec:
-      description: DirectoryEnvironmentSpec contains directory
+    repositoryDirectoryWorkSpaceSpec:
+      description: DirectoryWorkSpaceSpec contains directory
       type: object
     repositoryManifestResponse:
       type: object
@@ -2234,30 +2234,30 @@ components:
           type: array
           items:
             type: string
-    repositoryRepoEnvironmentDetailsQuery:
-      description: RepoEnvironmentDetailsQuery contains query information for app details request
+    repositoryRepoWorkSpaceDetailsQuery:
+      description: RepoWorkSpaceDetailsQuery contains query information for app details request
       type: object
       properties:
         appName:
           type: string
         source:
-          $ref: '#/components/schemas/v1alphaEnvironmentSource'
-    repositoryRepoEnvironmentDetailsResponse:
-      description: RepoEnvironmentDetailsResponse environment details
+          $ref: '#/components/schemas/v1WorkSpaceSource'
+    repositoryRepoWorkSpaceDetailsResponse:
+      description: RepoWorkSpaceDetailsResponse workSpace details
       type: object
       properties:
         directory:
-          $ref: '#/components/schemas/repositoryDirectoryEnvironmentSpec'
+          $ref: '#/components/schemas/repositoryDirectoryWorkSpaceSpec'
         type:
           type: string
-    repositoryRepoEnvironmentsResponse:
-      description: RepoEnvironmentsResponse contains environments of specified repository
+    repositoryRepoWorkSpacesResponse:
+      description: RepoWorkSpacesResponse contains workSpaces of specified repository
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/repositoryEnvironmentInfo'
+            $ref: '#/components/schemas/repositoryWorkSpaceInfo'
     repositoryRepoResponse:
       type: object
     runtimeError:
@@ -2376,25 +2376,6 @@ components:
             +optional
           type: string
       description: EventSource contains information for an event.
-    v1FieldsV1:
-      type: object
-      properties:
-        Raw:
-          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-          type: string
-          description: Raw is the underlying serialization of this object.
-          format: byte
-      description: |-
-        FieldsV1 stores a set of fields in a data structure like a Tree, in JSON format.
-    v1GroupKind:
-      type: object
-      properties:
-        group:
-          type: string
-        kind:
-          type: string
-      description: GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
-        concepts during lookup stages without having partially valid types
     v1ListMeta:
       type: object
       properties:
@@ -2429,18 +2410,17 @@ components:
       description: |-
         ListMeta describes metadata that synthetic resources must have, including lists and
         various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
-    v1LoadBalancerIngress:
+    v1NetworkIngress:
       type: object
       properties:
         hostname:
           description: |-
-            Hostname is set for load-balancer ingress points that are DNS based
-            (typically AWS load-balancers)
+            Hostname is set for ingress points
             +optional
           type: string
         ip:
           description: |-
-            IP is set for load-balancer ingress points that are IP based
+            IP is set for ingress points that are IP based
           type: string
         ports:
           description: |-
@@ -2450,38 +2430,8 @@ components:
           items:
             $ref: '#/components/schemas/v1PortStatus'
       description: |-
-        LoadBalancerIngress represents the status of a load-balancer ingress point:
+        NetworkIngress represents the status of an ingress point:
         traffic intended for the service should be sent to an ingress point.
-    v1ManagedFieldsEntry:
-      type: object
-      properties:
-        apiVersion:
-          type: string
-          description: |-
-            APIVersion defines the version of this resource that this field set
-            applies to. The format is "group/version" just like the top-level
-            APIVersion field. It is necessary to track the version of a field
-            set because it cannot be automatically converted.
-        fieldsType:
-          description: |-
-            FieldsType is the discriminator for the different fields format and version.
-            There is currently only one possible value: "FieldsV1"
-          type: string
-        fieldsV1:
-          $ref: '#/components/schemas/v1FieldsV1'
-        manager:
-          type: string
-          description: Manager is an identifier of the workflow managing these fields.
-        operation:
-          type: string
-          description: |-
-            Operation is the type of operation which lead to this ManagedFieldsEntry being created.
-            The only valid values for this field are 'Apply' and 'Update'.
-        time:
-          $ref: '#/components/schemas/v1Time'
-      description: |-
-        ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource
-        that the fieldset applies to.
     v1MicroTime:
       type: object
       properties:
@@ -2502,7 +2452,7 @@ components:
           format: int64
       description: |-
         MicroTime is version of Time with microsecond level precision.
-    v1NodeSystemInfo:
+    v1HostSystemInfo:
       type: object
       properties:
         architecture:
@@ -2613,19 +2563,6 @@ components:
           type: object
           additionalProperties:
             type: string
-        managedFields:
-          type: array
-          description: |-
-            ManagedFields maps workflow-id and version to the set of fields
-            that are managed by that workflow. This is mostly for internal
-            housekeeping, and users typically shouldn't need to set or
-            understand this field. A workflow can be the user's name, a
-            controller's name, or the name of a specific apply path like
-            "ci-cd". The set of fields is always in the version that the
-            workflow used when modifying the object.
-            +optional
-          items:
-            $ref: '#/components/schemas/v1ManagedFieldsEntry'
         name:
           description: |-
             Name must be unique within a namespace. Is required when creating resources, although
@@ -2809,23 +2746,23 @@ components:
         marshaling to YAML and JSON.  Wrappers are provided for many
         of the factory methods that the time package offers.
 
-    v1alphaEnvironment:
+    v1WorkSpace:
       description: |-
-        Environment description
+        WorkSpace description. Includes all information regarding contents
       type: object
       properties:
         metadata:
           $ref: '#/components/schemas/v1ObjectMeta'
         operation:
-          $ref: '#/components/schemas/v1alphaOperation'
+          $ref: '#/components/schemas/v1Operation'
         spec:
-          $ref: '#/components/schemas/v1alphaEnvironmentSpec'
-          description: information for managing the environment
+          $ref: '#/components/schemas/v1WorkSpaceSpec'
+          description: information for managing the workSpace
         status:
-          $ref: '#/components/schemas/v1alphaEnvironmentStatus'
-    v1alphaEnvironmentCondition:
-      description: EnvironmentCondition contains details about an environment condition,
-        which is usally an error or warning
+          $ref: '#/components/schemas/v1WorkSpaceStatus'
+    v1WorkSpaceCondition:
+      description: WorkSpaceCondition contains details about an workSpace condition,
+        which ishould be usally an error or warning
       type: object
       properties:
         lastTransitionTime:
@@ -2835,10 +2772,10 @@ components:
             condition
           type: string
         type:
-          description: Type is an environment condition type
+          description: Type is an workSpace condition type
           type: string
-    v1alphaEnvironmentDestination:
-      description: EnvironmentDestination holds information about the environment's destination
+    v1WorkSpaceDestination:
+      description: WorkSpaceDestination holds information about the workSpace's destination
       type: object
       properties:
         name:
@@ -2847,47 +2784,47 @@ components:
           type: string
         namespace:
           description: |-
-            Namespace specifies the target namespace for the environment's resources.
+            Namespace specifies the target namespace for the workSpace's resources.
             The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
           type: string
         server:
           description: Server specifies the URL of the target provider and must be set to
             the Kubernetes control plane API
           type: string
-    v1alphaEnvironmentList:
+    v1WorkSpaceList:
       description: |-
-        EnvironmentList is list of Environment resources
+        WorkSpaceList is list of WorkSpaces
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaEnvironment'
+            $ref: '#/components/schemas/v1WorkSpace'
         metadata:
           $ref: '#/components/schemas/v1ListMeta'
-    v1alphaEnvironmentSource:
-      description: EnvironmentSource contains all required information about the source
-        of an environment
+    v1WorkSpaceSource:
+      description: WorkSpaceSource contains all required information about the source
+        of an workSpace
       type: object
       properties:
         directory:
-          $ref: '#/components/schemas/v1alphaEnvironmentSourceDirectory'
+          $ref: '#/components/schemas/v1WorkSpaceSourceDirectory'
         path:
           type: string
           description: Path is a directory path within the Git repository, and is
-            only valid for environments sourced from Git.
+            only valid for workSpaces sourced from Git.
         plugin:
-          $ref: '#/components/schemas/v1alphaEnvironmentSourcePlugin'
+          $ref: '#/components/schemas/v1WorkSpaceSourcePlugin'
         repoURL:
           description: RepoURL is the URL to the repository (Git) that contains
-            the environment manifests
+            the workSpace manifests
           type: string
         targetRevision:
           type: string
           description: |-
-            TargetRevision defines the revision of the source to sync the environment to.
-    v1alphaEnvironmentSourceDirectory:
-      description: EnvironmentSourceDirectory holds options for environments of type plain
+            TargetRevision defines the revision of the source to sync the workSpace to.
+    v1WorkSpaceSourceDirectory:
+      description: WorkSpaceSourceDirectory holds options for workSpaces of type plain
         YAML
       type: object
       properties:
@@ -2902,126 +2839,125 @@ components:
         recurse:
           description: Recurse specifies whether to scan a directory recursively for manifests
           type: boolean
-    v1alphaEnvironmentSourcePlugin:
-      description: EnvironmentSourcePlugin holds options specific to config management plugins
+    v1WorkSpaceSourcePlugin:
+      description: WorkSpaceSourcePlugin holds options specific to config management plugins
       type: object
       properties:
         env:
           type: array
           items:
-            $ref: '#/components/schemas/environmentv1alphaEnvEntry'
+            $ref: '#/components/schemas/workSpacev1EnvEntry'
         name:
           type: string
-    v1alphaEnvironmentSpec:
+    v1WorkSpaceSpec:
       type: object
       properties:
         destination:
-          $ref: '#/components/schemas/v1alphaEnvironmentDestination'
+          $ref: '#/components/schemas/v1WorkSpaceDestination'
         ignoreDifferences:
           description: IgnoreDifferences is a list of resources and their fields which should
             be ignored during comparison
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaResourceIgnoreDifferences'
+            $ref: '#/components/schemas/v1ResourceIgnoreDifferences'
         info:
           description: Info contains a list of information (URLs, email addresses, and plain
-            text) that relates to the environment
+            text) that relates to the workSpace
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaInfo'
+            $ref: '#/components/schemas/v1Info'
         revisionHistoryLimit:
           type: string
           description: |-
-            RevisionHistoryLimit limits the number of items kept in the environment's revision history, which is used for informational purposes as well as for rollbacks to previous versions.
+            RevisionHistoryLimit limits the number of items kept in the workSpace's revision history, which is used for informational purposes as well as for rollbacks to previous versions.
             This should only be changed in exceptional circumstances.
             Setting to zero will store no history. This will reduce storage used.
             Increasing will increase the space used to store the history, so we do not recommend increasing it.
             Default is 10.
           format: int64
         source:
-          $ref: '#/components/schemas/v1alphaEnvironmentSource'
+          $ref: '#/components/schemas/v1WorkSpaceSource'
         syncPolicy:
-          $ref: '#/components/schemas/v1alphaSyncPolicy'
-      description: EnvironmentSpec represents desired environment state. Contains
-        link to repository with environment definition and additional parameters link
+          $ref: '#/components/schemas/v1SyncPolicy'
+      description: WorkSpaceSpec represents desired workSpace state. Contains
+        link to repository with workSpace definition and additional parameters link
         definition revision.
-    v1alphaEnvironmentStatus:
-      description: EnvironmentStatus contains status information for the environment
+    v1WorkSpaceStatus:
+      description: WorkSpaceStatus contains status information for the workSpace
       type: object
       properties:
         conditions:
-          description: Conditions is a list of currently observed environment conditions
+          description: Conditions is a list of currently observed workSpace conditions
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaEnvironmentCondition'
+            $ref: '#/components/schemas/v1WorkSpaceCondition'
         health:
-          $ref: '#/components/schemas/v1alphaHealthStatus'
+          $ref: '#/components/schemas/v1HealthStatus'
         history:
-          description: History contains information about the environment's sync history
+          description: History contains information about the workSpace's sync history
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaRevisionHistory'
+            $ref: '#/components/schemas/v1RevisionHistory'
         observedAt:
           $ref: '#/components/schemas/v1Time'
         operationState:
-          $ref: '#/components/schemas/v1alphaOperationState'
+          $ref: '#/components/schemas/v1OperationState'
         reconciledAt:
           $ref: '#/components/schemas/v1Time'
         resources:
-          description: Resources is a list of Kubernetes resources managed by this environment
+          description: Resources is a list of Kubernetes resources managed by this workSpace
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaResourceStatus'
+            $ref: '#/components/schemas/v1ResourceStatus'
         sourceType:
-          description: SourceType specifies the type of this environment
+          description: SourceType specifies the type of this workSpace
           type: string
         summary:
-          $ref: '#/components/schemas/v1alphaEnvironmentSummary'
+          $ref: '#/components/schemas/v1WorkSpaceSummary'
         sync:
-          $ref: '#/components/schemas/v1alphaSyncStatus'
-    v1alphaEnvironmentSummary:
-      description: EnvironmentSummary contains information about URLs and container images
-        used by an environment
+          $ref: '#/components/schemas/v1SyncStatus'
+    v1WorkSpaceSummary:
+      description: WorkSpaceSummary contains information about URLs and container images
+        used by an workSpace
       type: object
       properties:
         externalURLs:
           type: array
-          description: ExternalURLs holds all external URLs of environment child resources.
+          description: ExternalURLs holds all external URLs of workSpace child resources.
           items:
             type: string
         images:
           type: array
-          description: Images holds all images of environment child resources.
+          description: Images holds all images of workSpace child resources.
           items:
             type: string
-    v1alphaEnvironmentTree:
+    v1WorkSpaceTree:
       description: |-
-        EnvironmentTree holds nodes which belongs to the environment
+        WorkSpaceTree holds nodes which belongs to the workSpace
       type: object
       properties:
         hosts:
-          description: Hosts holds list of Kubernetes nodes that run environment related
+          description: Hosts holds list of Kubernetes nodes that run workSpace related
             pods
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaHostInfo'
+            $ref: '#/components/schemas/v1HostInfo'
         nodes:
           type: array
           description: Nodes contains list of nodes which either directly managed
-            by the environment and children of directly managed nodes.
+            by the workSpace and children of directly managed nodes.
           items:
-            $ref: '#/components/schemas/v1alphaResourceNode'
-    v1alphaEnvironmentWatchEvent:
+            $ref: '#/components/schemas/v1Resource'
+    v1WorkSpaceWatchEvent:
       type: object
       properties:
-        environment:
-          $ref: '#/components/schemas/v1alphaEnvironment'
+        workSpace:
+          $ref: '#/components/schemas/v1WorkSpace'
         type:
           type: string
-      description: EnvironmentWatchEvent contains information about environment change.
-    v1alphaBackoff:
-      description: Backoff is the backoff strategy to use on subsequent retries for failing
-        syncs
+      description: WorkSpaceWatchEvent contains information about workSpace change.
+    v1Backoff:
+      description: Backoff is the backoff strategy to use on subsequent retries for failing syncs
       type: object
       properties:
         duration:
@@ -3037,7 +2973,7 @@ components:
           description: MaxDuration is the maximum amount of time allowed for the backoff
             strategy
           type: string
-    v1alphaProvider:
+    v1Provider:
       description: Provider is the definition of a resource provider
       type: object
       properties:
@@ -3051,11 +2987,11 @@ components:
           description: Indicates if provider level resources should be managed. This
             setting is used only if provider is connected in a namespaced mode.
         config:
-          $ref: '#/components/schemas/v1alphaProviderConfig'
+          $ref: '#/components/schemas/v1ProviderConfig'
         connectionState:
-          $ref: '#/components/schemas/v1alphaConnectionState'
+          $ref: '#/components/schemas/v1ConnectionState'
         info:
-          $ref: '#/components/schemas/v1alphaProviderInfo'
+          $ref: '#/components/schemas/v1ProviderInfo'
         labels:
           description: Labels for provider secret metadata
           type: object
@@ -3078,9 +3014,9 @@ components:
         shard:
           type: string
           description: Shard contains optional shard number. Calculated on the fly
-            by the environment controller if not specified.
+            by the workSpace controller if not specified.
           format: int64
-    v1alphaProviderCacheInfo:
+    v1ProviderCacheInfo:
       description: ProviderCacheInfo contains information about the provider cache
       type: object
       properties:
@@ -3094,7 +3030,7 @@ components:
           description: ResourcesCount holds number of observed Kubernetes resources
           type: string
           format: int64
-    v1alphaProviderConfig:
+    v1ProviderConfig:
       type: object
       properties:
         bearerToken:
@@ -3103,18 +3039,18 @@ components:
             Server requires Bearer authentication. This client will not attempt to use
             refresh tokens for an OAuth2 flow.
         execProviderConfig:
-          $ref: '#/components/schemas/v1alphaExecProviderConfig'
+          $ref: '#/components/schemas/v1ExecProviderConfig'
         password:
           type: string
         tlsClientConfig:
-          $ref: '#/components/schemas/v1alphaTLSClientConfig'
+          $ref: '#/components/schemas/v1TLSClientConfig'
         username:
           description: Server requires Basic authentication
           type: string
       description: |-
         ProviderConfig is the configuration attributes. This structure is subset of the go-client
         rest.Config with annotations added for marshalling.
-    v1alphaProviderInfo:
+    v1ProviderInfo:
       description: ProviderInfo contains information about the provider
       type: object
       properties:
@@ -3123,29 +3059,29 @@ components:
           type: array
           items:
             type: string
-        environmentsCount:
-          description: EnvironmentsCount is the number of environments managed on the provider
+        workSpacesCount:
+          description: WorkSpacesCount is the number of workSpaces managed on the provider
           type: string
           format: int64
         cacheInfo:
-          $ref: '#/components/schemas/v1alphaProviderCacheInfo'
+          $ref: '#/components/schemas/v1ProviderCacheInfo'
         connectionState:
-          $ref: '#/components/schemas/v1alphaConnectionState'
+          $ref: '#/components/schemas/v1ConnectionState'
         serverVersion:
           description: ServerVersion contains information about the version of
             the provider
           type: string
-    v1alphaProviderList:
+    v1ProviderList:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaProvider'
+            $ref: '#/components/schemas/v1Provider'
         metadata:
           $ref: '#/components/schemas/v1ListMeta'
       description: ProviderList is a collection of Providers.
-    v1alphaCommand:
+    v1Command:
       description: Command holds binary path and arguments list
       type: object
       properties:
@@ -3157,26 +3093,26 @@ components:
           type: array
           items:
             type: string
-    v1alphaComparedTo:
-      description: ComparedTo contains environment source and target which was used for
+    v1ComparedTo:
+      description: ComparedTo contains workSpace source and target which was used for
         resources comparison
       type: object
       properties:
         destination:
-          $ref: '#/components/schemas/v1alphaEnvironmentDestination'
+          $ref: '#/components/schemas/v1WorkSpaceDestination'
         source:
-          $ref: '#/components/schemas/v1alphaEnvironmentSource'
-    v1alphaConfigManagementPlugin:
+          $ref: '#/components/schemas/v1WorkSpaceSource'
+    v1ConfigManagementPlugin:
       description: ConfigManagementPlugin contains config management plugin configuration
       type: object
       properties:
         generate:
-          $ref: '#/components/schemas/v1alphaCommand'
+          $ref: '#/components/schemas/v1Command'
         init:
-          $ref: '#/components/schemas/v1alphaCommand'
+          $ref: '#/components/schemas/v1Command'
         name:
           type: string
-    v1alphaConnectionState:
+    v1ConnectionState:
       description: ConnectionState contains information about remote resource connection
         state, currently used for providers and repositories
       type: object
@@ -3190,7 +3126,7 @@ components:
         status:
           description: Status contains the current status indicator for the connection
           type: string
-    v1alphaExecProviderConfig:
+    v1ExecProviderConfig:
       description: |-
         ExecProviderConfig is config used to call an external command to perform provider authentication
       type: object
@@ -3207,7 +3143,7 @@ components:
           description: Command to execute
           type: string
         env:
-          description: Env defines additional environment variables to expose to the process
+          description: Env defines additional workSpace variables to expose to the process
           type: object
           additionalProperties:
             type: string
@@ -3215,9 +3151,9 @@ components:
           description: This text is shown to the user when the executable doesn't seem to
             be present
           type: string
-    v1alphaHealthStatus:
+    v1HealthStatus:
       description: HealthStatus contains information about the currently observed health
-        state of an environment or resource
+        state of an workSpace or resource
       type: object
       properties:
         message:
@@ -3225,11 +3161,11 @@ components:
             health status
           type: string
         status:
-          description: Status holds the status code of the environment or resource
+          description: Status holds the status code of the workSpace or resource
           type: string
-    v1alphaHostInfo:
+    v1HostInfo:
       description: |-
-        HostInfo holds host name and resources metrics
+        HostInfo holds host name and resources included with information regarding its characteristics
       type: object
       properties:
         name:
@@ -3237,10 +3173,10 @@ components:
         resourcesInfo:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaHostResourceInfo'
+            $ref: '#/components/schemas/v1HostResourceInfo'
         systemInfo:
-          $ref: '#/components/schemas/v1NodeSystemInfo'
-    v1alphaHostResourceInfo:
+          $ref: '#/components/schemas/v1HostSystemInfo'
+    v1HostResourceInfo:
       description: 'TODO: describe this type'
       type: object
       properties:
@@ -3255,15 +3191,8 @@ components:
           format: int64
         resourceName:
           type: string
-    v1alphaInfo:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-    v1alphaInfoItem:
-      description: InfoItem contains arbitrary, human readable information about an environment
+    v1Info:
+      description: Contains arbitrary, human readable information as pair name value
       type: object
       properties:
         name:
@@ -3272,7 +3201,7 @@ components:
         value:
           type: string
           description: Value is human readable content.
-    v1alphaJWTToken:
+    v1JWTToken:
       description: JWTToken holds the issuedAt and expiresAt values of a token
       type: object
       properties:
@@ -3284,26 +3213,15 @@ components:
           format: int64
         id:
           type: string
-    v1alphaJWTTokens:
+    v1JWTTokens:
       description: JWTTokens represents a list of JWT tokens
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaJWTToken'
-    v1alphaKnownTypeField:
-      description: |-
-        KnownTypeField contains mapping between CRD field and known Kubernetes type.
-        This is mainly used for unit conversion in unknown resources (e.g. 0.1 == 100mi)
-        TODO: Describe the members of this type
-      type: object
-      properties:
-        field:
-          type: string
-        type:
-          type: string
-    v1alphaOperation:
+            $ref: '#/components/schemas/v1JWTToken'
+    v1Operation:
       description: Operation contains information about a requested or running operation
       type: object
       properties:
@@ -3311,25 +3229,25 @@ components:
           description: Info is a list of informational items for this operation
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaInfo'
+            $ref: '#/components/schemas/v1Info'
         initiatedBy:
-          $ref: '#/components/schemas/v1alphaOperationInitiator'
+          $ref: '#/components/schemas/v1OperationInitiator'
         retry:
-          $ref: '#/components/schemas/v1alphaRetryStrategy'
+          $ref: '#/components/schemas/v1RetryStrategy'
         sync:
-          $ref: '#/components/schemas/v1alphaSyncOperation'
-    v1alphaOperationInitiator:
+          $ref: '#/components/schemas/v1SyncOperation'
+    v1OperationInitiator:
       description: OperationInitiator contains information about the initiator of an operation
       type: object
       properties:
         automated:
           type: boolean
           description: Automated is set to true if operation was initiated automatically
-            by the environment controller.
+            by the workSpace controller.
         username:
           description: Username contains the name of a user who started operation
           type: string
-    v1alphaOperationState:
+    v1OperationState:
       description: OperationState contains information about state of a running operation
       type: object
       properties:
@@ -3340,7 +3258,7 @@ components:
           description: Message holds any pertinent messages when attempting to perform
             operation (typically errors).
         operation:
-          $ref: '#/components/schemas/v1alphaOperation'
+          $ref: '#/components/schemas/v1Operation'
         phase:
           description: Phase is the current phase of the operation
           type: string
@@ -3351,8 +3269,8 @@ components:
         startedAt:
           $ref: '#/components/schemas/v1Time'
         syncResult:
-          $ref: '#/components/schemas/v1alphaSyncOperationResult'
-    v1alphaOrphanedResourceKey:
+          $ref: '#/components/schemas/v1SyncOperationResult'
+    v1OrphanedResourceKey:
       description: OrphanedResourceKey is a reference to a resource to be ignored from
       type: object
       properties:
@@ -3362,7 +3280,7 @@ components:
           type: string
         name:
           type: string
-    v1alphaOrphanedResourcesMonitorSettings:
+    v1OrphanedResourcesMonitorSettings:
       description: OrphanedResourcesMonitorSettings holds settings of orphaned resources
         monitoring
       type: object
@@ -3372,13 +3290,13 @@ components:
             orphaned resources monitoring
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaOrphanedResourceKey'
+            $ref: '#/components/schemas/v1OrphanedResourceKey'
         warn:
-          description: Warn indicates if warning condition should be created for environments which
+          description: Warn indicates if warning condition should be created for workSpaces which
             have orphaned resources
           type: boolean
-    v1alphaOverrideIgnoreDiff:
-      description: 'TODO: describe this type'
+    v1OverrideIgnoreDiff:
+      description: Identifies elements to be ignored where checking differences amond desired and current status
       type: object
       properties:
         jSONPointers:
@@ -3389,7 +3307,7 @@ components:
           type: array
           items:
             type: string
-    v1alphaRepoCreds:
+    v1RepoCreds:
       description: RepoCreds holds the definition for repository credentials
       type: object
       properties:
@@ -3418,22 +3336,22 @@ components:
         username:
           description: Username for authenticating at the repo server
           type: string
-    v1alphaRepoCredsList:
+    v1RepoCredsList:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaRepoCreds'
+            $ref: '#/components/schemas/v1RepoCreds'
         metadata:
           $ref: '#/components/schemas/v1ListMeta'
       description: RepositoryList is a collection of Repositories.
-    v1alphaRepository:
-      description: Repository is a repository holding environment configurations
+    v1Repository:
+      description: Repository is a repository holding workSpace configurations
       type: object
       properties:
         connectionState:
-          $ref: '#/components/schemas/v1alphaConnectionState'
+          $ref: '#/components/schemas/v1ConnectionState'
         enableLfs:
           type: boolean
           description: EnableLFS specifies whether git-lfs support should be enabled
@@ -3484,20 +3402,19 @@ components:
           description: Username contains the user name used for authenticating at the remote
             repository
           type: string
-    v1alphaRepositoryList:
+    v1RepositoryList:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaRepository'
+            $ref: '#/components/schemas/v1Repository'
         metadata:
           $ref: '#/components/schemas/v1ListMeta'
       description: RepositoryList is a collection of Repositories.
-    v1alphaResourceAction:
+    v1ResourceAction:
       description: |-
-        TODO: describe this type
-        TODO: describe members of this type
+        Describes the action to execute on a resource
       type: object
       properties:
         disabled:
@@ -3507,8 +3424,8 @@ components:
         params:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaResourceActionParam'
-    v1alphaResourceActionParam:
+            $ref: '#/components/schemas/v1ResourceActionParam'
+    v1ResourceActionParam:
       description: |-
         TODO: describe this type
         TODO: describe members of this type
@@ -3522,7 +3439,7 @@ components:
           type: string
         value:
           type: string
-    v1alphaResourceDiff:
+    v1ResourceDiff:
       description: |-
         ResourceDiff holds the diff of a live and target resource object
         TODO: describe members of this type
@@ -3562,7 +3479,7 @@ components:
           description: TargetState contains the JSON serialized resource manifest defined
             in the Git
           type: string
-    v1alphaResourceIgnoreDifferences:
+    v1ResourceIgnoreDifferences:
       type: object
       properties:
         group:
@@ -3583,7 +3500,7 @@ components:
           type: string
       description: ResourceIgnoreDifferences contains resource filter and list of
         json paths which should be ignored during comparison with live state.
-    v1alphaResourceNetworkingInfo:
+    v1ResourceNetworkingInfo:
       description: |-
         ResourceNetworkingInfo holds networking resource related information
         TODO: describe members of this type
@@ -3598,7 +3515,7 @@ components:
         ingress:
           type: array
           items:
-            $ref: '#/components/schemas/v1LoadBalancerIngress'
+            $ref: '#/components/schemas/v1NetworkIngress'
         labels:
           type: object
           additionalProperties:
@@ -3610,17 +3527,16 @@ components:
         targetRefs:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaResourceRef'
-    v1alphaResourceNode:
+            $ref: '#/components/schemas/v1ResourceRef'
+    v1Resource:
       description: |-
         ResourceNode contains information about live resource and its children
-        TODO: describe members of this type
       type: object
       properties:
         createdAt:
           $ref: '#/components/schemas/v1Time'
         health:
-          $ref: '#/components/schemas/v1alphaHealthStatus'
+          $ref: '#/components/schemas/v1HealthStatus'
         images:
           type: array
           items:
@@ -3628,18 +3544,18 @@ components:
         info:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaInfoItem'
+            $ref: '#/components/schemas/v1Info'
         networkingInfo:
-          $ref: '#/components/schemas/v1alphaResourceNetworkingInfo'
+          $ref: '#/components/schemas/v1ResourceNetworkingInfo'
         parentRefs:
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaResourceRef'
+            $ref: '#/components/schemas/v1ResourceRef'
         resourceRef:
-          $ref: '#/components/schemas/v1alphaResourceRef'
+          $ref: '#/components/schemas/v1ResourceRef'
         resourceVersion:
           type: string
-    v1alphaResourceOverride:
+    v1ResourceOverride:
       description: |-
         ResourceOverride holds configuration to customize resource diffing and health assessment
         TODO: describe the members of this type
@@ -3650,14 +3566,8 @@ components:
         healthLua:
           type: string
         ignoreDifferences:
-          $ref: '#/components/schemas/v1alphaOverrideIgnoreDiff'
-        knownTypeFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1alphaKnownTypeField'
-        useOpenLibs:
-          type: boolean
-    v1alphaResourceRef:
+          $ref: '#/components/schemas/v1OverrideIgnoreDiff'
+    v1ResourceRef:
       description: ResourceRef includes fields which uniquely identify a resource
       type: object
       properties:
@@ -3673,7 +3583,7 @@ components:
           type: string
         version:
           type: string
-    v1alphaResourceResult:
+    v1ResourceResult:
       description: ResourceResult holds the operation result details of a specific resource
       type: object
       properties:
@@ -3712,16 +3622,15 @@ components:
         version:
           description: Version specifies the API version of the resource
           type: string
-    v1alphaResourceStatus:
+    v1ResourceStatus:
       description: |-
         ResourceStatus holds the current sync and health status of a resource
-        TODO: describe members of this type
       type: object
       properties:
         group:
           type: string
         health:
-          $ref: '#/components/schemas/v1alphaHealthStatus'
+          $ref: '#/components/schemas/v1HealthStatus'
         hook:
           type: boolean
         kind:
@@ -3736,19 +3645,19 @@ components:
           type: string
         version:
           type: string
-    v1alphaRetryStrategy:
+    v1RetryStrategy:
       description: RetryStrategy contains information about the strategy to apply when a
         sync failed
       type: object
       properties:
         backoff:
-          $ref: '#/components/schemas/v1alphaBackoff'
+          $ref: '#/components/schemas/v1Backoff'
         limit:
           type: string
           description: Limit is the maximum number of attempts for retrying a failed
             sync. If set to 0, no retries will be performed.
           format: int64
-    v1alphaRevisionHistory:
+    v1RevisionHistory:
       description: RevisionHistory contains history information about a previous sync
       type: object
       properties:
@@ -3764,8 +3673,8 @@ components:
           description: Revision holds the revision the sync was performed against
           type: string
         source:
-          $ref: '#/components/schemas/v1alphaEnvironmentSource'
-    v1alphaRevisionMetadata:
+          $ref: '#/components/schemas/v1WorkSpaceSource'
+    v1RevisionMetadata:
       description: RevisionMetadata contains metadata for a specific revision in a Git repository
       type: object
       properties:
@@ -3788,7 +3697,7 @@ components:
           type: array
           items:
             type: string
-    v1alphaSyncOperation:
+    v1SyncOperation:
       type: object
       properties:
         dryRun:
@@ -3808,23 +3717,23 @@ components:
           description: Resources describes which resources shall be part of the sync
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaSyncOperationResource'
+            $ref: '#/components/schemas/v1SyncOperationResource'
         revision:
           type: string
           description: |-
-            Revision is the revision (Git) or chart version (Helm) which to sync the environment to
+            Revision is the revision (Git) or chart version (Helm) which to sync the workSpace to
             If omitted, will use the revision specified in app spec.
         source:
-          $ref: '#/components/schemas/v1alphaEnvironmentSource'
+          $ref: '#/components/schemas/v1WorkSpaceSource'
         syncOptions:
           description: SyncOptions provide per-sync sync-options, e.g. Validate=false
           type: array
           items:
             type: string
         syncStrategy:
-          $ref: '#/components/schemas/v1alphaSyncStrategy'
+          $ref: '#/components/schemas/v1SyncStrategy'
       description: SyncOperation contains details about a sync operation.
-    v1alphaSyncOperationResource:
+    v1SyncOperationResource:
       type: object
       properties:
         group:
@@ -3836,7 +3745,7 @@ components:
         namespace:
           type: string
       description: SyncOperationResource contains resources to sync.
-    v1alphaSyncOperationResult:
+    v1SyncOperationResult:
       description: SyncOperationResult represent result of sync operation
       type: object
       properties:
@@ -3845,32 +3754,32 @@ components:
             resource in a sync operation
           type: array
           items:
-            $ref: '#/components/schemas/v1alphaResourceResult'
+            $ref: '#/components/schemas/v1ResourceResult'
         revision:
           description: Revision holds the revision this sync operation was performed to
           type: string
         source:
-          $ref: '#/components/schemas/v1alphaEnvironmentSource'
-    v1alphaSyncPolicy:
+          $ref: '#/components/schemas/v1WorkSpaceSource'
+    v1SyncPolicy:
       description: SyncPolicy controls when a sync will be performed in response to updates
         in git
       type: object
       properties:
         automated:
-          $ref: '#/components/schemas/v1alphaSyncPolicyAutomated'
+          $ref: '#/components/schemas/v1SyncPolicyAutomated'
         retry:
-          $ref: '#/components/schemas/v1alphaRetryStrategy'
+          $ref: '#/components/schemas/v1RetryStrategy'
         syncOptions:
           description: Options allow you to specify whole app sync-options
           type: array
           items:
             type: string
-    v1alphaSyncPolicyAutomated:
+    v1SyncPolicyAutomated:
       description: SyncPolicyAutomated controls the behavior of an automated sync
       type: object
       properties:
         allowEmpty:
-          description: 'AllowEmpty allows environments have zero live resources (default: false)'
+          description: 'AllowEmpty allows workSpaces have zero live resources (default: false)'
           type: boolean
         prune:
           description: 'Prune specifies whether to delete resources from the provider that
@@ -3881,13 +3790,13 @@ components:
           description: 'SelfHeal specifes whether to revert resources back to their desired
             state upon modification in the provider (default: false)'
           type: boolean
-    v1alphaSyncStatus:
+    v1SyncStatus:
       description: SyncStatus contains information about the currently observed live and
-        desired states of an environment
+        desired states of an workSpace
       type: object
       properties:
         comparedTo:
-          $ref: '#/components/schemas/v1alphaComparedTo'
+          $ref: '#/components/schemas/v1ComparedTo'
         revision:
           description: Revision contains information about the revision the comparison has
             been performed to
@@ -3895,15 +3804,15 @@ components:
         status:
           description: Status is the sync state of the comparison
           type: string
-    v1alphaSyncStrategy:
+    v1SyncStrategy:
       description: SyncStrategy controls the manner in which a sync is performed
       type: object
       properties:
         apply:
-          $ref: '#/components/schemas/v1alphaSyncStrategyApply'
+          $ref: '#/components/schemas/v1SyncStrategyApply'
         hook:
-          $ref: '#/components/schemas/v1alphaSyncStrategyHook'
-    v1alphaSyncStrategyApply:
+          $ref: '#/components/schemas/v1SyncStrategyHook'
+    v1SyncStrategyApply:
       description: SyncStrategyApply uses `kubectl apply` to perform the apply
       type: object
       properties:
@@ -3912,20 +3821,20 @@ components:
           description: |-
             The --force flag deletes and re-create the resource, when PATCH encounters conflict and has
             retried for 5 times.
-    v1alphaSyncStrategyHook:
+    v1SyncStrategyHook:
       type: object
       properties:
         syncStrategyApply:
-          $ref: '#/components/schemas/v1alphaSyncStrategyApply'
+          $ref: '#/components/schemas/v1SyncStrategyApply'
       description: |-
         SyncStrategyHook will perform a sync using hooks annotations.
-    v1alphaSyncWindow:
+    v1SyncWindow:
       description: SyncWindow contains the kind, time, duration and attributes that are
-        used to assign the syncWindows to environments
+        used to assign the syncWindows to workSpaces
       type: object
       properties:
-        environments:
-          description: Environments contains a list of environments that the window will
+        workSpaces:
+          description: WorkSpaces contains a list of workSpaces that the window will
             apply to
           type: array
           items:
@@ -3953,7 +3862,7 @@ components:
         schedule:
           description: Schedule is the time the window will begin, specified in cron format
           type: string
-    v1alphaTLSClientConfig:
+    v1TLSClientConfig:
       description: TLSClientConfig contains settings to enable transport layer security
       type: object
       properties:
