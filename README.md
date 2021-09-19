@@ -115,17 +115,10 @@ s   - v1HostInfo
   - v1Info
   - v1InfoItem
 
-
-v1JWTToken
-v1JWTTokens
-
-v1TLSClientConfig
-
-
-
-
-v1KnownTypeField
-v1OrphanedResourceKey
+- Support
+ - v1JWTToken
+ - v1JWTTokens
+ - v1TLSClientConfig
 
 
 ## References
@@ -142,5 +135,8 @@ Scenarios: An Overview and Research Challenges](https://doi.org/10.3390/fi110300
 
 - https://www.gitops.tech/
 - https://www.redhat.com/en/topics/devops/what-is-gitops
-- 
+
+
+# Tools
+- [Open API Tools](https://openapi.tools/)
 
