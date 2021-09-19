@@ -15,14 +15,13 @@ Four data domains have been identified. Each regarding
 
   - Phisical/Virtual infrastructure
 
-s    - v1HostInfo
+s   - v1HostInfo
     - v1HostSystemInfo
     - v1HostResourceInfo
     - v1NetworkIngress
     - v1PortStatus
 
   - Providers
-
     - v1Provider
     - v1ProviderConfig
     - v1ProviderInfo
@@ -98,7 +97,7 @@ s    - v1HostInfo
   - v1EventSource
 
 
-- GitOps,  required to implement the flow associated with GitOps.
+- Git,  required to implement the flow associated with GitOps.
 
   - v1RepoCreds
   - v1RepoCredsList
