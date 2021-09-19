@@ -1887,6 +1887,1626 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
+    # Host
+    v1HostInfo:
+      description: |-
+        HostInfo holds host name and resources included with information regarding its characteristics
+      type: object
+      properties:
+        name:
+          type: string
+        resourcesInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1HostResourceInfo'
+        systemInfo:
+          $ref: '#/components/schemas/v1HostSystemInfo'
+    v1HostResourceInfo:
+      description: 'TODO: describe this type'
+      type: object
+      properties:
+        capacity:
+          type: string
+          format: int64
+        requestedByApp:
+          type: string
+          format: int64
+        requestedByNeighbors:
+          type: string
+          format: int64
+        resourceName:
+          type: string
+    v1HostSystemInfo:
+      type: object
+      properties:
+        architecture:
+          description: The Architecture reported by the node
+          type: string
+        bootID:
+          type: string
+          description: Boot ID reported by the node.
+        containerRuntimeVersion:
+          type: string
+          description: ContainerRuntime Version reported by the node through runtime
+            remote API (e.g. docker://1.5.0).
+        kernelVersion:
+          type: string
+          description: Kernel Version reported by the node from 'uname -r' (e.g. 3.16.0-0.bpo.4-amd64).
+        kubeProxyVersion:
+          type: string
+          description: KubeProxy Version reported by the node.
+        kubeletVersion:
+          type: string
+          description: Kubelet Version reported by the node.
+        machineID:
+          description: |-
+            MachineID reported by the node. For unique machine identification
+            in the provider this field is preferred. Learn more from man(5)
+            machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
+          type: string
+        operatingSystem:
+          description: The Operating System reported by the node
+          type: string
+        osImage:
+          type: string
+          description: OS Image reported by the node from /etc/os-release (e.g. Debian
+            GNU/Linux 7 (wheezy)).
+        systemUUID:
+          description: |-
+            SystemUUID reported by the node. For unique machine identification
+            MachineID is preferred. This field is specific to Red Hat hosts
+            https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
+          type: string
+      description: NodeSystemInfo is a set of ids/uuids to uniquely identify the node. TODO this should be included in provider
+    v1NetworkIngress:
+      type: object
+      properties:
+        hostname:
+          description: |-
+            Hostname is set for ingress points
+            +optional
+          type: string
+        ip:
+          description: |-
+            IP is set for ingress points that are IP based
+          type: string
+        ports:
+          description: |-
+            Ports is a list of records of service ports
+            If used, every port defined in the service should have an entry in it
+          type: array
+          items:
+            $ref: '#/components/schemas/v1PortStatus'
+      description: |-
+        NetworkIngress represents the status of an ingress point:
+        traffic intended for the service should be sent to an ingress point.
+    v1PortStatus:
+      type: object
+      properties:
+        error:
+          description: |-
+            Error is to record the problem with the service port
+            The format of the error shall comply with the following rules:
+            - built-in error values shall be specified in this file and those shall use
+              CamelCase names
+            - cloud provider specific error values must have names that comply with the
+              format foo.example.com/CamelCase.
+          type: string
+        port:
+          description: Port is the port number of the service port of which status is recorded
+            here
+          type: integer
+          format: int32
+        protocol:
+          description: |-
+            Protocol is the protocol of the service port of which status is recorded here
+            Candidate values are: "TCP", "UDP", "SCTP"
+          type: string
+    # Provider
+    v1Provider:
+      description: Provider is the definition of a resource provider
+      type: object
+      properties:
+        annotations:
+          description: Annotations for provider secret metadata
+          type: object
+          additionalProperties:
+            type: string
+        providerResources:
+          type: boolean
+          description: Indicates if provider level resources should be managed. This
+            setting is used only if provider is connected in a namespaced mode.
+        config:
+          $ref: '#/components/schemas/v1ProviderConfig'
+        connectionState:
+          $ref: '#/components/schemas/v1ConnectionState'
+        info:
+          $ref: '#/components/schemas/v1ProviderInfo'
+        labels:
+          description: Labels for provider secret metadata
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          description: Name of the provider. If omitted, will use the server address
+          type: string
+        namespaces:
+          type: array
+          description: Holds list of namespaces which are accessible in that provider.
+            Provider level resources will be ignored if namespace list is not empty.
+          items:
+            type: string
+        refreshRequestedAt:
+          $ref: '#/components/schemas/v1Time'
+        server:
+          description: Server is the API server URL of the provider
+          type: string
+        shard:
+          type: string
+          description: Shard contains optional shard number. Calculated on the fly
+            by the workSpace controller if not specified.
+          format: int64
+    v1ProviderCacheInfo:
+      description: ProviderCacheInfo contains information about the provider cache
+      type: object
+      properties:
+        apisCount:
+          description: APIsCount holds number of observed  API count
+          type: string
+          format: int64
+        lastCacheSyncTime:
+          $ref: '#/components/schemas/v1Time'
+        resourcesCount:
+          description: ResourcesCount holds number of observed Kubernetes resources
+          type: string
+          format: int64
+    v1ProviderConfig:
+      type: object
+      properties:
+        bearerToken:
+          type: string
+          description: |-
+            Server requires Bearer authentication. This client will not attempt to use
+            refresh tokens for an OAuth2 flow.
+        execProviderConfig:
+          $ref: '#/components/schemas/v1ExecProviderConfig'
+        password:
+          type: string
+        tlsClientConfig:
+          $ref: '#/components/schemas/v1TLSClientConfig'
+        username:
+          description: Server requires Basic authentication
+          type: string
+      description: |-
+        ProviderConfig is the configuration attributes. This structure is subset of the go-client
+        rest.Config with annotations added for marshalling.
+    v1ProviderInfo:
+      description: ProviderInfo contains information about the provider
+      type: object
+      properties:
+        apiVersions:
+          description: APIVersions contains list of API versions supported by the provider
+          type: array
+          items:
+            type: string
+        workSpacesCount:
+          description: WorkSpacesCount is the number of workSpaces managed on the provider
+          type: string
+          format: int64
+        cacheInfo:
+          $ref: '#/components/schemas/v1ProviderCacheInfo'
+        connectionState:
+          $ref: '#/components/schemas/v1ConnectionState'
+        serverVersion:
+          description: ServerVersion contains information about the version of
+            the provider
+          type: string
+    v1ProviderList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Provider'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
+      description: ProviderList is a collection of Providers.
+
+# Workspace
+    v1WorkSpace:
+      description: |-
+        WorkSpace description. Includes all information regarding contents
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        operation:
+          $ref: '#/components/schemas/v1Operation'
+        spec:
+          $ref: '#/components/schemas/v1WorkSpaceSpec'
+          description: information for managing the workSpace
+        status:
+          $ref: '#/components/schemas/v1WorkSpaceStatus'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Resource'
+    v1WorkSpaceCondition:
+      description: WorkSpaceCondition contains details about an workSpace condition,
+        which ishould be usally an error or warning
+      type: object
+      properties:
+        lastTransitionTime:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          description: Message contains human-readable message indicating details about
+            condition
+          type: string
+        type:
+          description: Type is an workSpace condition type
+          type: string
+    v1WorkSpaceDestination:
+      description: WorkSpaceDestination holds information about the workSpace's destination
+      type: object
+      properties:
+        name:
+          description: Name is an alternate way of specifying the target provider by its
+            symbolic name
+          type: string
+        namespace:
+          description: |-
+            Namespace specifies the target namespace for the workSpace's resources.
+            The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
+          type: string
+        server:
+          description: Server specifies the URL of the target provider and must be set to
+            the Kubernetes control plane API
+          type: string
+    v1WorkSpaceList:
+      description: |-
+        WorkSpaceList is list of WorkSpaces
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1WorkSpace'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
+    v1WorkSpaceSource:
+      description: WorkSpaceSource contains all required information about the source
+        of an workSpace
+      type: object
+      properties:
+        directory:
+          $ref: '#/components/schemas/v1WorkSpaceSourceDirectory'
+        path:
+          type: string
+          description: Path is a directory path within the Git repository, and is
+            only valid for workSpaces sourced from Git.
+        plugin:
+          $ref: '#/components/schemas/v1WorkSpaceSourcePlugin'
+        repoURL:
+          description: RepoURL is the URL to the repository (Git) that contains
+            the workSpace manifests
+          type: string
+        targetRevision:
+          type: string
+          description: |-
+            TargetRevision defines the revision of the source to sync the workSpace to.
+    v1WorkSpaceSourceDirectory:
+      description: WorkSpaceSourceDirectory holds options for workSpaces of type plain
+        YAML
+      type: object
+      properties:
+        exclude:
+          description: Exclude contains a glob pattern to match paths against that should
+            be explicitly excluded from being used during manifest generation
+          type: string
+        include:
+          description: Include contains a glob pattern to match paths against that should
+            be explicitly included during manifest generation
+          type: string
+        recurse:
+          description: Recurse specifies whether to scan a directory recursively for manifests
+          type: boolean
+    v1WorkSpaceSourcePlugin:
+      description: WorkSpaceSourcePlugin holds options specific to config management plugins
+      type: object
+      properties:
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/workSpacev1EnvEntry'
+        name:
+          type: string
+    v1WorkSpaceSpec:
+      type: object
+      properties:
+        destination:
+          $ref: '#/components/schemas/v1WorkSpaceDestination'
+        ignoreDifferences:
+          description: IgnoreDifferences is a list of resources and their fields which should
+            be ignored during comparison
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ResourceIgnoreDifferences'
+        info:
+          description: Info contains a list of information (URLs, email addresses, and plain
+            text) that relates to the workSpace
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Info'
+        revisionHistoryLimit:
+          type: string
+          description: |-
+            RevisionHistoryLimit limits the number of items kept in the workSpace's revision history, which is used for informational purposes as well as for rollbacks to previous versions.
+            This should only be changed in exceptional circumstances.
+            Setting to zero will store no history. This will reduce storage used.
+            Increasing will increase the space used to store the history, so we do not recommend increasing it.
+            Default is 10.
+          format: int64
+        source:
+          $ref: '#/components/schemas/v1WorkSpaceSource'
+        syncPolicy:
+          $ref: '#/components/schemas/v1SyncPolicy'
+      description: WorkSpaceSpec represents desired workSpace state. Contains
+        link to repository with workSpace definition and additional parameters link
+        definition revision.
+    v1WorkSpaceStatus:
+      description: WorkSpaceStatus contains status information for the workSpace
+      type: object
+      properties:
+        conditions:
+          description: Conditions is a list of currently observed workSpace conditions
+          type: array
+          items:
+            $ref: '#/components/schemas/v1WorkSpaceCondition'
+        health:
+          $ref: '#/components/schemas/v1HealthStatus'
+        history:
+          description: History contains information about the workSpace's sync history
+          type: array
+          items:
+            $ref: '#/components/schemas/v1RevisionHistory'
+        observedAt:
+          $ref: '#/components/schemas/v1Time'
+        operationState:
+          $ref: '#/components/schemas/v1OperationState'
+        reconciledAt:
+          $ref: '#/components/schemas/v1Time'
+        resources:
+          description: Resources is a list of Kubernetes resources managed by this workSpace
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ResourceStatus'
+        sourceType:
+          description: SourceType specifies the type of this workSpace
+          type: string
+        summary:
+          $ref: '#/components/schemas/v1WorkSpaceSummary'
+        sync:
+          $ref: '#/components/schemas/v1SyncStatus'
+    v1WorkSpaceSummary:
+      description: WorkSpaceSummary contains information about URLs and container images
+        used by an workSpace
+      type: object
+      properties:
+        externalURLs:
+          type: array
+          description: ExternalURLs holds all external URLs of workSpace child resources.
+          items:
+            type: string
+        images:
+          type: array
+          description: Images holds all images of workSpace child resources.
+          items:
+            type: string
+    v1WorkSpaceTree:
+      description: |-
+        WorkSpaceTree holds nodes which belongs to the workSpace
+      type: object
+      properties:
+        hosts:
+          description: Hosts holds list of Kubernetes nodes that run workSpace related
+            pods
+          type: array
+          items:
+            $ref: '#/components/schemas/v1HostInfo'
+        nodes:
+          type: array
+          description: Nodes contains list of nodes which either directly managed
+            by the workSpace and children of directly managed nodes.
+          items:
+            $ref: '#/components/schemas/v1Resource'
+    # Resource
+    v1Resource:
+      description: |-
+        Resource contains information about live resource and its children
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        createdAt:
+          $ref: '#/components/schemas/v1Time'
+        health:
+          $ref: '#/components/schemas/v1HealthStatus'
+        # images:
+        #   type: array
+        #   items:
+        #     type: string
+        spec:
+          $ref: '#/components/schemas/v1ResourceSpec'
+          description: information for managing the resource
+        networkingInfo:
+          $ref: '#/components/schemas/v1ResourceNetworkingInfo'
+        parentRefs:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ResourceRef'
+        resourceRef:
+          $ref: '#/components/schemas/v1ResourceRef'
+        resourceVersion:
+          type: string
+    v1ResourceSpec:
+      type: object
+      properties:
+        destination:
+          $ref: '#/components/schemas/v1HostInfo'
+          description: May be templating required
+        info:
+          description: Info contains a list of information (URLs, email addresses, and plain
+            text) that relates to the workSpace
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Info'
+        revisionHistoryLimit:
+          type: string
+          description: |-
+            RevisionHistoryLimit limits the number of items kept in the workSpace's revision history, which is used for informational purposes as well as for rollbacks to previous versions.
+            This should only be changed in exceptional circumstances.
+            Setting to zero will store no history. This will reduce storage used.
+            Increasing will increase the space used to store the history, so we do not recommend increasing it.
+            Default is 10.
+          format: int64
+        source:
+          $ref: '#/components/schemas/v1WorkSpaceSource'
+        syncPolicy:
+          $ref: '#/components/schemas/v1SyncPolicy'
+      description: ResourceSpec represents desired Resource state. Contains
+        link to repository with workSpace definition and additional parameters link
+        definition revision.
+    v1ResourceOverride:
+      description: |-
+        ResourceOverride holds configuration to customize resource diffing and health assessment
+        TODO: describe the members of this type
+      type: object
+      properties:
+        actions:
+          type: string
+        healthLua:
+          type: string
+        ignoreDifferences:
+          $ref: '#/components/schemas/v1OverrideIgnoreDiff'
+    v1ResourceRef:
+      description: ResourceRef includes fields which uniquely identify a resource
+      type: object
+      properties:
+        group:
+          type: string
+        kind:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+        uid:
+          type: string
+        version:
+          type: string
+    v1ResourceResult:
+      description: ResourceResult holds the operation result details of a specific resource
+      type: object
+      properties:
+        group:
+          description: Group specifies the  group of the resource
+          type: string
+        hookPhase:
+          type: string
+          description: |-
+            HookPhase contains the state of any operation associated with this resource OR hook
+            This can also contain values for non-hook resources.
+        hookType:
+          description: HookType specifies the type of the hook. Empty for non-hook resources
+          type: string
+        kind:
+          description: Kind specifies the  kind of the resource
+          type: string
+        message:
+          description: Message contains an informational or error message for the last sync
+            OR operation
+          type: string
+        name:
+          description: Name specifies the name of the resource
+          type: string
+        namespace:
+          description: Namespace specifies the target namespace of the resource
+          type: string
+        status:
+          description: Status holds the final result of the sync. Will be empty if the resources
+            is yet to be applied/pruned and is always zero-value for hooks
+          type: string
+        syncPhase:
+          description: SyncPhase indicates the particular phase of the sync that this result
+            was acquired in
+          type: string
+        version:
+          description: Version specifies the API version of the resource
+          type: string
+    v1ResourceStatus:
+      description: |-
+        ResourceStatus holds the current sync and health status of a resource
+      type: object
+      properties:
+        group:
+          type: string
+        health:
+          $ref: '#/components/schemas/v1HealthStatus'
+        hook:
+          type: boolean
+        kind:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+        requiresPruning:
+          type: boolean
+        status:
+          type: string
+        version:
+          type: string
+    v1ResourceNetworkingInfo:
+      description: |-
+        ResourceNetworkingInfo holds networking resource related information
+        TODO: describe members of this type
+      type: object
+      properties:
+        externalURLs:
+          type: array
+          description: ExternalURLs holds list of URLs which should be available externally.
+            List is populated for ingress resources using rules hostnames.
+          items:
+            type: string
+        ingress:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NetworkIngress'
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        targetLabels:
+          type: object
+          additionalProperties:
+            type: string
+        targetRefs:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ResourceRef'
+    v1HealthStatus:
+      description: HealthStatus contains information about the currently observed health
+        state of an workSpace or resource
+      type: object
+      properties:
+        message:
+          description: Message is a human-readable informational message describing the
+            health status
+          type: string
+        status:
+          description: Status holds the status code of the workSpace or resource
+          type: string
+    v1ConnectionState:
+      description: ConnectionState contains information about remote resource connection
+        state, currently used for providers and repositories
+      type: object
+      properties:
+        attemptedAt:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          description: Message contains human readable information about the connection
+            status
+          type: string
+        status:
+          description: Status contains the current status indicator for the connection
+          type: string
+    v1WorkSpaceWatchEvent:
+      type: object
+      properties:
+        workSpace:
+          $ref: '#/components/schemas/v1WorkSpace'
+        type:
+          type: string
+      description: WorkSpaceWatchEvent contains information about workSpace change.
+    # Control
+    v1Event:
+      type: object
+      properties:
+        action:
+          description: |-
+            What action was taken/failed regarding to the Regarding object.
+            +optional
+          type: string
+        count:
+          description: |-
+            The number of times this event has occurred.
+            +optional
+          type: integer
+          format: int32
+        eventTime:
+          $ref: '#/components/schemas/v1MicroTime'
+        firstTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        involvedObject:
+          $ref: '#/components/schemas/v1ObjectReference'
+        lastTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          description: |-
+            A human-readable description of the status of this operation.
+            TODO: decide on maximum length.
+            +optional
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        reason:
+          description: |-
+            This should be a short, machine understandable string that gives the reason
+            for the transition into the object's current status.
+            TODO: provide exact specification for format.
+            +optional
+          type: string
+        related:
+          $ref: '#/components/schemas/v1ObjectReference'
+        reportingComponent:
+          description: |-
+            Name of the controller that emitted the Event.
+            +optional
+          type: string
+        reportingInstance:
+          description: |-
+            ID of the controller instance.
+            +optional
+          type: string
+        series:
+          $ref: '#/components/schemas/v1EventSeries'
+        source:
+          $ref: '#/components/schemas/v1EventSource'
+        type:
+          description: |-
+            Type of this event (Normal, Warning), new types could be added in the future
+            +optional
+          type: string
+      description: |-
+        Event is a report of an event somewhere in the provider.  Events
+        have a limited retention time and triggers and messages may evolve
+        with time.  Event consumers should not rely on the timing of an event
+        with a given Reason reflecting a consistent underlying trigger, or the
+        continued existence of events with that Reason.  Events should be
+        treated as informative, best-effort, supplemental data.
+    v1EventList:
+      type: object
+      properties:
+        items:
+          description: List of events
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Event'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
+      description: EventList is a list of events.
+    v1EventSeries:
+      type: object
+      properties:
+        count:
+          description: Number of occurrences in this series up to the last heartbeat time
+          type: integer
+          format: int32
+        lastObservedTime:
+          $ref: '#/components/schemas/v1MicroTime'
+      description: |-
+        EventSeries contain information on series of events, i.e. thing that was/is happening
+        continuously for some time.
+    v1EventSource:
+      type: object
+      properties:
+        component:
+          description: |-
+            Component from which the event is generated.
+            +optional
+          type: string
+        host:
+          description: |-
+            Node name on which the event is generated.
+            +optional
+          type: string
+      description: EventSource contains information for an event.
+    
+    v1Operation:
+      description: Operation contains information about a requested or running operation
+      type: object
+      properties:
+        info:
+          description: Info is a list of informational items for this operation
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Info'
+        initiatedBy:
+          $ref: '#/components/schemas/v1OperationInitiator'
+        retry:
+          $ref: '#/components/schemas/v1RetryStrategy'
+        sync:
+          $ref: '#/components/schemas/v1SyncOperation'
+    v1OperationInitiator:
+      description: OperationInitiator contains information about the initiator of an operation
+      type: object
+      properties:
+        automated:
+          type: boolean
+          description: Automated is set to true if operation was initiated automatically
+            by the workSpace controller.
+        username:
+          description: Username contains the name of a user who started operation
+          type: string
+    v1OperationState:
+      description: OperationState contains information about state of a running operation
+      type: object
+      properties:
+        finishedAt:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          type: string
+          description: Message holds any pertinent messages when attempting to perform
+            operation (typically errors).
+        operation:
+          $ref: '#/components/schemas/v1Operation'
+        phase:
+          description: Phase is the current phase of the operation
+          type: string
+        retryCount:
+          description: RetryCount contains time of operation retries
+          type: string
+          format: int64
+        startedAt:
+          $ref: '#/components/schemas/v1Time'
+        syncResult:
+          $ref: '#/components/schemas/v1SyncOperationResult'
+    v1Command:
+      description: Command holds binary path and arguments list
+      type: object
+      properties:
+        args:
+          type: array
+          items:
+            type: string
+        command:
+          type: array
+          items:
+            type: string
+    v1ComparedTo:
+      description: ComparedTo contains workSpace source and target which was used for
+        resources comparison
+      type: object
+      properties:
+        destination:
+          $ref: '#/components/schemas/v1WorkSpaceDestination'
+        source:
+          $ref: '#/components/schemas/v1WorkSpaceSource'
+    v1ResourceAction:
+      description: |-
+        Describes the action to execute on a resource
+      type: object
+      properties:
+        disabled:
+          type: boolean
+        name:
+          type: string
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ResourceActionParam'
+    v1ResourceActionParam:
+      description: |-
+        TODO: describe this type
+        TODO: describe members of this type
+      type: object
+      properties:
+        default:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+    v1ResourceDiff:
+      description: |-
+        ResourceDiff holds the diff of a live and target resource object
+        TODO: describe members of this type
+      type: object
+      properties:
+        diff:
+          description: |-
+            Diff contains the JSON patch between target and live resource
+            Deprecated: use NormalizedLiveState and PredictedLiveState to render the difference
+          type: string
+        group:
+          type: string
+        hook:
+          type: boolean
+        kind:
+          type: string
+        liveState:
+          description: TargetState contains the JSON live resource manifest
+          type: string
+        modified:
+          type: boolean
+        name:
+          type: string
+        namespace:
+          type: string
+        normalizedLiveState:
+          description: NormalizedLiveState contains JSON serialized live resource state
+            with applied normalizations
+          type: string
+        predictedLiveState:
+          description: PredictedLiveState contains JSON serialized resource state that is
+            calculated based on normalized and target resource state
+          type: string
+        resourceVersion:
+          type: string
+        targetState:
+          description: TargetState contains the JSON serialized resource manifest defined
+            in the Git
+          type: string
+    v1ResourceIgnoreDifferences:
+      type: object
+      properties:
+        group:
+          type: string
+        jqPathExpressions:
+          type: array
+          items:
+            type: string
+        jsonPointers:
+          type: array
+          items:
+            type: string
+        kind:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+      description: ResourceIgnoreDifferences contains resource filter and list of
+        json paths which should be ignored during comparison with live state.
+    v1SyncOperation:
+      type: object
+      properties:
+        dryRun:
+          description: DryRun specifies to perform an apply without actually performing the sync
+          type: boolean
+        manifests:
+          description: Manifests is an optional field that overrides sync source with a
+            local directory for development
+          type: array
+          items:
+            type: string
+        prune:
+          description: Prune specifies to delete resources from the provider that are no
+            longer tracked in git
+          type: boolean
+        resources:
+          description: Resources describes which resources shall be part of the sync
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SyncOperationResource'
+        revision:
+          type: string
+          description: |-
+            Revision is the revision (Git) or chart version (Helm) which to sync the workSpace to
+            If omitted, will use the revision specified in app spec.
+        source:
+          $ref: '#/components/schemas/v1WorkSpaceSource'
+        syncOptions:
+          description: SyncOptions provide per-sync sync-options, e.g. Validate=false
+          type: array
+          items:
+            type: string
+        syncStrategy:
+          $ref: '#/components/schemas/v1SyncStrategy'
+      description: SyncOperation contains details about a sync operation.
+    v1SyncOperationResource:
+      type: object
+      properties:
+        group:
+          type: string
+        kind:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+      description: SyncOperationResource contains resources to sync.
+    v1SyncOperationResult:
+      description: SyncOperationResult represent result of sync operation
+      type: object
+      properties:
+        resources:
+          description: Resources contains a list of sync result items for each individual
+            resource in a sync operation
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ResourceResult'
+        revision:
+          description: Revision holds the revision this sync operation was performed to
+          type: string
+        source:
+          $ref: '#/components/schemas/v1WorkSpaceSource'
+    v1SyncPolicy:
+      description: SyncPolicy controls when a sync will be performed in response to updates
+        in git
+      type: object
+      properties:
+        automated:
+          $ref: '#/components/schemas/v1SyncPolicyAutomated'
+        retry:
+          $ref: '#/components/schemas/v1RetryStrategy'
+        syncOptions:
+          description: Options allow you to specify whole app sync-options
+          type: array
+          items:
+            type: string
+    v1SyncPolicyAutomated:
+      description: SyncPolicyAutomated controls the behavior of an automated sync
+      type: object
+      properties:
+        allowEmpty:
+          description: 'AllowEmpty allows workSpaces have zero live resources (default: false)'
+          type: boolean
+        prune:
+          description: 'Prune specifies whether to delete resources from the provider that
+            are not found in the sources anymore as part of automated sync (default:
+            false)'
+          type: boolean
+        selfHeal:
+          description: 'SelfHeal specifes whether to revert resources back to their desired
+            state upon modification in the provider (default: false)'
+          type: boolean
+    v1SyncStatus:
+      description: SyncStatus contains information about the currently observed live and
+        desired states of an workSpace
+      type: object
+      properties:
+        comparedTo:
+          $ref: '#/components/schemas/v1ComparedTo'
+        revision:
+          description: Revision contains information about the revision the comparison has
+            been performed to
+          type: string
+        status:
+          description: Status is the sync state of the comparison
+          type: string
+    v1SyncStrategy:
+      description: SyncStrategy controls the manner in which a sync is performed
+      type: object
+      properties:
+        apply:
+          $ref: '#/components/schemas/v1SyncStrategyApply'
+        hook:
+          $ref: '#/components/schemas/v1SyncStrategyHook'
+    v1SyncStrategyApply:
+      description: SyncStrategyApply uses `kubectl apply` to perform the apply
+      type: object
+      properties:
+        force:
+          type: boolean
+          description: |-
+            The --force flag deletes and re-create the resource, when PATCH encounters conflict and has
+            retried for 5 times.
+    v1SyncStrategyHook:
+      type: object
+      properties:
+        syncStrategyApply:
+          $ref: '#/components/schemas/v1SyncStrategyApply'
+      description: |-
+        SyncStrategyHook will perform a sync using hooks annotations.
+    v1SyncWindow:
+      description: SyncWindow contains the kind, time, duration and attributes that are
+        used to assign the syncWindows to workSpaces
+      type: object
+      properties:
+        workSpaces:
+          description: WorkSpaces contains a list of workSpaces that the window will
+            apply to
+          type: array
+          items:
+            type: string
+        providers:
+          description: Providers contains a list of providers that the window will apply to
+          type: array
+          items:
+            type: string
+        duration:
+          description: Duration is the amount of time the sync window will be open
+          type: string
+        kind:
+          description: Kind defines if the window allows or blocks syncs
+          type: string
+        manualSync:
+          description: ManualSync enables manual syncs when they would otherwise be blocked
+          type: boolean
+        namespaces:
+          description: Namespaces contains a list of namespaces that the window will apply
+            to
+          type: array
+          items:
+            type: string
+        schedule:
+          description: Schedule is the time the window will begin, specified in cron format
+          type: string
+    v1Backoff:
+      description: Backoff is the backoff strategy to use on subsequent retries for failing syncs
+      type: object
+      properties:
+        duration:
+          description: Duration is the amount to back off. Default unit is seconds, but
+            could also be a duration (e.g. "2m", "1h")
+          type: string
+        factor:
+          description: Factor is a factor to multiply the base duration after each failed
+            retry
+          type: string
+          format: int64
+        maxDuration:
+          description: MaxDuration is the maximum amount of time allowed for the backoff
+            strategy
+          type: string
+    v1RetryStrategy:
+      description: RetryStrategy contains information about the strategy to apply when a
+        sync failed
+      type: object
+      properties:
+        backoff:
+          $ref: '#/components/schemas/v1Backoff'
+        limit:
+          type: string
+          description: Limit is the maximum number of attempts for retrying a failed
+            sync. If set to 0, no retries will be performed.
+          format: int64
+    v1OrphanedResourceKey:
+      description: OrphanedResourceKey is a reference to a resource to be ignored
+      type: object
+      properties:
+        group:
+          type: string
+        kind:
+          type: string
+        name:
+          type: string
+    v1OrphanedResourcesMonitorSettings:
+      description: OrphanedResourcesMonitorSettings holds settings of orphaned resources
+        monitoring
+      type: object
+      properties:
+        ignore:
+          description: Ignore contains a list of resources that are to be excluded from
+            orphaned resources monitoring
+          type: array
+          items:
+            $ref: '#/components/schemas/v1OrphanedResourceKey'
+        warn:
+          description: Warn indicates if warning condition should be created for workSpaces which
+            have orphaned resources
+          type: boolean
+    v1RevisionHistory:
+      description: RevisionHistory contains history information about a previous sync
+      type: object
+      properties:
+        deployStartedAt:
+          $ref: '#/components/schemas/v1Time'
+        deployedAt:
+          $ref: '#/components/schemas/v1Time'
+        id:
+          description: ID is an auto incrementing identifier of the Revision History
+          type: string
+          format: int64
+        revision:
+          description: Revision holds the revision the sync was performed against
+          type: string
+        source:
+          $ref: '#/components/schemas/v1WorkSpaceSource'
+    v1RevisionMetadata:
+      description: RevisionMetadata contains metadata for a specific revision in a Git repository
+      type: object
+      properties:
+        author:
+          description: |-
+            who authored this revision,
+            typically their name and email, e.g. "John Doe <john_doe@my-company.com>",
+          type: string
+        date:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          description: |-
+            Message contains the message associated with the revision, most likely the commit message.
+            The message is truncated to the first newline or 64 characters (which ever comes first)
+          type: string
+        tags:
+          description: |-
+            Tags specifies any tags currently attached to the revision
+            Floating tags can move from one revision to another
+          type: array
+          items:
+            type: string    
+    #Git
+    v1RepoCreds:
+      description: RepoCreds holds the definition for repository credentials
+      type: object
+      properties:
+        password:
+          description: Password for authenticating at the repo server
+          type: string
+        sshPrivateKey:
+          description: SSHPrivateKey contains the private key data for authenticating at
+            the repo server using SSH (only Git repos)
+          type: string
+        tlsClientCertData:
+          description: TLSClientCertData specifies the TLS client cert data for authenticating
+            at the repo server
+          type: string
+        tlsClientCertKey:
+          description: TLSClientCertKey specifies the TLS client cert key for authenticating
+            at the repo server
+          type: string
+        type:
+          type: string
+          description: Type specifies the type of the repoCreds. Can be either "git"
+            or "helm. "git" is assumed if empty or absent.
+        url:
+          description: URL is the URL that this credentials matches to
+          type: string
+        username:
+          description: Username for authenticating at the repo server
+          type: string
+    v1RepoCredsList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1RepoCreds'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
+      description: RepositoryList is a collection of Repositories.
+    v1Repository:
+      description: Repository is a repository holding workSpace configurations
+      type: object
+      properties:
+        connectionState:
+          $ref: '#/components/schemas/v1ConnectionState'
+        enableLfs:
+          type: boolean
+          description: EnableLFS specifies whether git-lfs support should be enabled
+            for this repo. Only valid for Git repositories.
+        inheritedCreds:
+          description: Whether credentials were inherited from a credential set
+          type: boolean
+        insecure:
+          description: Insecure specifies whether the connection to the repository ignores
+            any errors when verifying TLS certificates or SSH host keys
+          type: boolean
+        insecureIgnoreHostKey:
+          description: |-
+            InsecureIgnoreHostKey should not be used anymore, Insecure is favoured
+            Used only for Git repos
+          type: boolean
+        name:
+          description: Name specifies a name to be used for this repo. Only used with Helm
+            repos
+          type: string
+        password:
+          description: Password contains the password or PAT used for authenticating at
+            the remote repository
+          type: string
+        proxy:
+          description: Proxy specifies the HTTP/HTTPS proxy used to access the repo
+          type: string
+        repo:
+          description: Repo contains the URL to the remote repository
+          type: string
+        sshPrivateKey:
+          type: string
+          description: SSHPrivateKey contains the PEM data for authenticating at the
+            repo server. Only used with Git repos.
+        tlsClientCertData:
+          description: TLSClientCertData contains a certificate in PEM format for authenticating
+            at the repo server
+          type: string
+        tlsClientCertKey:
+          description: TLSClientCertKey contains a private key in PEM format for authenticating
+            at the repo server
+          type: string
+        type:
+          type: string
+          description: Type specifies the type of the repo. Can be either "git" or
+            "helm. "git" is assumed if empty or absent.
+        username:
+          description: Username contains the user name used for authenticating at the remote
+            repository
+          type: string
+    v1RepositoryList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Repository'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
+      description: RepositoryList is a collection of Repositories
+  #Common
+    v1ListMeta:
+      type: object
+      properties:
+        continue:
+          type: string
+          description: |-
+            continue may be set if the user set a limit on the number of items returned, and indicates that
+            the server has more data available. The value is opaque and may be used to issue another request
+            to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+            consistent list may not be possible if the server configuration has changed or more than a few
+            minutes have passed. The resourceVersion field returned when using this continue value will be
+            identical to the value in the first response, unless you have received this token from an error
+            message.
+        remainingItemCount:
+          description: |-
+            remainingItemCount is the number of subsequent items in the list which are not included in this
+            list response. If the list request contained label or field selectors, then the number of
+            remaining items is unknown and the field will be left unset and omitted during serialization.
+            If the list is complete (either because it is not chunking or because this is the last chunk),
+            then there are no more remaining items and this field will be left unset and omitted during
+            serialization.
+          type: string
+          format: int64
+        resourceVersion:
+          description: |-
+            String that identifies the server's internal version of this object that
+            can be used by clients to determine when objects have changed.
+            Value must be treated as opaque by clients and passed unmodified back to the server.
+            Populated by the system.
+            Read-only.
+          type: string
+      description: |-
+        ListMeta describes metadata that synthetic resources must have, including lists and
+        various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
+    v1MicroTime:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          description: |-
+            Non-negative fractions of a second at nanosecond resolution. Negative
+            second values with fractions must still have non-negative nanos values
+            that count forward in time. Must be from 0 to 999,999,999
+            inclusive. This field may be limited in precision depending on context.
+          format: int32
+        seconds:
+          type: string
+          description: |-
+            Represents seconds of UTC time since Unix epoch
+            1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
+            9999-12-31T23:59:59Z inclusive.
+          format: int64
+      description: |-
+        MicroTime is version of Time with microsecond level precision.
+    v1ObjectMeta:
+      type: object
+      properties:
+        annotations:
+          description: |-
+            Annotations is an unstructured key value map stored with a resource that may be
+            set by external tools to store and retrieve arbitrary metadata. They are not
+            queryable and should be preserved when modifying objects.
+          type: object
+          additionalProperties:
+            type: string
+        creationTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        deletionGracePeriodSeconds:
+          description: |-
+            Number of seconds allowed for this object to gracefully terminate before
+            it will be removed from the system. Only set when deletionTimestamp is also set.
+            May only be shortened.
+            Read-only.
+            +optional
+          type: string
+          format: int64
+        deletionTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        finalizers:
+          description: |-
+            Must be empty before the object is deleted from the registry. Each entry
+            is an identifier for the responsible component that will remove the entry
+            from the list. If the deletionTimestamp of the object is non-nil, entries
+            in this list can only be removed.
+            Finalizers may be processed and removed in any order.  Order is NOT enforced
+            because it introduces significant risk of stuck finalizers.
+            finalizers is a shared field, any actor with permission can reorder it.
+            If the finalizer list is processed in order, then this can lead to a situation
+            in which the component responsible for the first finalizer in the list is
+            waiting for a signal (field value, external system, or other) produced by a
+            component responsible for a finalizer later in the list, resulting in a deadlock.
+            Without enforced ordering finalizers are free to order amongst themselves and
+            are not vulnerable to ordering changes in the list.
+            +optional
+            +patchStrategy=merge
+          type: array
+          items:
+            type: string
+        generateName:
+          type: string
+          description: |-
+            GenerateName is an optional prefix, used by the server, to generate a unique
+            name ONLY IF the Name field has not been provided.
+            If this field is used, the name returned to the client will be different
+            than the name passed. This value will also be combined with a unique suffix.
+            The provided value has the same validation rules as the Name field,
+            and may be truncated by the length of the suffix required to make the value
+            unique on the server.
+        generation:
+          description: |-
+            A sequence number representing a specific generation of the desired state.
+            Populated by the system. Read-only.
+            +optional
+          type: string
+          format: int64
+        labels:
+          description: |-
+            Map of string keys and values that can be used to organize and categorize
+            (scope and select) objects. May match selectors of replication controllers
+            and services.
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          description: |-
+            Name must be unique within a namespace. Is required when creating resources, although
+            some resources may allow a client to request the generation of an appropriate name
+            automatically. Name is primarily intended for creation idempotence and configuration
+            definition.
+            Cannot be updated.
+            More info: http://kubernetes.io/docs/user-guide/identifiers#names
+            +optional
+          type: string
+        namespace:
+          type: string
+          description: |-
+            Namespace defines the space within which each name must be unique. An empty namespace is
+            equivalent to the "default" namespace, but "default" is the canonical representation.
+            Not all objects are required to be scoped to a namespace - the value of this field for
+            those objects will be empty.
+            Must be a DNS_LABEL.
+            Cannot be updated.
+            More info: http://kubernetes.io/docs/user-guide/namespaces
+            +optional
+        ownerReferences:
+          description: |-
+            List of objects depended by this object. If ALL objects in the list have
+            been deleted, this object will be garbage collected. If this object is managed by a controller,
+            then an entry in this list will point to this controller, with the controller field set to true.
+            There cannot be more than one managing controller.
+            +optional
+            +patchMergeKey=uid
+            +patchStrategy=merge
+          type: array
+          items:
+            $ref: '#/components/schemas/v1OwnerReference'
+        resourceVersion:
+          type: string
+          description: |-
+            An opaque value that represents the internal version of this object that can
+            be used by clients to determine when objects have changed. May be used for optimistic
+            concurrency, change detection, and the watch operation on a resource or set of resources.
+            Clients must treat these values as opaque and passed unmodified back to the server.
+            They may only be valid for a particular resource or set of resources.
+
+            Populated by the system.
+        uid:
+          type: string
+          description: |-
+            UID is the unique in time and space value for this object. It is typically generated by
+            the server on successful creation of a resource and is not allowed to change on PUT
+            operations.
+
+            Populated by the system.
+            Read-only.
+      description: |-
+        ObjectMeta is metadata that all persisted resources must have, which includes all objects
+        users must create.
+    v1ObjectReference:
+      description: |-
+        ObjectReference contains enough information to let you inspect or modify the referred object.
+      type: object
+      properties:
+        apiVersion:
+          description: |-
+            API version of the referent.
+          type: string
+        fieldPath:
+          description: |-
+            If referring to a piece of an object instead of an entire object
+          type: string
+        kind:
+          description: |-
+            Kind of the referent.
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            +optional
+          type: string
+        name:
+          description: |-
+            Name of the referent.
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+            +optional
+          type: string
+        namespace:
+          description: |-
+            Namespace of the referent.
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+            +optional
+          type: string
+        resourceVersion:
+          description: |-
+            Specific resourceVersion to which this reference is made, if any.
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+            +optional
+          type: string
+        uid:
+          description: |-
+            UID of the referent.
+            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+            +optional
+          type: string
+    v1OwnerReference:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the referent.
+        blockOwnerDeletion:
+          description: |-
+            If true, AND if the owner has the "foregroundDeletion" finalizer, then
+            the owner cannot be deleted from the key-value store until this
+            reference is removed.
+            Defaults to false.
+            To set this field, a user needs "delete" permission of the owner,
+            otherwise 422 (Unprocessable Entity) will be returned.
+            +optional
+          type: boolean
+        controller:
+          description: |-
+            If true, this reference points to the managing controller.
+            +optional
+          type: boolean
+        kind:
+          description: |-
+            Kind of the referent.
+            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+          type: string
+        name:
+          description: |-
+            Name of the referent.
+            More info: http://kubernetes.io/docs/user-guide/identifiers#names
+          type: string
+        uid:
+          description: |-
+            UID of the referent.
+            More info: http://kubernetes.io/docs/user-guide/identifiers#uids
+          type: string
+      description: |-
+        OwnerReference contains enough information to let you identify an owning
+        object. An owning object must be in the same namespace as the dependent, or
+        be provider-scoped, so there is no namespace field.
+    v1Time:
+      type: object
+      properties:
+        nanos:
+          type: integer
+          description: |-
+            Non-negative fractions of a second at nanosecond resolution. Negative
+            second values with fractions must still have non-negative nanos values
+            that count forward in time. Must be from 0 to 999,999,999
+            inclusive. This field may be limited in precision depending on context.
+          format: int32
+        seconds:
+          type: string
+          description: |-
+            Represents seconds of UTC time since Unix epoch
+            1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
+            9999-12-31T23:59:59Z inclusive.
+          format: int64
+      description: |-
+        Time is a wrapper around time.Time which supports correct
+        marshaling to YAML and JSON.  Wrappers are provided for many
+        of the factory methods that the time package offers.
+    v1Info:
+      description: Contains arbitrary, human readable information as pair name value
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name is a human readable title for this piece of information.
+        value:
+          type: string
+          description: Value is human readable content.  
+    v1JWTToken:
+      description: JWTToken holds the issuedAt and expiresAt values of a token
+      type: object
+      properties:
+        exp:
+          type: string
+          format: int64
+        iat:
+          type: string
+          format: int64
+        id:
+          type: string
+    v1JWTTokens:
+      description: JWTTokens represents a list of JWT tokens
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1JWTToken'
+    v1TLSClientConfig:
+      description: TLSClientConfig contains settings to enable transport layer security
+      type: object
+      properties:
+        caData:
+          description: |-
+            CAData holds PEM-encoded bytes (typically read from a root certificates bundle).
+            CAData takes precedence over CAFile
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          format: byte
+        certData:
+          description: |-
+            CertData holds PEM-encoded bytes (typically read from a client certificate file).
+            CertData takes precedence over CertFile
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          format: byte
+        insecure:
+          type: boolean
+          description: Insecure specifies that the server should be accessed without
+            verifying the TLS certificate. For testing only.
+        keyData:
+          description: |-
+            KeyData holds PEM-encoded bytes (typically read from a client certificate key file).
+            KeyData takes precedence over KeyFile
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          format: byte
+        serverName:
+          type: string
+          description: |-
+            ServerName is passed to the server for SNI and is used in the client to check server
+            certificates against. If ServerName is empty, the hostname used to contact the
+            server is used.
+################################################
+
+
     accountAccount:
       type: object
       properties:
@@ -2274,834 +3894,6 @@ components:
           type: string
         message:
           type: string
-    v1Event:
-      type: object
-      properties:
-        action:
-          description: |-
-            What action was taken/failed regarding to the Regarding object.
-            +optional
-          type: string
-        count:
-          description: |-
-            The number of times this event has occurred.
-            +optional
-          type: integer
-          format: int32
-        eventTime:
-          $ref: '#/components/schemas/v1MicroTime'
-        firstTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        involvedObject:
-          $ref: '#/components/schemas/v1ObjectReference'
-        lastTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        message:
-          description: |-
-            A human-readable description of the status of this operation.
-            TODO: decide on maximum length.
-            +optional
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        reason:
-          description: |-
-            This should be a short, machine understandable string that gives the reason
-            for the transition into the object's current status.
-            TODO: provide exact specification for format.
-            +optional
-          type: string
-        related:
-          $ref: '#/components/schemas/v1ObjectReference'
-        reportingComponent:
-          description: |-
-            Name of the controller that emitted the Event.
-            +optional
-          type: string
-        reportingInstance:
-          description: |-
-            ID of the controller instance.
-            +optional
-          type: string
-        series:
-          $ref: '#/components/schemas/v1EventSeries'
-        source:
-          $ref: '#/components/schemas/v1EventSource'
-        type:
-          description: |-
-            Type of this event (Normal, Warning), new types could be added in the future
-            +optional
-          type: string
-      description: |-
-        Event is a report of an event somewhere in the provider.  Events
-        have a limited retention time and triggers and messages may evolve
-        with time.  Event consumers should not rely on the timing of an event
-        with a given Reason reflecting a consistent underlying trigger, or the
-        continued existence of events with that Reason.  Events should be
-        treated as informative, best-effort, supplemental data.
-    v1EventList:
-      type: object
-      properties:
-        items:
-          description: List of events
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Event'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-      description: EventList is a list of events.
-    v1EventSeries:
-      type: object
-      properties:
-        count:
-          description: Number of occurrences in this series up to the last heartbeat time
-          type: integer
-          format: int32
-        lastObservedTime:
-          $ref: '#/components/schemas/v1MicroTime'
-      description: |-
-        EventSeries contain information on series of events, i.e. thing that was/is happening
-        continuously for some time.
-    v1EventSource:
-      type: object
-      properties:
-        component:
-          description: |-
-            Component from which the event is generated.
-            +optional
-          type: string
-        host:
-          description: |-
-            Node name on which the event is generated.
-            +optional
-          type: string
-      description: EventSource contains information for an event.
-    v1ListMeta:
-      type: object
-      properties:
-        continue:
-          type: string
-          description: |-
-            continue may be set if the user set a limit on the number of items returned, and indicates that
-            the server has more data available. The value is opaque and may be used to issue another request
-            to the endpoint that served this list to retrieve the next set of available objects. Continuing a
-            consistent list may not be possible if the server configuration has changed or more than a few
-            minutes have passed. The resourceVersion field returned when using this continue value will be
-            identical to the value in the first response, unless you have received this token from an error
-            message.
-        remainingItemCount:
-          description: |-
-            remainingItemCount is the number of subsequent items in the list which are not included in this
-            list response. If the list request contained label or field selectors, then the number of
-            remaining items is unknown and the field will be left unset and omitted during serialization.
-            If the list is complete (either because it is not chunking or because this is the last chunk),
-            then there are no more remaining items and this field will be left unset and omitted during
-            serialization.
-          type: string
-          format: int64
-        resourceVersion:
-          description: |-
-            String that identifies the server's internal version of this object that
-            can be used by clients to determine when objects have changed.
-            Value must be treated as opaque by clients and passed unmodified back to the server.
-            Populated by the system.
-            Read-only.
-          type: string
-      description: |-
-        ListMeta describes metadata that synthetic resources must have, including lists and
-        various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
-    v1NetworkIngress:
-      type: object
-      properties:
-        hostname:
-          description: |-
-            Hostname is set for ingress points
-            +optional
-          type: string
-        ip:
-          description: |-
-            IP is set for ingress points that are IP based
-          type: string
-        ports:
-          description: |-
-            Ports is a list of records of service ports
-            If used, every port defined in the service should have an entry in it
-          type: array
-          items:
-            $ref: '#/components/schemas/v1PortStatus'
-      description: |-
-        NetworkIngress represents the status of an ingress point:
-        traffic intended for the service should be sent to an ingress point.
-    v1MicroTime:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          description: |-
-            Non-negative fractions of a second at nanosecond resolution. Negative
-            second values with fractions must still have non-negative nanos values
-            that count forward in time. Must be from 0 to 999,999,999
-            inclusive. This field may be limited in precision depending on context.
-          format: int32
-        seconds:
-          type: string
-          description: |-
-            Represents seconds of UTC time since Unix epoch
-            1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
-            9999-12-31T23:59:59Z inclusive.
-          format: int64
-      description: |-
-        MicroTime is version of Time with microsecond level precision.
-    v1HostSystemInfo:
-      type: object
-      properties:
-        architecture:
-          description: The Architecture reported by the node
-          type: string
-        bootID:
-          type: string
-          description: Boot ID reported by the node.
-        containerRuntimeVersion:
-          type: string
-          description: ContainerRuntime Version reported by the node through runtime
-            remote API (e.g. docker://1.5.0).
-        kernelVersion:
-          type: string
-          description: Kernel Version reported by the node from 'uname -r' (e.g. 3.16.0-0.bpo.4-amd64).
-        kubeProxyVersion:
-          type: string
-          description: KubeProxy Version reported by the node.
-        kubeletVersion:
-          type: string
-          description: Kubelet Version reported by the node.
-        machineID:
-          description: |-
-            MachineID reported by the node. For unique machine identification
-            in the provider this field is preferred. Learn more from man(5)
-            machine-id: http://man7.org/linux/man-pages/man5/machine-id.5.html
-          type: string
-        operatingSystem:
-          description: The Operating System reported by the node
-          type: string
-        osImage:
-          type: string
-          description: OS Image reported by the node from /etc/os-release (e.g. Debian
-            GNU/Linux 7 (wheezy)).
-        systemUUID:
-          description: |-
-            SystemUUID reported by the node. For unique machine identification
-            MachineID is preferred. This field is specific to Red Hat hosts
-            https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
-          type: string
-      description: NodeSystemInfo is a set of ids/uuids to uniquely identify the node. TODO this should be included in provider
-    v1ObjectMeta:
-      type: object
-      properties:
-        annotations:
-          description: |-
-            Annotations is an unstructured key value map stored with a resource that may be
-            set by external tools to store and retrieve arbitrary metadata. They are not
-            queryable and should be preserved when modifying objects.
-          type: object
-          additionalProperties:
-            type: string
-        creationTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        deletionGracePeriodSeconds:
-          description: |-
-            Number of seconds allowed for this object to gracefully terminate before
-            it will be removed from the system. Only set when deletionTimestamp is also set.
-            May only be shortened.
-            Read-only.
-            +optional
-          type: string
-          format: int64
-        deletionTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        finalizers:
-          description: |-
-            Must be empty before the object is deleted from the registry. Each entry
-            is an identifier for the responsible component that will remove the entry
-            from the list. If the deletionTimestamp of the object is non-nil, entries
-            in this list can only be removed.
-            Finalizers may be processed and removed in any order.  Order is NOT enforced
-            because it introduces significant risk of stuck finalizers.
-            finalizers is a shared field, any actor with permission can reorder it.
-            If the finalizer list is processed in order, then this can lead to a situation
-            in which the component responsible for the first finalizer in the list is
-            waiting for a signal (field value, external system, or other) produced by a
-            component responsible for a finalizer later in the list, resulting in a deadlock.
-            Without enforced ordering finalizers are free to order amongst themselves and
-            are not vulnerable to ordering changes in the list.
-            +optional
-            +patchStrategy=merge
-          type: array
-          items:
-            type: string
-        generateName:
-          type: string
-          description: |-
-            GenerateName is an optional prefix, used by the server, to generate a unique
-            name ONLY IF the Name field has not been provided.
-            If this field is used, the name returned to the client will be different
-            than the name passed. This value will also be combined with a unique suffix.
-            The provided value has the same validation rules as the Name field,
-            and may be truncated by the length of the suffix required to make the value
-            unique on the server.
-        generation:
-          description: |-
-            A sequence number representing a specific generation of the desired state.
-            Populated by the system. Read-only.
-            +optional
-          type: string
-          format: int64
-        labels:
-          description: |-
-            Map of string keys and values that can be used to organize and categorize
-            (scope and select) objects. May match selectors of replication controllers
-            and services.
-          type: object
-          additionalProperties:
-            type: string
-        name:
-          description: |-
-            Name must be unique within a namespace. Is required when creating resources, although
-            some resources may allow a client to request the generation of an appropriate name
-            automatically. Name is primarily intended for creation idempotence and configuration
-            definition.
-            Cannot be updated.
-            More info: http://kubernetes.io/docs/user-guide/identifiers#names
-            +optional
-          type: string
-        namespace:
-          type: string
-          description: |-
-            Namespace defines the space within which each name must be unique. An empty namespace is
-            equivalent to the "default" namespace, but "default" is the canonical representation.
-            Not all objects are required to be scoped to a namespace - the value of this field for
-            those objects will be empty.
-            Must be a DNS_LABEL.
-            Cannot be updated.
-            More info: http://kubernetes.io/docs/user-guide/namespaces
-            +optional
-        ownerReferences:
-          description: |-
-            List of objects depended by this object. If ALL objects in the list have
-            been deleted, this object will be garbage collected. If this object is managed by a controller,
-            then an entry in this list will point to this controller, with the controller field set to true.
-            There cannot be more than one managing controller.
-            +optional
-            +patchMergeKey=uid
-            +patchStrategy=merge
-          type: array
-          items:
-            $ref: '#/components/schemas/v1OwnerReference'
-        resourceVersion:
-          type: string
-          description: |-
-            An opaque value that represents the internal version of this object that can
-            be used by clients to determine when objects have changed. May be used for optimistic
-            concurrency, change detection, and the watch operation on a resource or set of resources.
-            Clients must treat these values as opaque and passed unmodified back to the server.
-            They may only be valid for a particular resource or set of resources.
-
-            Populated by the system.
-        uid:
-          type: string
-          description: |-
-            UID is the unique in time and space value for this object. It is typically generated by
-            the server on successful creation of a resource and is not allowed to change on PUT
-            operations.
-
-            Populated by the system.
-            Read-only.
-      description: |-
-        ObjectMeta is metadata that all persisted resources must have, which includes all objects
-        users must create.
-    v1ObjectReference:
-      description: |-
-        ObjectReference contains enough information to let you inspect or modify the referred object.
-      type: object
-      properties:
-        apiVersion:
-          description: |-
-            API version of the referent.
-          type: string
-        fieldPath:
-          description: |-
-            If referring to a piece of an object instead of an entire object
-          type: string
-        kind:
-          description: |-
-            Kind of the referent.
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-            +optional
-          type: string
-        name:
-          description: |-
-            Name of the referent.
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-            +optional
-          type: string
-        namespace:
-          description: |-
-            Namespace of the referent.
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
-            +optional
-          type: string
-        resourceVersion:
-          description: |-
-            Specific resourceVersion to which this reference is made, if any.
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
-            +optional
-          type: string
-        uid:
-          description: |-
-            UID of the referent.
-            More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
-            +optional
-          type: string
-    v1OwnerReference:
-      type: object
-      properties:
-        apiVersion:
-          type: string
-          description: API version of the referent.
-        blockOwnerDeletion:
-          description: |-
-            If true, AND if the owner has the "foregroundDeletion" finalizer, then
-            the owner cannot be deleted from the key-value store until this
-            reference is removed.
-            Defaults to false.
-            To set this field, a user needs "delete" permission of the owner,
-            otherwise 422 (Unprocessable Entity) will be returned.
-            +optional
-          type: boolean
-        controller:
-          description: |-
-            If true, this reference points to the managing controller.
-            +optional
-          type: boolean
-        kind:
-          description: |-
-            Kind of the referent.
-            More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-          type: string
-        name:
-          description: |-
-            Name of the referent.
-            More info: http://kubernetes.io/docs/user-guide/identifiers#names
-          type: string
-        uid:
-          description: |-
-            UID of the referent.
-            More info: http://kubernetes.io/docs/user-guide/identifiers#uids
-          type: string
-      description: |-
-        OwnerReference contains enough information to let you identify an owning
-        object. An owning object must be in the same namespace as the dependent, or
-        be provider-scoped, so there is no namespace field.
-    v1PortStatus:
-      type: object
-      properties:
-        error:
-          description: |-
-            Error is to record the problem with the service port
-            The format of the error shall comply with the following rules:
-            - built-in error values shall be specified in this file and those shall use
-              CamelCase names
-            - cloud provider specific error values must have names that comply with the
-              format foo.example.com/CamelCase.
-          type: string
-        port:
-          description: Port is the port number of the service port of which status is recorded
-            here
-          type: integer
-          format: int32
-        protocol:
-          description: |-
-            Protocol is the protocol of the service port of which status is recorded here
-            Candidate values are: "TCP", "UDP", "SCTP"
-          type: string
-    v1Time:
-      type: object
-      properties:
-        nanos:
-          type: integer
-          description: |-
-            Non-negative fractions of a second at nanosecond resolution. Negative
-            second values with fractions must still have non-negative nanos values
-            that count forward in time. Must be from 0 to 999,999,999
-            inclusive. This field may be limited in precision depending on context.
-          format: int32
-        seconds:
-          type: string
-          description: |-
-            Represents seconds of UTC time since Unix epoch
-            1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
-            9999-12-31T23:59:59Z inclusive.
-          format: int64
-      description: |-
-        Time is a wrapper around time.Time which supports correct
-        marshaling to YAML and JSON.  Wrappers are provided for many
-        of the factory methods that the time package offers.
-
-    v1WorkSpace:
-      description: |-
-        WorkSpace description. Includes all information regarding contents
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        operation:
-          $ref: '#/components/schemas/v1Operation'
-        spec:
-          $ref: '#/components/schemas/v1WorkSpaceSpec'
-          description: information for managing the workSpace
-        status:
-          $ref: '#/components/schemas/v1WorkSpaceStatus'
-    v1WorkSpaceCondition:
-      description: WorkSpaceCondition contains details about an workSpace condition,
-        which ishould be usally an error or warning
-      type: object
-      properties:
-        lastTransitionTime:
-          $ref: '#/components/schemas/v1Time'
-        message:
-          description: Message contains human-readable message indicating details about
-            condition
-          type: string
-        type:
-          description: Type is an workSpace condition type
-          type: string
-    v1WorkSpaceDestination:
-      description: WorkSpaceDestination holds information about the workSpace's destination
-      type: object
-      properties:
-        name:
-          description: Name is an alternate way of specifying the target provider by its
-            symbolic name
-          type: string
-        namespace:
-          description: |-
-            Namespace specifies the target namespace for the workSpace's resources.
-            The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
-          type: string
-        server:
-          description: Server specifies the URL of the target provider and must be set to
-            the Kubernetes control plane API
-          type: string
-    v1WorkSpaceList:
-      description: |-
-        WorkSpaceList is list of WorkSpaces
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1WorkSpace'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-    v1WorkSpaceSource:
-      description: WorkSpaceSource contains all required information about the source
-        of an workSpace
-      type: object
-      properties:
-        directory:
-          $ref: '#/components/schemas/v1WorkSpaceSourceDirectory'
-        path:
-          type: string
-          description: Path is a directory path within the Git repository, and is
-            only valid for workSpaces sourced from Git.
-        plugin:
-          $ref: '#/components/schemas/v1WorkSpaceSourcePlugin'
-        repoURL:
-          description: RepoURL is the URL to the repository (Git) that contains
-            the workSpace manifests
-          type: string
-        targetRevision:
-          type: string
-          description: |-
-            TargetRevision defines the revision of the source to sync the workSpace to.
-    v1WorkSpaceSourceDirectory:
-      description: WorkSpaceSourceDirectory holds options for workSpaces of type plain
-        YAML
-      type: object
-      properties:
-        exclude:
-          description: Exclude contains a glob pattern to match paths against that should
-            be explicitly excluded from being used during manifest generation
-          type: string
-        include:
-          description: Include contains a glob pattern to match paths against that should
-            be explicitly included during manifest generation
-          type: string
-        recurse:
-          description: Recurse specifies whether to scan a directory recursively for manifests
-          type: boolean
-    v1WorkSpaceSourcePlugin:
-      description: WorkSpaceSourcePlugin holds options specific to config management plugins
-      type: object
-      properties:
-        env:
-          type: array
-          items:
-            $ref: '#/components/schemas/workSpacev1EnvEntry'
-        name:
-          type: string
-    v1WorkSpaceSpec:
-      type: object
-      properties:
-        destination:
-          $ref: '#/components/schemas/v1WorkSpaceDestination'
-        ignoreDifferences:
-          description: IgnoreDifferences is a list of resources and their fields which should
-            be ignored during comparison
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ResourceIgnoreDifferences'
-        info:
-          description: Info contains a list of information (URLs, email addresses, and plain
-            text) that relates to the workSpace
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Info'
-        revisionHistoryLimit:
-          type: string
-          description: |-
-            RevisionHistoryLimit limits the number of items kept in the workSpace's revision history, which is used for informational purposes as well as for rollbacks to previous versions.
-            This should only be changed in exceptional circumstances.
-            Setting to zero will store no history. This will reduce storage used.
-            Increasing will increase the space used to store the history, so we do not recommend increasing it.
-            Default is 10.
-          format: int64
-        source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
-        syncPolicy:
-          $ref: '#/components/schemas/v1SyncPolicy'
-      description: WorkSpaceSpec represents desired workSpace state. Contains
-        link to repository with workSpace definition and additional parameters link
-        definition revision.
-    v1WorkSpaceStatus:
-      description: WorkSpaceStatus contains status information for the workSpace
-      type: object
-      properties:
-        conditions:
-          description: Conditions is a list of currently observed workSpace conditions
-          type: array
-          items:
-            $ref: '#/components/schemas/v1WorkSpaceCondition'
-        health:
-          $ref: '#/components/schemas/v1HealthStatus'
-        history:
-          description: History contains information about the workSpace's sync history
-          type: array
-          items:
-            $ref: '#/components/schemas/v1RevisionHistory'
-        observedAt:
-          $ref: '#/components/schemas/v1Time'
-        operationState:
-          $ref: '#/components/schemas/v1OperationState'
-        reconciledAt:
-          $ref: '#/components/schemas/v1Time'
-        resources:
-          description: Resources is a list of Kubernetes resources managed by this workSpace
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ResourceStatus'
-        sourceType:
-          description: SourceType specifies the type of this workSpace
-          type: string
-        summary:
-          $ref: '#/components/schemas/v1WorkSpaceSummary'
-        sync:
-          $ref: '#/components/schemas/v1SyncStatus'
-    v1WorkSpaceSummary:
-      description: WorkSpaceSummary contains information about URLs and container images
-        used by an workSpace
-      type: object
-      properties:
-        externalURLs:
-          type: array
-          description: ExternalURLs holds all external URLs of workSpace child resources.
-          items:
-            type: string
-        images:
-          type: array
-          description: Images holds all images of workSpace child resources.
-          items:
-            type: string
-    v1WorkSpaceTree:
-      description: |-
-        WorkSpaceTree holds nodes which belongs to the workSpace
-      type: object
-      properties:
-        hosts:
-          description: Hosts holds list of Kubernetes nodes that run workSpace related
-            pods
-          type: array
-          items:
-            $ref: '#/components/schemas/v1HostInfo'
-        nodes:
-          type: array
-          description: Nodes contains list of nodes which either directly managed
-            by the workSpace and children of directly managed nodes.
-          items:
-            $ref: '#/components/schemas/v1Resource'
-    v1WorkSpaceWatchEvent:
-      type: object
-      properties:
-        workSpace:
-          $ref: '#/components/schemas/v1WorkSpace'
-        type:
-          type: string
-      description: WorkSpaceWatchEvent contains information about workSpace change.
-    v1Backoff:
-      description: Backoff is the backoff strategy to use on subsequent retries for failing syncs
-      type: object
-      properties:
-        duration:
-          description: Duration is the amount to back off. Default unit is seconds, but
-            could also be a duration (e.g. "2m", "1h")
-          type: string
-        factor:
-          description: Factor is a factor to multiply the base duration after each failed
-            retry
-          type: string
-          format: int64
-        maxDuration:
-          description: MaxDuration is the maximum amount of time allowed for the backoff
-            strategy
-          type: string
-    v1Provider:
-      description: Provider is the definition of a resource provider
-      type: object
-      properties:
-        annotations:
-          description: Annotations for provider secret metadata
-          type: object
-          additionalProperties:
-            type: string
-        providerResources:
-          type: boolean
-          description: Indicates if provider level resources should be managed. This
-            setting is used only if provider is connected in a namespaced mode.
-        config:
-          $ref: '#/components/schemas/v1ProviderConfig'
-        connectionState:
-          $ref: '#/components/schemas/v1ConnectionState'
-        info:
-          $ref: '#/components/schemas/v1ProviderInfo'
-        labels:
-          description: Labels for provider secret metadata
-          type: object
-          additionalProperties:
-            type: string
-        name:
-          description: Name of the provider. If omitted, will use the server address
-          type: string
-        namespaces:
-          type: array
-          description: Holds list of namespaces which are accessible in that provider.
-            Provider level resources will be ignored if namespace list is not empty.
-          items:
-            type: string
-        refreshRequestedAt:
-          $ref: '#/components/schemas/v1Time'
-        server:
-          description: Server is the API server URL of the provider
-          type: string
-        shard:
-          type: string
-          description: Shard contains optional shard number. Calculated on the fly
-            by the workSpace controller if not specified.
-          format: int64
-    v1ProviderCacheInfo:
-      description: ProviderCacheInfo contains information about the provider cache
-      type: object
-      properties:
-        apisCount:
-          description: APIsCount holds number of observed  API count
-          type: string
-          format: int64
-        lastCacheSyncTime:
-          $ref: '#/components/schemas/v1Time'
-        resourcesCount:
-          description: ResourcesCount holds number of observed Kubernetes resources
-          type: string
-          format: int64
-    v1ProviderConfig:
-      type: object
-      properties:
-        bearerToken:
-          type: string
-          description: |-
-            Server requires Bearer authentication. This client will not attempt to use
-            refresh tokens for an OAuth2 flow.
-        execProviderConfig:
-          $ref: '#/components/schemas/v1ExecProviderConfig'
-        password:
-          type: string
-        tlsClientConfig:
-          $ref: '#/components/schemas/v1TLSClientConfig'
-        username:
-          description: Server requires Basic authentication
-          type: string
-      description: |-
-        ProviderConfig is the configuration attributes. This structure is subset of the go-client
-        rest.Config with annotations added for marshalling.
-    v1ProviderInfo:
-      description: ProviderInfo contains information about the provider
-      type: object
-      properties:
-        apiVersions:
-          description: APIVersions contains list of API versions supported by the provider
-          type: array
-          items:
-            type: string
-        workSpacesCount:
-          description: WorkSpacesCount is the number of workSpaces managed on the provider
-          type: string
-          format: int64
-        cacheInfo:
-          $ref: '#/components/schemas/v1ProviderCacheInfo'
-        connectionState:
-          $ref: '#/components/schemas/v1ConnectionState'
-        serverVersion:
-          description: ServerVersion contains information about the version of
-            the provider
-          type: string
-    v1ProviderList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Provider'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-      description: ProviderList is a collection of Providers.
-    v1Command:
-      description: Command holds binary path and arguments list
-      type: object
-      properties:
-        args:
-          type: array
-          items:
-            type: string
-        command:
-          type: array
-          items:
-            type: string
-    v1ComparedTo:
-      description: ComparedTo contains workSpace source and target which was used for
-        resources comparison
-      type: object
-      properties:
-        destination:
-          $ref: '#/components/schemas/v1WorkSpaceDestination'
-        source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
     v1ConfigManagementPlugin:
       description: ConfigManagementPlugin contains config management plugin configuration
       type: object
@@ -3111,20 +3903,6 @@ components:
         init:
           $ref: '#/components/schemas/v1Command'
         name:
-          type: string
-    v1ConnectionState:
-      description: ConnectionState contains information about remote resource connection
-        state, currently used for providers and repositories
-      type: object
-      properties:
-        attemptedAt:
-          $ref: '#/components/schemas/v1Time'
-        message:
-          description: Message contains human readable information about the connection
-            status
-          type: string
-        status:
-          description: Status contains the current status indicator for the connection
           type: string
     v1ExecProviderConfig:
       description: |-
@@ -3151,150 +3929,6 @@ components:
           description: This text is shown to the user when the executable doesn't seem to
             be present
           type: string
-    v1HealthStatus:
-      description: HealthStatus contains information about the currently observed health
-        state of an workSpace or resource
-      type: object
-      properties:
-        message:
-          description: Message is a human-readable informational message describing the
-            health status
-          type: string
-        status:
-          description: Status holds the status code of the workSpace or resource
-          type: string
-    v1HostInfo:
-      description: |-
-        HostInfo holds host name and resources included with information regarding its characteristics
-      type: object
-      properties:
-        name:
-          type: string
-        resourcesInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1HostResourceInfo'
-        systemInfo:
-          $ref: '#/components/schemas/v1HostSystemInfo'
-    v1HostResourceInfo:
-      description: 'TODO: describe this type'
-      type: object
-      properties:
-        capacity:
-          type: string
-          format: int64
-        requestedByApp:
-          type: string
-          format: int64
-        requestedByNeighbors:
-          type: string
-          format: int64
-        resourceName:
-          type: string
-    v1Info:
-      description: Contains arbitrary, human readable information as pair name value
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name is a human readable title for this piece of information.
-        value:
-          type: string
-          description: Value is human readable content.
-    v1JWTToken:
-      description: JWTToken holds the issuedAt and expiresAt values of a token
-      type: object
-      properties:
-        exp:
-          type: string
-          format: int64
-        iat:
-          type: string
-          format: int64
-        id:
-          type: string
-    v1JWTTokens:
-      description: JWTTokens represents a list of JWT tokens
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1JWTToken'
-    v1Operation:
-      description: Operation contains information about a requested or running operation
-      type: object
-      properties:
-        info:
-          description: Info is a list of informational items for this operation
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Info'
-        initiatedBy:
-          $ref: '#/components/schemas/v1OperationInitiator'
-        retry:
-          $ref: '#/components/schemas/v1RetryStrategy'
-        sync:
-          $ref: '#/components/schemas/v1SyncOperation'
-    v1OperationInitiator:
-      description: OperationInitiator contains information about the initiator of an operation
-      type: object
-      properties:
-        automated:
-          type: boolean
-          description: Automated is set to true if operation was initiated automatically
-            by the workSpace controller.
-        username:
-          description: Username contains the name of a user who started operation
-          type: string
-    v1OperationState:
-      description: OperationState contains information about state of a running operation
-      type: object
-      properties:
-        finishedAt:
-          $ref: '#/components/schemas/v1Time'
-        message:
-          type: string
-          description: Message holds any pertinent messages when attempting to perform
-            operation (typically errors).
-        operation:
-          $ref: '#/components/schemas/v1Operation'
-        phase:
-          description: Phase is the current phase of the operation
-          type: string
-        retryCount:
-          description: RetryCount contains time of operation retries
-          type: string
-          format: int64
-        startedAt:
-          $ref: '#/components/schemas/v1Time'
-        syncResult:
-          $ref: '#/components/schemas/v1SyncOperationResult'
-    v1OrphanedResourceKey:
-      description: OrphanedResourceKey is a reference to a resource to be ignored from
-      type: object
-      properties:
-        group:
-          type: string
-        kind:
-          type: string
-        name:
-          type: string
-    v1OrphanedResourcesMonitorSettings:
-      description: OrphanedResourcesMonitorSettings holds settings of orphaned resources
-        monitoring
-      type: object
-      properties:
-        ignore:
-          description: Ignore contains a list of resources that are to be excluded from
-            orphaned resources monitoring
-          type: array
-          items:
-            $ref: '#/components/schemas/v1OrphanedResourceKey'
-        warn:
-          description: Warn indicates if warning condition should be created for workSpaces which
-            have orphaned resources
-          type: boolean
     v1OverrideIgnoreDiff:
       description: Identifies elements to be ignored where checking differences amond desired and current status
       type: object
@@ -3307,596 +3941,6 @@ components:
           type: array
           items:
             type: string
-    v1RepoCreds:
-      description: RepoCreds holds the definition for repository credentials
-      type: object
-      properties:
-        password:
-          description: Password for authenticating at the repo server
-          type: string
-        sshPrivateKey:
-          description: SSHPrivateKey contains the private key data for authenticating at
-            the repo server using SSH (only Git repos)
-          type: string
-        tlsClientCertData:
-          description: TLSClientCertData specifies the TLS client cert data for authenticating
-            at the repo server
-          type: string
-        tlsClientCertKey:
-          description: TLSClientCertKey specifies the TLS client cert key for authenticating
-            at the repo server
-          type: string
-        type:
-          type: string
-          description: Type specifies the type of the repoCreds. Can be either "git"
-            or "helm. "git" is assumed if empty or absent.
-        url:
-          description: URL is the URL that this credentials matches to
-          type: string
-        username:
-          description: Username for authenticating at the repo server
-          type: string
-    v1RepoCredsList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1RepoCreds'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-      description: RepositoryList is a collection of Repositories.
-    v1Repository:
-      description: Repository is a repository holding workSpace configurations
-      type: object
-      properties:
-        connectionState:
-          $ref: '#/components/schemas/v1ConnectionState'
-        enableLfs:
-          type: boolean
-          description: EnableLFS specifies whether git-lfs support should be enabled
-            for this repo. Only valid for Git repositories.
-        inheritedCreds:
-          description: Whether credentials were inherited from a credential set
-          type: boolean
-        insecure:
-          description: Insecure specifies whether the connection to the repository ignores
-            any errors when verifying TLS certificates or SSH host keys
-          type: boolean
-        insecureIgnoreHostKey:
-          description: |-
-            InsecureIgnoreHostKey should not be used anymore, Insecure is favoured
-            Used only for Git repos
-          type: boolean
-        name:
-          description: Name specifies a name to be used for this repo. Only used with Helm
-            repos
-          type: string
-        password:
-          description: Password contains the password or PAT used for authenticating at
-            the remote repository
-          type: string
-        proxy:
-          description: Proxy specifies the HTTP/HTTPS proxy used to access the repo
-          type: string
-        repo:
-          description: Repo contains the URL to the remote repository
-          type: string
-        sshPrivateKey:
-          type: string
-          description: SSHPrivateKey contains the PEM data for authenticating at the
-            repo server. Only used with Git repos.
-        tlsClientCertData:
-          description: TLSClientCertData contains a certificate in PEM format for authenticating
-            at the repo server
-          type: string
-        tlsClientCertKey:
-          description: TLSClientCertKey contains a private key in PEM format for authenticating
-            at the repo server
-          type: string
-        type:
-          type: string
-          description: Type specifies the type of the repo. Can be either "git" or
-            "helm. "git" is assumed if empty or absent.
-        username:
-          description: Username contains the user name used for authenticating at the remote
-            repository
-          type: string
-    v1RepositoryList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Repository'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-      description: RepositoryList is a collection of Repositories.
-    v1ResourceAction:
-      description: |-
-        Describes the action to execute on a resource
-      type: object
-      properties:
-        disabled:
-          type: boolean
-        name:
-          type: string
-        params:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ResourceActionParam'
-    v1ResourceActionParam:
-      description: |-
-        TODO: describe this type
-        TODO: describe members of this type
-      type: object
-      properties:
-        default:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        value:
-          type: string
-    v1ResourceDiff:
-      description: |-
-        ResourceDiff holds the diff of a live and target resource object
-        TODO: describe members of this type
-      type: object
-      properties:
-        diff:
-          description: |-
-            Diff contains the JSON patch between target and live resource
-            Deprecated: use NormalizedLiveState and PredictedLiveState to render the difference
-          type: string
-        group:
-          type: string
-        hook:
-          type: boolean
-        kind:
-          type: string
-        liveState:
-          description: TargetState contains the JSON live resource manifest
-          type: string
-        modified:
-          type: boolean
-        name:
-          type: string
-        namespace:
-          type: string
-        normalizedLiveState:
-          description: NormalizedLiveState contains JSON serialized live resource state
-            with applied normalizations
-          type: string
-        predictedLiveState:
-          description: PredictedLiveState contains JSON serialized resource state that is
-            calculated based on normalized and target resource state
-          type: string
-        resourceVersion:
-          type: string
-        targetState:
-          description: TargetState contains the JSON serialized resource manifest defined
-            in the Git
-          type: string
-    v1ResourceIgnoreDifferences:
-      type: object
-      properties:
-        group:
-          type: string
-        jqPathExpressions:
-          type: array
-          items:
-            type: string
-        jsonPointers:
-          type: array
-          items:
-            type: string
-        kind:
-          type: string
-        name:
-          type: string
-        namespace:
-          type: string
-      description: ResourceIgnoreDifferences contains resource filter and list of
-        json paths which should be ignored during comparison with live state.
-    v1ResourceNetworkingInfo:
-      description: |-
-        ResourceNetworkingInfo holds networking resource related information
-        TODO: describe members of this type
-      type: object
-      properties:
-        externalURLs:
-          type: array
-          description: ExternalURLs holds list of URLs which should be available externally.
-            List is populated for ingress resources using rules hostnames.
-          items:
-            type: string
-        ingress:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1NetworkIngress'
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-        targetLabels:
-          type: object
-          additionalProperties:
-            type: string
-        targetRefs:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ResourceRef'
-    v1Resource:
-      description: |-
-        ResourceNode contains information about live resource and its children
-      type: object
-      properties:
-        createdAt:
-          $ref: '#/components/schemas/v1Time'
-        health:
-          $ref: '#/components/schemas/v1HealthStatus'
-        images:
-          type: array
-          items:
-            type: string
-        info:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Info'
-        networkingInfo:
-          $ref: '#/components/schemas/v1ResourceNetworkingInfo'
-        parentRefs:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ResourceRef'
-        resourceRef:
-          $ref: '#/components/schemas/v1ResourceRef'
-        resourceVersion:
-          type: string
-    v1ResourceOverride:
-      description: |-
-        ResourceOverride holds configuration to customize resource diffing and health assessment
-        TODO: describe the members of this type
-      type: object
-      properties:
-        actions:
-          type: string
-        healthLua:
-          type: string
-        ignoreDifferences:
-          $ref: '#/components/schemas/v1OverrideIgnoreDiff'
-    v1ResourceRef:
-      description: ResourceRef includes fields which uniquely identify a resource
-      type: object
-      properties:
-        group:
-          type: string
-        kind:
-          type: string
-        name:
-          type: string
-        namespace:
-          type: string
-        uid:
-          type: string
-        version:
-          type: string
-    v1ResourceResult:
-      description: ResourceResult holds the operation result details of a specific resource
-      type: object
-      properties:
-        group:
-          description: Group specifies the  group of the resource
-          type: string
-        hookPhase:
-          type: string
-          description: |-
-            HookPhase contains the state of any operation associated with this resource OR hook
-            This can also contain values for non-hook resources.
-        hookType:
-          description: HookType specifies the type of the hook. Empty for non-hook resources
-          type: string
-        kind:
-          description: Kind specifies the  kind of the resource
-          type: string
-        message:
-          description: Message contains an informational or error message for the last sync
-            OR operation
-          type: string
-        name:
-          description: Name specifies the name of the resource
-          type: string
-        namespace:
-          description: Namespace specifies the target namespace of the resource
-          type: string
-        status:
-          description: Status holds the final result of the sync. Will be empty if the resources
-            is yet to be applied/pruned and is always zero-value for hooks
-          type: string
-        syncPhase:
-          description: SyncPhase indicates the particular phase of the sync that this result
-            was acquired in
-          type: string
-        version:
-          description: Version specifies the API version of the resource
-          type: string
-    v1ResourceStatus:
-      description: |-
-        ResourceStatus holds the current sync and health status of a resource
-      type: object
-      properties:
-        group:
-          type: string
-        health:
-          $ref: '#/components/schemas/v1HealthStatus'
-        hook:
-          type: boolean
-        kind:
-          type: string
-        name:
-          type: string
-        namespace:
-          type: string
-        requiresPruning:
-          type: boolean
-        status:
-          type: string
-        version:
-          type: string
-    v1RetryStrategy:
-      description: RetryStrategy contains information about the strategy to apply when a
-        sync failed
-      type: object
-      properties:
-        backoff:
-          $ref: '#/components/schemas/v1Backoff'
-        limit:
-          type: string
-          description: Limit is the maximum number of attempts for retrying a failed
-            sync. If set to 0, no retries will be performed.
-          format: int64
-    v1RevisionHistory:
-      description: RevisionHistory contains history information about a previous sync
-      type: object
-      properties:
-        deployStartedAt:
-          $ref: '#/components/schemas/v1Time'
-        deployedAt:
-          $ref: '#/components/schemas/v1Time'
-        id:
-          description: ID is an auto incrementing identifier of the Revision History
-          type: string
-          format: int64
-        revision:
-          description: Revision holds the revision the sync was performed against
-          type: string
-        source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
-    v1RevisionMetadata:
-      description: RevisionMetadata contains metadata for a specific revision in a Git repository
-      type: object
-      properties:
-        author:
-          description: |-
-            who authored this revision,
-            typically their name and email, e.g. "John Doe <john_doe@my-company.com>",
-          type: string
-        date:
-          $ref: '#/components/schemas/v1Time'
-        message:
-          description: |-
-            Message contains the message associated with the revision, most likely the commit message.
-            The message is truncated to the first newline or 64 characters (which ever comes first)
-          type: string
-        tags:
-          description: |-
-            Tags specifies any tags currently attached to the revision
-            Floating tags can move from one revision to another
-          type: array
-          items:
-            type: string
-    v1SyncOperation:
-      type: object
-      properties:
-        dryRun:
-          description: DryRun specifies to perform an apply without actually performing the sync
-          type: boolean
-        manifests:
-          description: Manifests is an optional field that overrides sync source with a
-            local directory for development
-          type: array
-          items:
-            type: string
-        prune:
-          description: Prune specifies to delete resources from the provider that are no
-            longer tracked in git
-          type: boolean
-        resources:
-          description: Resources describes which resources shall be part of the sync
-          type: array
-          items:
-            $ref: '#/components/schemas/v1SyncOperationResource'
-        revision:
-          type: string
-          description: |-
-            Revision is the revision (Git) or chart version (Helm) which to sync the workSpace to
-            If omitted, will use the revision specified in app spec.
-        source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
-        syncOptions:
-          description: SyncOptions provide per-sync sync-options, e.g. Validate=false
-          type: array
-          items:
-            type: string
-        syncStrategy:
-          $ref: '#/components/schemas/v1SyncStrategy'
-      description: SyncOperation contains details about a sync operation.
-    v1SyncOperationResource:
-      type: object
-      properties:
-        group:
-          type: string
-        kind:
-          type: string
-        name:
-          type: string
-        namespace:
-          type: string
-      description: SyncOperationResource contains resources to sync.
-    v1SyncOperationResult:
-      description: SyncOperationResult represent result of sync operation
-      type: object
-      properties:
-        resources:
-          description: Resources contains a list of sync result items for each individual
-            resource in a sync operation
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ResourceResult'
-        revision:
-          description: Revision holds the revision this sync operation was performed to
-          type: string
-        source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
-    v1SyncPolicy:
-      description: SyncPolicy controls when a sync will be performed in response to updates
-        in git
-      type: object
-      properties:
-        automated:
-          $ref: '#/components/schemas/v1SyncPolicyAutomated'
-        retry:
-          $ref: '#/components/schemas/v1RetryStrategy'
-        syncOptions:
-          description: Options allow you to specify whole app sync-options
-          type: array
-          items:
-            type: string
-    v1SyncPolicyAutomated:
-      description: SyncPolicyAutomated controls the behavior of an automated sync
-      type: object
-      properties:
-        allowEmpty:
-          description: 'AllowEmpty allows workSpaces have zero live resources (default: false)'
-          type: boolean
-        prune:
-          description: 'Prune specifies whether to delete resources from the provider that
-            are not found in the sources anymore as part of automated sync (default:
-            false)'
-          type: boolean
-        selfHeal:
-          description: 'SelfHeal specifes whether to revert resources back to their desired
-            state upon modification in the provider (default: false)'
-          type: boolean
-    v1SyncStatus:
-      description: SyncStatus contains information about the currently observed live and
-        desired states of an workSpace
-      type: object
-      properties:
-        comparedTo:
-          $ref: '#/components/schemas/v1ComparedTo'
-        revision:
-          description: Revision contains information about the revision the comparison has
-            been performed to
-          type: string
-        status:
-          description: Status is the sync state of the comparison
-          type: string
-    v1SyncStrategy:
-      description: SyncStrategy controls the manner in which a sync is performed
-      type: object
-      properties:
-        apply:
-          $ref: '#/components/schemas/v1SyncStrategyApply'
-        hook:
-          $ref: '#/components/schemas/v1SyncStrategyHook'
-    v1SyncStrategyApply:
-      description: SyncStrategyApply uses `kubectl apply` to perform the apply
-      type: object
-      properties:
-        force:
-          type: boolean
-          description: |-
-            The --force flag deletes and re-create the resource, when PATCH encounters conflict and has
-            retried for 5 times.
-    v1SyncStrategyHook:
-      type: object
-      properties:
-        syncStrategyApply:
-          $ref: '#/components/schemas/v1SyncStrategyApply'
-      description: |-
-        SyncStrategyHook will perform a sync using hooks annotations.
-    v1SyncWindow:
-      description: SyncWindow contains the kind, time, duration and attributes that are
-        used to assign the syncWindows to workSpaces
-      type: object
-      properties:
-        workSpaces:
-          description: WorkSpaces contains a list of workSpaces that the window will
-            apply to
-          type: array
-          items:
-            type: string
-        providers:
-          description: Providers contains a list of providers that the window will apply to
-          type: array
-          items:
-            type: string
-        duration:
-          description: Duration is the amount of time the sync window will be open
-          type: string
-        kind:
-          description: Kind defines if the window allows or blocks syncs
-          type: string
-        manualSync:
-          description: ManualSync enables manual syncs when they would otherwise be blocked
-          type: boolean
-        namespaces:
-          description: Namespaces contains a list of namespaces that the window will apply
-            to
-          type: array
-          items:
-            type: string
-        schedule:
-          description: Schedule is the time the window will begin, specified in cron format
-          type: string
-    v1TLSClientConfig:
-      description: TLSClientConfig contains settings to enable transport layer security
-      type: object
-      properties:
-        caData:
-          description: |-
-            CAData holds PEM-encoded bytes (typically read from a root certificates bundle).
-            CAData takes precedence over CAFile
-          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-          type: string
-          format: byte
-        certData:
-          description: |-
-            CertData holds PEM-encoded bytes (typically read from a client certificate file).
-            CertData takes precedence over CertFile
-          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-          type: string
-          format: byte
-        insecure:
-          type: boolean
-          description: Insecure specifies that the server should be accessed without
-            verifying the TLS certificate. For testing only.
-        keyData:
-          description: |-
-            KeyData holds PEM-encoded bytes (typically read from a client certificate key file).
-            KeyData takes precedence over KeyFile
-          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-          type: string
-          format: byte
-        serverName:
-          type: string
-          description: |-
-            ServerName is passed to the server for SNI and is used in the client to check server
-            certificates against. If ServerName is empty, the hostname used to contact the
-            server is used.
     versionVersionMessage:
       description: VersionMessage represents version of the API server
       type: object
