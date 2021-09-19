@@ -7,128 +7,126 @@ This reposotory contains the implementation of the Virtual Environment as a Serv
 - [api](api), contains the description of the services required to provide the service. It's done using OpenApi 3.0 specification.
 
 
-## Dominios
+## Domains
 
 Four data domains have been identified. Each regarding 
 
 - Infrastructure, the physical/virtual computing resources where the environments will be created and the service providers.
 
-Phisical/Virtual infrastructure
+  - Phisical/Virtual infrastructure
 
-v1HostInfo
-v1HostSystemInfo
-v1HostResourceInfo
-v1NetworkIngress
-v1PortStatus
+s    - v1HostInfo
+    - v1HostSystemInfo
+    - v1HostResourceInfo
+    - v1NetworkIngress
+    - v1PortStatus
 
-Providers
+  - Providers
 
-v1Provider
-v1ProviderConfig
-v1ProviderInfo
-v1ProviderList
-v1ProviderCacheInfo
+    - v1Provider
+    - v1ProviderConfig
+    - v1ProviderInfo
+    - v1ProviderList
+    - v1ProviderCacheInfo
 
  
-- Environments, this includes the resources required to create the desired environment workspace (devices).
+- Environment, this includes the resources required to create the desired environment/workspace with the required resources (devices).
 
-v1WorkSpace
-v1WorkSpaceSpec
-v1WorkSpaceStatus
-v1WorkSpaceCondition
-v1WorkSpaceDestination
-v1WorkSpaceSource
-v1WorkSpaceSourceDirectory
-v1WorkSpaceSourcePlugin
-v1WorkSpaceSummary
-v1WorkSpaceTree
-v1WorkSpaceList
+  - Workspace
+    - v1WorkSpace
+    - v1WorkSpaceSpec
+    - v1WorkSpaceStatus
+    - v1WorkSpaceCondition
+    - v1WorkSpaceDestination
+    - v1WorkSpaceSource
+    - v1WorkSpaceSourceDirectory
+    - v1WorkSpaceSourcePlugin
+    - v1WorkSpaceSummary
+    - v1WorkSpaceTree
+    - v1WorkSpaceList
 
+  - Resource (requires Spec?)
+    - v1Resource
+    - v1ResourceStatus
+    - v1ResourceRef
+    - v1ResourceDiff
+    - v1ResourceIgnoreDifferences
+    - v1ResourceNetworkingInfo
+    - v1ResourceOverride
+    - v1ResourceResult
 
-v1WorkSpaceWatchEvent (Git)
-
-Resource (requires Spec?)
-v1Resource
-v1ResourceStatus
-v1ResourceRef
-v1ResourceDiff
-v1ResourceIgnoreDifferences
-v1ResourceNetworkingInfo
-v1ResourceOverride
-v1ResourceResult
-
-
-v1ConnectionState
-v1HealthStatus
+  - Status
+    - v1WorkSpaceWatchEvent (Git)
+    - v1ConnectionState
+    - v1HealthStatus
 
 
 - Control, that should include operation & managment data structures.
 
+  - v1Operation
+  - v1OperationInitiator
+  - v1OperationState
 
-v1Operation
-v1OperationInitiator
-v1OperationState
+  - v1Command
+  - v1ComparedTo
 
-v1Command
-v1ComparedTo
+  - v1ResourceAction
+  - v1ResourceActionParam
 
-v1ResourceAction
-v1ResourceActionParam
-
-v1SyncOperation
-v1SyncOperationResource
-v1SyncOperationResult
-v1SyncPolicy
-v1SyncPolicyAutomated
-
-v1SyncStatus
-v1SyncStrategy
-v1SyncStrategyApply
-v1SyncStrategyHook
-v1SyncWindow
-v1Backoff
-
-v1RevisionHistory
-v1RevisionMetadata
-v1OrphanedResourcesMonitorSettings
+  - v1SyncOperation
+  - v1SyncOperationResource
+  - v1SyncOperationResult
+  - v1SyncPolicy
+  - v1SyncPolicyAutomated
+  - v1SyncStatus
+  - v1SyncStrategy
+  - v1SyncStrategyApply
+  - v1SyncStrategyHook
+  - v1SyncWindow
+  - v1Backoff
+  - v1OverrideIgnoreDiff
+  - v1RetryStrategy
 
 
-- GitOps, data model required to implement the flow.
+  - v1RevisionHistory
+  - v1RevisionMetadata
+  - v1OrphanedResourcesMonitorSettings
 
-v1RepoCreds
-v1RepoCredsList
-v1Repository
-v1RepositoryList
+  - v1Event
+  - v1EventList
+  - v1EventSeries
+  - v1EventSource
+
+
+- GitOps,  required to implement the flow associated with GitOps.
+
+  - v1RepoCreds
+  - v1RepoCredsList
+  - v1Repository
+  - v1RepositoryList
 
 
 - Common
-v1MicroTime
-v1Time
-v1ObjectMeta
-v1ListMeta
-v1ObjectReference
-v1OwnerReference
-v1Info
-v1InfoItem
+  - v1MicroTime
+  - v1Time
+  - v1ObjectMeta
+  - v1ListMeta
+  - v1ObjectReference
+  - v1OwnerReference
+  - v1Info
+  - v1InfoItem
+
 
 v1JWTToken
 v1JWTTokens
 
 v1TLSClientConfig
 
-v1Event
-v1EventList
-v1EventSeries
-v1EventSource
+
 
 
 v1KnownTypeField
-
 v1OrphanedResourceKey
-
-v1OverrideIgnoreDiff
-
-v1RetryStrategy
 
 
 ## References
