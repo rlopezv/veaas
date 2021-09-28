@@ -1,13 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1OverrideIgnoreDiffDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ResourceOverride holds configuration to customize resource diffing and health assessment TODO: describe the members of this type
@@ -33,10 +32,8 @@ public class V1ResourceOverrideDto   {
    * Get actions
    * @return actions
   */
- @Schema(defaultValue = "")
-
-
-  public String getActions() {
+ @Schema(defaultValue =  "")
+ public String getActions() {
     return actions;
   }
 
@@ -53,10 +50,8 @@ public class V1ResourceOverrideDto   {
    * Get healthLua
    * @return healthLua
   */
- @Schema(defaultValue = "")
-
-
-  public String getHealthLua() {
+ @Schema(defaultValue =  "")
+ public String getHealthLua() {
     return healthLua;
   }
 
@@ -74,7 +69,6 @@ public class V1ResourceOverrideDto   {
    * @return ignoreDifferences
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1OverrideIgnoreDiffDto getIgnoreDifferences() {

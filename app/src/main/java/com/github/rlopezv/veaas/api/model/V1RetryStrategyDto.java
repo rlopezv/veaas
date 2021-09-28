@@ -1,13 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1BackoffDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * RetryStrategy contains information about the strategy to apply when a sync failed
@@ -31,7 +30,6 @@ public class V1RetryStrategyDto   {
    * @return backoff
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1BackoffDto getBackoff() {

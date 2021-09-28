@@ -1,18 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1HostInfoDto;
-import com.github.rlopezv.veaas.api.model.V1InfoDto;
-import com.github.rlopezv.veaas.api.model.V1SyncPolicyDto;
-import com.github.rlopezv.veaas.api.model.V1WorkSpaceSourceDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ResourceSpec represents desired Resource state. Contains link to repository with workSpace definition and additional parameters link definition revision.
@@ -46,7 +42,6 @@ public class V1ResourceSpecDto   {
    * @return destination
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1HostInfoDto getDestination() {
@@ -116,7 +111,6 @@ public class V1ResourceSpecDto   {
    * @return source
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1WorkSpaceSourceDto getSource() {
@@ -137,7 +131,6 @@ public class V1ResourceSpecDto   {
    * @return syncPolicy
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1SyncPolicyDto getSyncPolicy() {

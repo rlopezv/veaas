@@ -1,13 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1HealthStatusDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ResourceStatus holds the current sync and health status of a resource
@@ -51,10 +50,8 @@ public class V1ResourceStatusDto   {
    * Get group
    * @return group
   */
- @Schema(defaultValue = "")
-
-
-  public String getGroup() {
+ @Schema(defaultValue =  "")
+ public String getGroup() {
     return group;
   }
 
@@ -72,7 +69,6 @@ public class V1ResourceStatusDto   {
    * @return health
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1HealthStatusDto getHealth() {
@@ -92,10 +88,8 @@ public class V1ResourceStatusDto   {
    * Get hook
    * @return hook
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getHook() {
+ @Schema(defaultValue =  "")
+ public Boolean getHook() {
     return hook;
   }
 
@@ -112,10 +106,8 @@ public class V1ResourceStatusDto   {
    * Get kind
    * @return kind
   */
- @Schema(defaultValue = "")
-
-
-  public String getKind() {
+ @Schema(defaultValue =  "")
+ public String getKind() {
     return kind;
   }
 
@@ -132,10 +124,8 @@ public class V1ResourceStatusDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 
@@ -152,10 +142,8 @@ public class V1ResourceStatusDto   {
    * Get namespace
    * @return namespace
   */
- @Schema(defaultValue = "")
-
-
-  public String getNamespace() {
+ @Schema(defaultValue =  "")
+ public String getNamespace() {
     return namespace;
   }
 
@@ -172,10 +160,8 @@ public class V1ResourceStatusDto   {
    * Get requiresPruning
    * @return requiresPruning
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getRequiresPruning() {
+ @Schema(defaultValue =  "")
+ public Boolean getRequiresPruning() {
     return requiresPruning;
   }
 
@@ -192,10 +178,8 @@ public class V1ResourceStatusDto   {
    * Get status
    * @return status
   */
- @Schema(defaultValue = "")
-
-
-  public String getStatus() {
+ @Schema(defaultValue =  "")
+ public String getStatus() {
     return status;
   }
 
@@ -212,10 +196,8 @@ public class V1ResourceStatusDto   {
    * Get version
    * @return version
   */
- @Schema(defaultValue = "")
-
-
-  public String getVersion() {
+ @Schema(defaultValue =  "")
+ public String getVersion() {
     return version;
   }
 

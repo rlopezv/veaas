@@ -1,14 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * RepositoryManifestResponseDto
@@ -68,10 +68,8 @@ public class RepositoryManifestResponseDto   {
    * Get namespace
    * @return namespace
   */
- @Schema(defaultValue = "")
-
-
-  public String getNamespace() {
+ @Schema(defaultValue =  "")
+ public String getNamespace() {
     return namespace;
   }
 
@@ -108,10 +106,8 @@ public class RepositoryManifestResponseDto   {
    * Get server
    * @return server
   */
- @Schema(defaultValue = "")
-
-
-  public String getServer() {
+ @Schema(defaultValue =  "")
+ public String getServer() {
     return server;
   }
 
@@ -128,10 +124,8 @@ public class RepositoryManifestResponseDto   {
    * Get sourceType
    * @return sourceType
   */
- @Schema(defaultValue = "")
-
-
-  public String getSourceType() {
+ @Schema(defaultValue =  "")
+ public String getSourceType() {
     return sourceType;
   }
 

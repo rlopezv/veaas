@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * VersionMessage represents version of the API server
@@ -44,10 +42,8 @@ public class VersionVersionMessageDto   {
    * Get buildDate
    * @return buildDate
   */
- @Schema(defaultValue = "")
-
-
-  public String getBuildDate() {
+ @Schema(defaultValue =  "")
+ public String getBuildDate() {
     return buildDate;
   }
 
@@ -64,10 +60,8 @@ public class VersionVersionMessageDto   {
    * Get compiler
    * @return compiler
   */
- @Schema(defaultValue = "")
-
-
-  public String getCompiler() {
+ @Schema(defaultValue =  "")
+ public String getCompiler() {
     return compiler;
   }
 
@@ -84,10 +78,8 @@ public class VersionVersionMessageDto   {
    * Get gitCommit
    * @return gitCommit
   */
- @Schema(defaultValue = "")
-
-
-  public String getGitCommit() {
+ @Schema(defaultValue =  "")
+ public String getGitCommit() {
     return gitCommit;
   }
 
@@ -104,10 +96,8 @@ public class VersionVersionMessageDto   {
    * Get gitTag
    * @return gitTag
   */
- @Schema(defaultValue = "")
-
-
-  public String getGitTag() {
+ @Schema(defaultValue =  "")
+ public String getGitTag() {
     return gitTag;
   }
 
@@ -124,10 +114,8 @@ public class VersionVersionMessageDto   {
    * Get gitTreeState
    * @return gitTreeState
   */
- @Schema(defaultValue = "")
-
-
-  public String getGitTreeState() {
+ @Schema(defaultValue =  "")
+ public String getGitTreeState() {
     return gitTreeState;
   }
 
@@ -144,10 +132,8 @@ public class VersionVersionMessageDto   {
    * Get platform
    * @return platform
   */
- @Schema(defaultValue = "")
-
-
-  public String getPlatform() {
+ @Schema(defaultValue =  "")
+ public String getPlatform() {
     return platform;
   }
 
@@ -164,10 +150,8 @@ public class VersionVersionMessageDto   {
    * Get version
    * @return version
   */
- @Schema(defaultValue = "")
-
-
-  public String getVersion() {
+ @Schema(defaultValue =  "")
+ public String getVersion() {
     return version;
   }
 

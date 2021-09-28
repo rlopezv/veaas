@@ -1,13 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1MicroTimeDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time.
@@ -51,7 +50,6 @@ public class V1EventSeriesDto   {
    * @return lastObservedTime
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1MicroTimeDto getLastObservedTime() {

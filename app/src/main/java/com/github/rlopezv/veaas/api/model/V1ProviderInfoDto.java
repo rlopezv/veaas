@@ -1,16 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1ConnectionStateDto;
-import com.github.rlopezv.veaas.api.model.V1ProviderCacheInfoDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ProviderInfo contains information about the provider
@@ -92,7 +90,6 @@ public class V1ProviderInfoDto   {
    * @return cacheInfo
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ProviderCacheInfoDto getCacheInfo() {
@@ -113,7 +110,6 @@ public class V1ProviderInfoDto   {
    * @return connectionState
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ConnectionStateDto getConnectionState() {

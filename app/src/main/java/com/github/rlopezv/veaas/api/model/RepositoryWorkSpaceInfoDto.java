@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * WorkSpaceInfo contains workSpace type and app file path
@@ -29,10 +27,8 @@ public class RepositoryWorkSpaceInfoDto   {
    * Get path
    * @return path
   */
- @Schema(defaultValue = "")
-
-
-  public String getPath() {
+ @Schema(defaultValue =  "")
+ public String getPath() {
     return path;
   }
 
@@ -49,10 +45,8 @@ public class RepositoryWorkSpaceInfoDto   {
    * Get type
    * @return type
   */
- @Schema(defaultValue = "")
-
-
-  public String getType() {
+ @Schema(defaultValue =  "")
+ public String getType() {
     return type;
   }
 

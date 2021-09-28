@@ -1,15 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1TimeDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * RevisionMetadata contains metadata for a specific revision in a Git repository
@@ -60,7 +59,6 @@ public class V1RevisionMetadataDto   {
    * @return date
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getDate() {

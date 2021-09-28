@@ -1,14 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1ExecProviderConfigDto;
-import com.github.rlopezv.veaas.api.model.V1TLSClientConfigDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ProviderConfig is the configuration attributes. This structure is subset of the go-client rest.Config with annotations added for marshalling.
@@ -61,7 +59,6 @@ public class V1ProviderConfigDto   {
    * @return execProviderConfig
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ExecProviderConfigDto getExecProviderConfig() {
@@ -81,10 +78,8 @@ public class V1ProviderConfigDto   {
    * Get password
    * @return password
   */
- @Schema(defaultValue = "")
-
-
-  public String getPassword() {
+ @Schema(defaultValue =  "")
+ public String getPassword() {
     return password;
   }
 
@@ -102,7 +97,6 @@ public class V1ProviderConfigDto   {
    * @return tlsClientConfig
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TLSClientConfigDto getTlsClientConfig() {

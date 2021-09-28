@@ -1,16 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1ListMetaDto;
-import com.github.rlopezv.veaas.api.model.V1RepositoryDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * RepositoryList is a collection of Repositories
@@ -43,7 +41,6 @@ public class V1RepositoryListDto   {
    * @return items
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<V1RepositoryDto> getItems() {
@@ -64,7 +61,6 @@ public class V1RepositoryListDto   {
    * @return metadata
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ListMetaDto getMetadata() {

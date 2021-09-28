@@ -1,18 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1EventSeriesDto;
-import com.github.rlopezv.veaas.api.model.V1EventSourceDto;
-import com.github.rlopezv.veaas.api.model.V1MicroTimeDto;
-import com.github.rlopezv.veaas.api.model.V1ObjectMetaDto;
-import com.github.rlopezv.veaas.api.model.V1ObjectReferenceDto;
-import com.github.rlopezv.veaas.api.model.V1TimeDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Event is a report of an event somewhere in the provider.  Events have a limited retention time and triggers and messages may evolve with time.  Event consumers should not rely on the timing of an event with a given Reason reflecting a consistent underlying trigger, or the continued existence of events with that Reason.  Events should be treated as informative, best-effort, supplemental data.
@@ -115,7 +109,6 @@ public class V1EventDto   {
    * @return eventTime
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1MicroTimeDto getEventTime() {
@@ -136,7 +129,6 @@ public class V1EventDto   {
    * @return firstTimestamp
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getFirstTimestamp() {
@@ -157,7 +149,6 @@ public class V1EventDto   {
    * @return involvedObject
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ObjectReferenceDto getInvolvedObject() {
@@ -178,7 +169,6 @@ public class V1EventDto   {
    * @return lastTimestamp
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getLastTimestamp() {
@@ -219,7 +209,6 @@ public class V1EventDto   {
    * @return metadata
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ObjectMetaDto getMetadata() {
@@ -260,7 +249,6 @@ public class V1EventDto   {
    * @return related
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ObjectReferenceDto getRelated() {
@@ -321,7 +309,6 @@ public class V1EventDto   {
    * @return series
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1EventSeriesDto getSeries() {
@@ -342,7 +329,6 @@ public class V1EventDto   {
    * @return source
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1EventSourceDto getSource() {

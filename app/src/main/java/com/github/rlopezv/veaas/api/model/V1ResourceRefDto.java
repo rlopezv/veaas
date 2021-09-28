@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ResourceRef includes fields which uniquely identify a resource
@@ -41,10 +39,8 @@ public class V1ResourceRefDto   {
    * Get group
    * @return group
   */
- @Schema(defaultValue = "")
-
-
-  public String getGroup() {
+ @Schema(defaultValue =  "")
+ public String getGroup() {
     return group;
   }
 
@@ -61,10 +57,8 @@ public class V1ResourceRefDto   {
    * Get kind
    * @return kind
   */
- @Schema(defaultValue = "")
-
-
-  public String getKind() {
+ @Schema(defaultValue =  "")
+ public String getKind() {
     return kind;
   }
 
@@ -81,10 +75,8 @@ public class V1ResourceRefDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 
@@ -101,10 +93,8 @@ public class V1ResourceRefDto   {
    * Get namespace
    * @return namespace
   */
- @Schema(defaultValue = "")
-
-
-  public String getNamespace() {
+ @Schema(defaultValue =  "")
+ public String getNamespace() {
     return namespace;
   }
 
@@ -121,10 +111,8 @@ public class V1ResourceRefDto   {
    * Get uid
    * @return uid
   */
- @Schema(defaultValue = "")
-
-
-  public String getUid() {
+ @Schema(defaultValue =  "")
+ public String getUid() {
     return uid;
   }
 
@@ -141,10 +129,8 @@ public class V1ResourceRefDto   {
    * Get version
    * @return version
   */
- @Schema(defaultValue = "")
-
-
-  public String getVersion() {
+ @Schema(defaultValue =  "")
+ public String getVersion() {
     return version;
   }
 

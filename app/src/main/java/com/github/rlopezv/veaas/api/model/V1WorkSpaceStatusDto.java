@@ -1,22 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1HealthStatusDto;
-import com.github.rlopezv.veaas.api.model.V1OperationStateDto;
-import com.github.rlopezv.veaas.api.model.V1ResourceStatusDto;
-import com.github.rlopezv.veaas.api.model.V1RevisionHistoryDto;
-import com.github.rlopezv.veaas.api.model.V1SyncStatusDto;
-import com.github.rlopezv.veaas.api.model.V1TimeDto;
-import com.github.rlopezv.veaas.api.model.V1WorkSpaceConditionDto;
-import com.github.rlopezv.veaas.api.model.V1WorkSpaceSummaryDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * WorkSpaceStatus contains status information for the workSpace
@@ -96,7 +88,6 @@ public class V1WorkSpaceStatusDto   {
    * @return health
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1HealthStatusDto getHealth() {
@@ -146,7 +137,6 @@ public class V1WorkSpaceStatusDto   {
    * @return observedAt
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getObservedAt() {
@@ -167,7 +157,6 @@ public class V1WorkSpaceStatusDto   {
    * @return operationState
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1OperationStateDto getOperationState() {
@@ -188,7 +177,6 @@ public class V1WorkSpaceStatusDto   {
    * @return reconciledAt
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getReconciledAt() {
@@ -258,7 +246,6 @@ public class V1WorkSpaceStatusDto   {
    * @return summary
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1WorkSpaceSummaryDto getSummary() {
@@ -279,7 +266,6 @@ public class V1WorkSpaceStatusDto   {
    * @return sync
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1SyncStatusDto getSync() {

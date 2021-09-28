@@ -1,13 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1WorkSpaceDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * WorkSpaceWatchEvent contains information about workSpace change.
@@ -31,7 +30,6 @@ public class V1WorkSpaceWatchEventDto   {
    * @return workSpace
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1WorkSpaceDto getWorkSpace() {
@@ -51,10 +49,8 @@ public class V1WorkSpaceWatchEventDto   {
    * Get type
    * @return type
   */
- @Schema(defaultValue = "")
-
-
-  public String getType() {
+ @Schema(defaultValue =  "")
+ public String getType() {
     return type;
   }
 

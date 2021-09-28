@@ -1,14 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ResourceIgnoreDifferences contains resource filter and list of json paths which should be ignored during comparison with live state.
@@ -45,10 +45,8 @@ public class V1ResourceIgnoreDifferencesDto   {
    * Get group
    * @return group
   */
- @Schema(defaultValue = "")
-
-
-  public String getGroup() {
+ @Schema(defaultValue =  "")
+ public String getGroup() {
     return group;
   }
 
@@ -73,10 +71,8 @@ public class V1ResourceIgnoreDifferencesDto   {
    * Get jqPathExpressions
    * @return jqPathExpressions
   */
- @Schema(defaultValue = "")
-
-
-  public List<String> getJqPathExpressions() {
+ @Schema(defaultValue =  "")
+ public List<String> getJqPathExpressions() {
     return jqPathExpressions;
   }
 
@@ -101,10 +97,8 @@ public class V1ResourceIgnoreDifferencesDto   {
    * Get jsonPointers
    * @return jsonPointers
   */
- @Schema(defaultValue = "")
-
-
-  public List<String> getJsonPointers() {
+ @Schema(defaultValue =  "")
+ public List<String> getJsonPointers() {
     return jsonPointers;
   }
 
@@ -121,10 +115,8 @@ public class V1ResourceIgnoreDifferencesDto   {
    * Get kind
    * @return kind
   */
- @Schema(defaultValue = "")
-
-
-  public String getKind() {
+ @Schema(defaultValue =  "")
+ public String getKind() {
     return kind;
   }
 
@@ -141,10 +133,8 @@ public class V1ResourceIgnoreDifferencesDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 
@@ -161,10 +151,8 @@ public class V1ResourceIgnoreDifferencesDto   {
    * Get namespace
    * @return namespace
   */
- @Schema(defaultValue = "")
-
-
-  public String getNamespace() {
+ @Schema(defaultValue =  "")
+ public String getNamespace() {
     return namespace;
   }
 

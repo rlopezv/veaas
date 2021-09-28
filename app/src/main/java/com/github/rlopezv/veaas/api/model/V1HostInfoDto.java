@@ -1,16 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1HostResourceInfoDto;
-import com.github.rlopezv.veaas.api.model.V1HostSystemInfoDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * HostInfo holds host name and resources included with information regarding its characteristics
@@ -37,10 +35,8 @@ public class V1HostInfoDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 
@@ -66,7 +62,6 @@ public class V1HostInfoDto   {
    * @return resourcesInfo
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<V1HostResourceInfoDto> getResourcesInfo() {
@@ -87,7 +82,6 @@ public class V1HostInfoDto   {
    * @return systemInfo
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1HostSystemInfoDto getSystemInfo() {

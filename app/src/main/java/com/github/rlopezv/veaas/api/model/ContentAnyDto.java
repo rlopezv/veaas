@@ -1,19 +1,18 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ContentAnyDto
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-26T12:04:00.942225+02:00[Europe/Madrid]")
 public class ContentAnyDto   {
+
   @JsonProperty("type_url")
   private String typeUrl;
 
@@ -30,9 +29,7 @@ public class ContentAnyDto   {
    * @return typeUrl
   */
  @Schema(defaultValue = "")
-
-
-  public String getTypeUrl() {
+ public String getTypeUrl() {
     return typeUrl;
   }
 
@@ -49,10 +46,8 @@ public class ContentAnyDto   {
    * Get value
    * @return value
   */
- @Schema(defaultValue = "")
-
-
-  public byte[] getValue() {
+ @Schema(defaultValue =  "")
+ public byte[] getValue() {
     return value;
   }
 
@@ -79,26 +74,17 @@ public class ContentAnyDto   {
     return Objects.hash(typeUrl, Arrays.hashCode(value));
   }
 
+   /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class ContentAnyDto {\n");
-    
-    sb.append("    typeUrl: ").append(toIndentedString(typeUrl)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
-    sb.append("}");
-    return sb.toString();
+    StringBuilder builder = new StringBuilder();
+    builder.append("ContentAnyDto [typeUrl=").append(typeUrl).append(", value=").append(Arrays.toString(value))
+        .append("]");
+    return builder.toString();
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
 }
 

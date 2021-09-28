@@ -1,15 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.WorkSpaceWorkSpaceSyncWindowDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * WorkSpaceWorkSpaceSyncWindowsResponseDto
@@ -45,7 +44,6 @@ public class WorkSpaceWorkSpaceSyncWindowsResponseDto   {
    * @return activeWindows
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<WorkSpaceWorkSpaceSyncWindowDto> getActiveWindows() {
@@ -74,7 +72,6 @@ public class WorkSpaceWorkSpaceSyncWindowsResponseDto   {
    * @return assignedWindows
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<WorkSpaceWorkSpaceSyncWindowDto> getAssignedWindows() {
@@ -94,10 +91,8 @@ public class WorkSpaceWorkSpaceSyncWindowsResponseDto   {
    * Get canSync
    * @return canSync
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getCanSync() {
+ @Schema(defaultValue =  "")
+ public Boolean getCanSync() {
     return canSync;
   }
 

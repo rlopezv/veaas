@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * AccountTokenDto
@@ -31,13 +29,12 @@ public class AccountTokenDto   {
    * Get expiresAt
    * @return expiresAt
   */
- @Schema(defaultValue = "")
-
-
-  public String getExpiresAt() {
+ @Schema(defaultValue =  "")
+ public String getExpiresAt() {
     return expiresAt;
   }
 
+  @Schema(defaultValue =  "") 
   public void setExpiresAt(String expiresAt) {
     this.expiresAt = expiresAt;
   }
@@ -51,10 +48,8 @@ public class AccountTokenDto   {
    * Get id
    * @return id
   */
- @Schema(defaultValue = "")
-
-
-  public String getId() {
+ @Schema(defaultValue =  "")
+ public String getId() {
     return id;
   }
 
@@ -71,10 +66,8 @@ public class AccountTokenDto   {
    * Get issuedAt
    * @return issuedAt
   */
- @Schema(defaultValue = "")
-
-
-  public String getIssuedAt() {
+ @Schema(defaultValue =  "")
+ public String getIssuedAt() {
     return issuedAt;
   }
 

@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * WorkSpacePatchRequest is a request to patch an workSpace
@@ -32,10 +30,8 @@ public class WorkSpaceWorkSpacePatchRequestDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 
@@ -52,10 +48,8 @@ public class WorkSpaceWorkSpacePatchRequestDto   {
    * Get patch
    * @return patch
   */
- @Schema(defaultValue = "")
-
-
-  public String getPatch() {
+ @Schema(defaultValue =  "")
+ public String getPatch() {
     return patch;
   }
 
@@ -72,10 +66,8 @@ public class WorkSpaceWorkSpacePatchRequestDto   {
    * Get patchType
    * @return patchType
   */
- @Schema(defaultValue = "")
-
-
-  public String getPatchType() {
+ @Schema(defaultValue =  "")
+ public String getPatchType() {
     return patchType;
   }
 

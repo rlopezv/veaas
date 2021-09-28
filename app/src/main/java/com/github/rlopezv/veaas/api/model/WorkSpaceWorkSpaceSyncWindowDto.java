@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * WorkSpaceWorkSpaceSyncWindowDto
@@ -34,10 +32,8 @@ public class WorkSpaceWorkSpaceSyncWindowDto   {
    * Get duration
    * @return duration
   */
- @Schema(defaultValue = "")
-
-
-  public String getDuration() {
+ @Schema(defaultValue =  "")
+ public String getDuration() {
     return duration;
   }
 
@@ -54,10 +50,8 @@ public class WorkSpaceWorkSpaceSyncWindowDto   {
    * Get kind
    * @return kind
   */
- @Schema(defaultValue = "")
-
-
-  public String getKind() {
+ @Schema(defaultValue =  "")
+ public String getKind() {
     return kind;
   }
 
@@ -74,10 +68,8 @@ public class WorkSpaceWorkSpaceSyncWindowDto   {
    * Get manualSync
    * @return manualSync
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getManualSync() {
+ @Schema(defaultValue =  "")
+ public Boolean getManualSync() {
     return manualSync;
   }
 
@@ -94,10 +86,8 @@ public class WorkSpaceWorkSpaceSyncWindowDto   {
    * Get schedule
    * @return schedule
   */
- @Schema(defaultValue = "")
-
-
-  public String getSchedule() {
+ @Schema(defaultValue =  "")
+ public String getSchedule() {
     return schedule;
   }
 

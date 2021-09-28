@@ -1,20 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1HealthStatusDto;
-import com.github.rlopezv.veaas.api.model.V1ObjectMetaDto;
-import com.github.rlopezv.veaas.api.model.V1ResourceNetworkingInfoDto;
-import com.github.rlopezv.veaas.api.model.V1ResourceRefDto;
-import com.github.rlopezv.veaas.api.model.V1ResourceSpecDto;
-import com.github.rlopezv.veaas.api.model.V1TimeDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Resource contains information about live resource and its children
@@ -57,7 +51,6 @@ public class V1ResourceDto   {
    * @return metadata
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ObjectMetaDto getMetadata() {
@@ -78,7 +71,6 @@ public class V1ResourceDto   {
    * @return createdAt
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getCreatedAt() {
@@ -99,7 +91,6 @@ public class V1ResourceDto   {
    * @return health
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1HealthStatusDto getHealth() {
@@ -120,7 +111,6 @@ public class V1ResourceDto   {
    * @return spec
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ResourceSpecDto getSpec() {
@@ -141,7 +131,6 @@ public class V1ResourceDto   {
    * @return networkingInfo
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ResourceNetworkingInfoDto getNetworkingInfo() {
@@ -170,7 +159,6 @@ public class V1ResourceDto   {
    * @return parentRefs
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<V1ResourceRefDto> getParentRefs() {
@@ -191,7 +179,6 @@ public class V1ResourceDto   {
    * @return resourceRef
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ResourceRefDto getResourceRef() {
@@ -211,10 +198,8 @@ public class V1ResourceDto   {
    * Get resourceVersion
    * @return resourceVersion
   */
- @Schema(defaultValue = "")
-
-
-  public String getResourceVersion() {
+ @Schema(defaultValue =  "")
+ public String getResourceVersion() {
     return resourceVersion;
   }
 

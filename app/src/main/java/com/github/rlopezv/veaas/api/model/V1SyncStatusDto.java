@@ -1,13 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1ComparedToDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * SyncStatus contains information about the currently observed live and desired states of an workSpace
@@ -34,7 +33,6 @@ public class V1SyncStatusDto   {
    * @return comparedTo
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ComparedToDto getComparedTo() {

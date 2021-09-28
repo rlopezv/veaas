@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-VeaasApplication<veaas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.github.rlopezv.veaas.VeaasApplication",
+            "projectName": "veaas",
+            "args": ""
+        }
+    ]
+}

@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * OrphanedResourceKey is a reference to a resource to be ignored
@@ -32,10 +30,8 @@ public class V1OrphanedResourceKeyDto   {
    * Get group
    * @return group
   */
- @Schema(defaultValue = "")
-
-
-  public String getGroup() {
+ @Schema(defaultValue =  "")
+ public String getGroup() {
     return group;
   }
 
@@ -52,10 +48,8 @@ public class V1OrphanedResourceKeyDto   {
    * Get kind
    * @return kind
   */
- @Schema(defaultValue = "")
-
-
-  public String getKind() {
+ @Schema(defaultValue =  "")
+ public String getKind() {
     return kind;
   }
 
@@ -72,10 +66,8 @@ public class V1OrphanedResourceKeyDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 

@@ -5,12 +5,11 @@
  */
 package com.github.rlopezv.veaas.api;
 
-import com.github.rlopezv.veaas.api.model.AccountAccountDto;
-import com.github.rlopezv.veaas.api.model.AccountAccountsListDto;
-import com.github.rlopezv.veaas.api.model.AccountCheckResponseDto;
-import com.github.rlopezv.veaas.api.model.AccountCreateTokenRequestDto;
-import com.github.rlopezv.veaas.api.model.AccountCreateTokenResponseDto;
-import com.github.rlopezv.veaas.api.model.AccountUpdatePasswordRequestDto;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
 import com.github.rlopezv.veaas.api.model.InlineResponse2001Dto;
 import com.github.rlopezv.veaas.api.model.InlineResponse200Dto;
 import com.github.rlopezv.veaas.api.model.ProviderSettingsDto;
@@ -46,226 +45,33 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.multipart.MultipartFile;
-import io.swagger.v3.oas.annotations.tags.*;
-import io.swagger.v3.oas.annotations.*;
-import io.swagger.v3.oas.annotations.responses.*;
-import io.swagger.v3.oas.annotations.media.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-26T12:04:00.942225+02:00[Europe/Madrid]")
 @Validated
-@Tag(name = "api", description = "the api API")
+@Tag(name = "api", description = "Service API")
 public interface VeaasApi {
 
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
     }
-
-    /**
-     * GET /api/v1/account/check/{resource}/{action}/{subresource} : Checks if the current account has permission to perform an action
-     *
-     * @param resource  (required)
-     * @param action  (required)
-     * @param subresource  (required)
-     * @return A successful response. (status code 200)
-     *         or An unexpected error response. (status code 500)
-     */
-    @Operation(summary = "Checks if the current account has permission to perform an action", operationId = "accountServiceCheck",  tags={ "AccountService", })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", 
-        schema = @Schema(implementation =  AccountCheckResponseDto.class))}),
-        @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", 
-        schema = @Schema(implementation =   RuntimeErrorDto.class))})})
-    @GetMapping(
-        value = "/api/v1/account/check/{resource}/{action}/{subresource}",
-        produces = { "workSpace/json" }
-    )
-    default ResponseEntity<AccountCheckResponseDto> _accountServiceCheck(@Parameter(example = "",required=true) @PathVariable("resource") String resource,@Parameter(example = "",required=true) @PathVariable("action") String action,@Parameter(example = "",required=true) @PathVariable("subresource") String subresource) {
-        return accountServiceCheck(resource, action, subresource);
-    }
-
-    // Override this method
-    default  ResponseEntity<AccountCheckResponseDto> accountServiceCheck(String resource, String action, String subresource) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
-                    String exampleString = "";
-                    ApiUtil.setExampleResponse(request, "", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * POST /api/v1/account/{name}/token : Creates a token for the account
-     *
-     * @param name  (required)
-     * @param body  (required)
-     * @return A successful response. (status code 200)
-     *         or An unexpected error response. (status code 500)
-     */
-    @Operation(summary = "Creates a token for the account", operationId = "accountServiceCreateToken",  tags={ "AccountService", })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  AccountCreateTokenResponseDto.class))}),
-        @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeErrorDto.class))})})
-    @PostMapping(
-        value = "/api/v1/account/{name}/token",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
-    )
-    default ResponseEntity<AccountCreateTokenResponseDto> _accountServiceCreateToken(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody AccountCreateTokenRequestDto body) {
-        return accountServiceCreateToken(name, body);
-    }
-
-    // Override this method
-    default  ResponseEntity<AccountCreateTokenResponseDto> accountServiceCreateToken(String name, AccountCreateTokenRequestDto body) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
-                    String exampleString = "";
-                    ApiUtil.setExampleResponse(request, "", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * DELETE /api/v1/account/{name}/token/{id} : Deletes a token for the account
-     *
-     * @param name  (required)
-     * @param id  (required)
-     * @return A successful response. (status code 200)
-     *         or An unexpected error response. (status code 500)
-     */
-    @Operation(summary = "Deletes a token for the account", operationId = "accountServiceDeleteToken",  tags={ "AccountService", })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  Object.class))}),
-        @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeErrorDto.class))})})
-    @DeleteMapping(
-        value = "/api/v1/account/{name}/token/{id}",
-        produces = { "workSpace/json" }
-    )
-    default ResponseEntity<Object> _accountServiceDeleteToken(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "",required=true) @PathVariable("id") String id) {
-        return accountServiceDeleteToken(name, id);
-    }
-
-    // Override this method
-    default  ResponseEntity<Object> accountServiceDeleteToken(String name, String id) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * GET /api/v1/account/{name} : GetAccount returns an account
-     *
-     * @param name  (required)
-     * @return A successful response. (status code 200)
-     *         or An unexpected error response. (status code 500)
-     */
-    @Operation(summary = "GetAccount returns an account", operationId = "accountServiceGetAccount",  tags={ "AccountService", })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  AccountAccountDto.class))}),
-        @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeErrorDto.class))})})
-    @GetMapping(
-        value = "/api/v1/account/{name}",
-        produces = { "workSpace/json" }
-    )
-    default ResponseEntity<AccountAccountDto> _accountServiceGetAccount(@Parameter(example = "",required=true) @PathVariable("name") String name) {
-        return accountServiceGetAccount(name);
-    }
-
-    // Override this method
-    default  ResponseEntity<AccountAccountDto> accountServiceGetAccount(String name) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
-                    String exampleString = "";
-                    ApiUtil.setExampleResponse(request, "", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * GET /api/v1/account : Returns the list of accounts
-     *
-     * @return A successful response. (status code 200)
-     *         or An unexpected error response. (status code 500)
-     */
-    @Operation(summary = "Returns the list of accounts", operationId = "accountServiceListAccounts",  tags={ "AccountService", })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  AccountAccountsListDto.class))}),
-        @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeErrorDto.class))})})
-    @GetMapping(
-        value = "/api/v1/account",
-        produces = { "workSpace/json" }
-    )
-    default ResponseEntity<AccountAccountsListDto> _accountServiceListAccounts() {
-        return accountServiceListAccounts();
-    }
-
-    // Override this method
-    default  ResponseEntity<AccountAccountsListDto> accountServiceListAccounts() {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
-                    String exampleString = "";
-                    ApiUtil.setExampleResponse(request, "", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * PUT /api/v1/account/password : Updates an account&#39;s password to a new value
-     *
-     * @param body  (required)
-     * @return A successful response. (status code 200)
-     *         or An unexpected error response. (status code 500)
-     */
-    @Operation(summary = "Updates an account's password to a new value", operationId = "accountServiceUpdatePassword",  tags={ "AccountService", })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  Object.class))}),
-        @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeErrorDto.class))})})
-    @PutMapping(
-        value = "/api/v1/account/password",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
-    )
-    default ResponseEntity<Object> _accountServiceUpdatePassword(@Parameter(example = "" ,required=true )  @Valid @RequestBody AccountUpdatePasswordRequestDto body) {
-        return accountServiceUpdatePassword(body);
-    }
-
-    // Override this method
-    default  ResponseEntity<Object> accountServiceUpdatePassword(AccountUpdatePasswordRequestDto body) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
 
     /**
      * POST /api/v1/providers : Create creates a provider

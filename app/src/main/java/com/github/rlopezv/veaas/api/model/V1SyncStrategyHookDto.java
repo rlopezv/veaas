@@ -1,13 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1SyncStrategyApplyDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * SyncStrategyHook will perform a sync using hooks annotations.
@@ -28,7 +27,6 @@ public class V1SyncStrategyHookDto   {
    * @return syncStrategyApply
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1SyncStrategyApplyDto getSyncStrategyApply() {

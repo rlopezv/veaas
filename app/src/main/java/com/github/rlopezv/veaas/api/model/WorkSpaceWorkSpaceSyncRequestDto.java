@@ -1,19 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1InfoDto;
-import com.github.rlopezv.veaas.api.model.V1RetryStrategyDto;
-import com.github.rlopezv.veaas.api.model.V1SyncOperationResourceDto;
-import com.github.rlopezv.veaas.api.model.V1SyncStrategyDto;
-import com.github.rlopezv.veaas.api.model.WorkSpaceSyncOptionsDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * WorkSpaceSyncRequest is a request to apply the config state to live state
@@ -63,10 +58,8 @@ public class WorkSpaceWorkSpaceSyncRequestDto   {
    * Get dryRun
    * @return dryRun
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getDryRun() {
+ @Schema(defaultValue =  "")
+ public Boolean getDryRun() {
     return dryRun;
   }
 
@@ -92,7 +85,6 @@ public class WorkSpaceWorkSpaceSyncRequestDto   {
    * @return infos
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<V1InfoDto> getInfos() {
@@ -120,10 +112,8 @@ public class WorkSpaceWorkSpaceSyncRequestDto   {
    * Get manifests
    * @return manifests
   */
- @Schema(defaultValue = "")
-
-
-  public List<String> getManifests() {
+ @Schema(defaultValue =  "")
+ public List<String> getManifests() {
     return manifests;
   }
 
@@ -140,10 +130,8 @@ public class WorkSpaceWorkSpaceSyncRequestDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 
@@ -160,10 +148,8 @@ public class WorkSpaceWorkSpaceSyncRequestDto   {
    * Get prune
    * @return prune
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getPrune() {
+ @Schema(defaultValue =  "")
+ public Boolean getPrune() {
     return prune;
   }
 
@@ -189,7 +175,6 @@ public class WorkSpaceWorkSpaceSyncRequestDto   {
    * @return resources
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<V1SyncOperationResourceDto> getResources() {
@@ -210,7 +195,6 @@ public class WorkSpaceWorkSpaceSyncRequestDto   {
    * @return retryStrategy
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1RetryStrategyDto getRetryStrategy() {
@@ -230,10 +214,8 @@ public class WorkSpaceWorkSpaceSyncRequestDto   {
    * Get revision
    * @return revision
   */
- @Schema(defaultValue = "")
-
-
-  public String getRevision() {
+ @Schema(defaultValue =  "")
+ public String getRevision() {
     return revision;
   }
 
@@ -251,7 +233,6 @@ public class WorkSpaceWorkSpaceSyncRequestDto   {
    * @return strategy
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1SyncStrategyDto getStrategy() {
@@ -272,7 +253,6 @@ public class WorkSpaceWorkSpaceSyncRequestDto   {
    * @return syncOptions
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public WorkSpaceSyncOptionsDto getSyncOptions() {

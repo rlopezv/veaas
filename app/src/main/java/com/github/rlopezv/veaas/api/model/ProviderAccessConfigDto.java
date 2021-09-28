@@ -1,17 +1,16 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.AccessClaimDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ProviderAccessConfigDto
@@ -47,10 +46,8 @@ public class ProviderAccessConfigDto   {
    * Get cliClientID
    * @return cliClientID
   */
- @Schema(defaultValue = "")
-
-
-  public String getCliClientID() {
+ @Schema(defaultValue =  "")
+ public String getCliClientID() {
     return cliClientID;
   }
 
@@ -67,10 +64,8 @@ public class ProviderAccessConfigDto   {
    * Get clientID
    * @return clientID
   */
- @Schema(defaultValue = "")
-
-
-  public String getClientID() {
+ @Schema(defaultValue =  "")
+ public String getClientID() {
     return clientID;
   }
 
@@ -96,7 +91,6 @@ public class ProviderAccessConfigDto   {
    * @return idTokenClaims
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public Map<String, AccessClaimDto> getIdTokenClaims() {
@@ -116,10 +110,8 @@ public class ProviderAccessConfigDto   {
    * Get issuer
    * @return issuer
   */
- @Schema(defaultValue = "")
-
-
-  public String getIssuer() {
+ @Schema(defaultValue =  "")
+ public String getIssuer() {
     return issuer;
   }
 
@@ -136,10 +128,8 @@ public class ProviderAccessConfigDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 
@@ -164,10 +154,8 @@ public class ProviderAccessConfigDto   {
    * Get scopes
    * @return scopes
   */
- @Schema(defaultValue = "")
-
-
-  public List<String> getScopes() {
+ @Schema(defaultValue =  "")
+ public List<String> getScopes() {
     return scopes;
   }
 

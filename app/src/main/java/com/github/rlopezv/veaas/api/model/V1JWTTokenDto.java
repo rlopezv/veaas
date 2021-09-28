@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * JWTToken holds the issuedAt and expiresAt values of a token
@@ -32,10 +30,8 @@ public class V1JWTTokenDto   {
    * Get exp
    * @return exp
   */
- @Schema(defaultValue = "")
-
-
-  public String getExp() {
+ @Schema(defaultValue =  "")
+ public String getExp() {
     return exp;
   }
 
@@ -52,10 +48,8 @@ public class V1JWTTokenDto   {
    * Get iat
    * @return iat
   */
- @Schema(defaultValue = "")
-
-
-  public String getIat() {
+ @Schema(defaultValue =  "")
+ public String getIat() {
     return iat;
   }
 
@@ -72,10 +66,8 @@ public class V1JWTTokenDto   {
    * Get id
    * @return id
   */
- @Schema(defaultValue = "")
-
-
-  public String getId() {
+ @Schema(defaultValue =  "")
+ public String getId() {
     return id;
   }
 

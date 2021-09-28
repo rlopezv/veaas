@@ -1,15 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.ContentAnyDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * RuntimeErrorDto
@@ -38,10 +37,8 @@ public class RuntimeErrorDto   {
    * Get code
    * @return code
   */
- @Schema(defaultValue = "")
-
-
-  public Integer getCode() {
+ @Schema(defaultValue =  "")
+ public Integer getCode() {
     return code;
   }
 
@@ -67,7 +64,6 @@ public class RuntimeErrorDto   {
    * @return details
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<ContentAnyDto> getDetails() {
@@ -87,10 +83,8 @@ public class RuntimeErrorDto   {
    * Get error
    * @return error
   */
- @Schema(defaultValue = "")
-
-
-  public String getError() {
+ @Schema(defaultValue =  "")
+ public String getError() {
     return error;
   }
 
@@ -107,10 +101,8 @@ public class RuntimeErrorDto   {
    * Get message
    * @return message
   */
- @Schema(defaultValue = "")
-
-
-  public String getMessage() {
+ @Schema(defaultValue =  "")
+ public String getMessage() {
     return message;
   }
 

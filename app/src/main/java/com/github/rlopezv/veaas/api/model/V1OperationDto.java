@@ -1,18 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1InfoDto;
-import com.github.rlopezv.veaas.api.model.V1OperationInitiatorDto;
-import com.github.rlopezv.veaas.api.model.V1RetryStrategyDto;
-import com.github.rlopezv.veaas.api.model.V1SyncOperationDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Operation contains information about a requested or running operation
@@ -72,7 +68,6 @@ public class V1OperationDto   {
    * @return initiatedBy
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1OperationInitiatorDto getInitiatedBy() {
@@ -93,7 +88,6 @@ public class V1OperationDto   {
    * @return retry
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1RetryStrategyDto getRetry() {
@@ -114,7 +108,6 @@ public class V1OperationDto   {
    * @return sync
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1SyncOperationDto getSync() {

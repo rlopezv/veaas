@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * AccountUpdatePasswordRequestDto
@@ -31,10 +29,8 @@ public class AccountUpdatePasswordRequestDto   {
    * Get currentPassword
    * @return currentPassword
   */
- @Schema(defaultValue = "")
-
-
-  public String getCurrentPassword() {
+ @Schema(defaultValue =  "")
+ public String getCurrentPassword() {
     return currentPassword;
   }
 
@@ -51,10 +47,8 @@ public class AccountUpdatePasswordRequestDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 
@@ -71,10 +65,8 @@ public class AccountUpdatePasswordRequestDto   {
    * Get newPassword
    * @return newPassword
   */
- @Schema(defaultValue = "")
-
-
-  public String getNewPassword() {
+ @Schema(defaultValue =  "")
+ public String getNewPassword() {
     return newPassword;
   }
 

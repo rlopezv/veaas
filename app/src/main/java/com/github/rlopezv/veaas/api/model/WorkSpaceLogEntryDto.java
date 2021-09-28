@@ -1,13 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1TimeDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * WorkSpaceLogEntryDto
@@ -38,10 +37,8 @@ public class WorkSpaceLogEntryDto   {
    * Get content
    * @return content
   */
- @Schema(defaultValue = "")
-
-
-  public String getContent() {
+ @Schema(defaultValue =  "")
+ public String getContent() {
     return content;
   }
 
@@ -58,10 +55,8 @@ public class WorkSpaceLogEntryDto   {
    * Get last
    * @return last
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getLast() {
+ @Schema(defaultValue =  "")
+ public Boolean getLast() {
     return last;
   }
 
@@ -78,10 +73,8 @@ public class WorkSpaceLogEntryDto   {
    * Get deviceName
    * @return deviceName
   */
- @Schema(defaultValue = "")
-
-
-  public String getDeviceName() {
+ @Schema(defaultValue =  "")
+ public String getDeviceName() {
     return deviceName;
   }
 
@@ -99,7 +92,6 @@ public class WorkSpaceLogEntryDto   {
    * @return timeStamp
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getTimeStamp() {
@@ -119,10 +111,8 @@ public class WorkSpaceLogEntryDto   {
    * Get timeStampStr
    * @return timeStampStr
   */
- @Schema(defaultValue = "")
-
-
-  public String getTimeStampStr() {
+ @Schema(defaultValue =  "")
+ public String getTimeStampStr() {
     return timeStampStr;
   }
 

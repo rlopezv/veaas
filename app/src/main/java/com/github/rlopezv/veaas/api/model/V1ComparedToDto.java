@@ -1,14 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1WorkSpaceDestinationDto;
-import com.github.rlopezv.veaas.api.model.V1WorkSpaceSourceDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ComparedTo contains workSpace source and target which was used for resources comparison
@@ -32,7 +30,6 @@ public class V1ComparedToDto   {
    * @return destination
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1WorkSpaceDestinationDto getDestination() {
@@ -53,7 +50,6 @@ public class V1ComparedToDto   {
    * @return source
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1WorkSpaceSourceDto getSource() {

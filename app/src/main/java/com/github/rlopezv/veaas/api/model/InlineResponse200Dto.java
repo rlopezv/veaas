@@ -1,14 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.RuntimeErrorDto;
-import com.github.rlopezv.veaas.api.model.WorkSpaceLogEntryDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Stream result of workSpaceLogEntry
@@ -32,7 +30,6 @@ public class InlineResponse200Dto   {
    * @return error
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public RuntimeErrorDto getError() {
@@ -53,7 +50,6 @@ public class InlineResponse200Dto   {
    * @return result
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public WorkSpaceLogEntryDto getResult() {

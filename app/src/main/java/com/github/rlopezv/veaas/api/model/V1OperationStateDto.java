@@ -1,15 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1OperationDto;
-import com.github.rlopezv.veaas.api.model.V1SyncOperationResultDto;
-import com.github.rlopezv.veaas.api.model.V1TimeDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * OperationState contains information about state of a running operation
@@ -48,7 +45,6 @@ public class V1OperationStateDto   {
    * @return finishedAt
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getFinishedAt() {
@@ -89,7 +85,6 @@ public class V1OperationStateDto   {
    * @return operation
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1OperationDto getOperation() {
@@ -150,7 +145,6 @@ public class V1OperationStateDto   {
    * @return startedAt
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getStartedAt() {
@@ -171,7 +165,6 @@ public class V1OperationStateDto   {
    * @return syncResult
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1SyncOperationResultDto getSyncResult() {

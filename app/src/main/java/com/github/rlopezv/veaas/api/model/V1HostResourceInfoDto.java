@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * TODO: describe this type
@@ -35,10 +33,8 @@ public class V1HostResourceInfoDto   {
    * Get capacity
    * @return capacity
   */
- @Schema(defaultValue = "")
-
-
-  public String getCapacity() {
+ @Schema(defaultValue =  "")
+ public String getCapacity() {
     return capacity;
   }
 
@@ -55,10 +51,8 @@ public class V1HostResourceInfoDto   {
    * Get requestedByApp
    * @return requestedByApp
   */
- @Schema(defaultValue = "")
-
-
-  public String getRequestedByApp() {
+ @Schema(defaultValue =  "")
+ public String getRequestedByApp() {
     return requestedByApp;
   }
 
@@ -75,10 +69,8 @@ public class V1HostResourceInfoDto   {
    * Get requestedByNeighbors
    * @return requestedByNeighbors
   */
- @Schema(defaultValue = "")
-
-
-  public String getRequestedByNeighbors() {
+ @Schema(defaultValue =  "")
+ public String getRequestedByNeighbors() {
     return requestedByNeighbors;
   }
 
@@ -95,10 +87,8 @@ public class V1HostResourceInfoDto   {
    * Get resourceName
    * @return resourceName
   */
- @Schema(defaultValue = "")
-
-
-  public String getResourceName() {
+ @Schema(defaultValue =  "")
+ public String getResourceName() {
     return resourceName;
   }
 

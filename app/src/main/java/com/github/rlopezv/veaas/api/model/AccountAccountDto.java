@@ -1,15 +1,14 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.AccountTokenDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * AccountAccountDto
@@ -47,10 +46,8 @@ public class AccountAccountDto   {
    * Get capabilities
    * @return capabilities
   */
- @Schema(defaultValue = "")
-
-
-  public List<String> getCapabilities() {
+ @Schema(defaultValue =  "")
+ public List<String> getCapabilities() {
     return capabilities;
   }
 
@@ -67,10 +64,8 @@ public class AccountAccountDto   {
    * Get enabled
    * @return enabled
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getEnabled() {
+ @Schema(defaultValue =  "")
+ public Boolean getEnabled() {
     return enabled;
   }
 
@@ -87,10 +82,8 @@ public class AccountAccountDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 
@@ -116,7 +109,6 @@ public class AccountAccountDto   {
    * @return tokens
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<AccountTokenDto> getTokens() {

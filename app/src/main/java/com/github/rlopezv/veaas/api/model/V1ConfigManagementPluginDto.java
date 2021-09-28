@@ -1,13 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1CommandDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ConfigManagementPlugin contains config management plugin configuration
@@ -34,7 +33,6 @@ public class V1ConfigManagementPluginDto   {
    * @return generate
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1CommandDto getGenerate() {
@@ -55,7 +53,6 @@ public class V1ConfigManagementPluginDto   {
    * @return init
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1CommandDto getInit() {
@@ -75,10 +72,8 @@ public class V1ConfigManagementPluginDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 

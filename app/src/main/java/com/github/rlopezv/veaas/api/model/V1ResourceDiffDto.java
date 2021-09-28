@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ResourceDiff holds the diff of a live and target resource object TODO: describe members of this type
@@ -79,10 +77,8 @@ public class V1ResourceDiffDto   {
    * Get group
    * @return group
   */
- @Schema(defaultValue = "")
-
-
-  public String getGroup() {
+ @Schema(defaultValue =  "")
+ public String getGroup() {
     return group;
   }
 
@@ -99,10 +95,8 @@ public class V1ResourceDiffDto   {
    * Get hook
    * @return hook
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getHook() {
+ @Schema(defaultValue =  "")
+ public Boolean getHook() {
     return hook;
   }
 
@@ -119,10 +113,8 @@ public class V1ResourceDiffDto   {
    * Get kind
    * @return kind
   */
- @Schema(defaultValue = "")
-
-
-  public String getKind() {
+ @Schema(defaultValue =  "")
+ public String getKind() {
     return kind;
   }
 
@@ -159,10 +151,8 @@ public class V1ResourceDiffDto   {
    * Get modified
    * @return modified
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getModified() {
+ @Schema(defaultValue =  "")
+ public Boolean getModified() {
     return modified;
   }
 
@@ -179,10 +169,8 @@ public class V1ResourceDiffDto   {
    * Get name
    * @return name
   */
- @Schema(defaultValue = "")
-
-
-  public String getName() {
+ @Schema(defaultValue =  "")
+ public String getName() {
     return name;
   }
 
@@ -199,10 +187,8 @@ public class V1ResourceDiffDto   {
    * Get namespace
    * @return namespace
   */
- @Schema(defaultValue = "")
-
-
-  public String getNamespace() {
+ @Schema(defaultValue =  "")
+ public String getNamespace() {
     return namespace;
   }
 
@@ -259,10 +245,8 @@ public class V1ResourceDiffDto   {
    * Get resourceVersion
    * @return resourceVersion
   */
- @Schema(defaultValue = "")
-
-
-  public String getResourceVersion() {
+ @Schema(defaultValue =  "")
+ public String getResourceVersion() {
     return resourceVersion;
   }
 

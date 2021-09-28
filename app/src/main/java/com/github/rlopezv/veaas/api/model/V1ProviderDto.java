@@ -1,20 +1,16 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1ConnectionStateDto;
-import com.github.rlopezv.veaas.api.model.V1ProviderConfigDto;
-import com.github.rlopezv.veaas.api.model.V1ProviderInfoDto;
-import com.github.rlopezv.veaas.api.model.V1TimeDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Provider is the definition of a resource provider
@@ -116,7 +112,6 @@ public class V1ProviderDto   {
    * @return config
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ProviderConfigDto getConfig() {
@@ -137,7 +132,6 @@ public class V1ProviderDto   {
    * @return connectionState
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ConnectionStateDto getConnectionState() {
@@ -158,7 +152,6 @@ public class V1ProviderDto   {
    * @return info
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1ProviderInfoDto getInfo() {
@@ -255,7 +248,6 @@ public class V1ProviderDto   {
    * @return refreshRequestedAt
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getRefreshRequestedAt() {

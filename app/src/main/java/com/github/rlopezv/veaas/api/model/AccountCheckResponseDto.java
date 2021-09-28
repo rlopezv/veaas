@@ -1,12 +1,10 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * AccountCheckResponseDto
@@ -25,10 +23,8 @@ public class AccountCheckResponseDto   {
    * Get value
    * @return value
   */
- @Schema(defaultValue = "")
-
-
-  public String getValue() {
+ @Schema(defaultValue =  "")
+ public String getValue() {
     return value;
   }
 

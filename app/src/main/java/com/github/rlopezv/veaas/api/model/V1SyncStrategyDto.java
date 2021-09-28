@@ -1,14 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1SyncStrategyApplyDto;
-import com.github.rlopezv.veaas.api.model.V1SyncStrategyHookDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * SyncStrategy controls the manner in which a sync is performed
@@ -32,7 +30,6 @@ public class V1SyncStrategyDto   {
    * @return apply
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1SyncStrategyApplyDto getApply() {
@@ -53,7 +50,6 @@ public class V1SyncStrategyDto   {
    * @return hook
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1SyncStrategyHookDto getHook() {

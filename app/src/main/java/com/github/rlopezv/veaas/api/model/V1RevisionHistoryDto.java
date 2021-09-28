@@ -1,14 +1,12 @@
 package com.github.rlopezv.veaas.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.V1TimeDto;
-import com.github.rlopezv.veaas.api.model.V1WorkSpaceSourceDto;
-import io.swagger.v3.oas.annotations.media.*;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * RevisionHistory contains history information about a previous sync
@@ -41,7 +39,6 @@ public class V1RevisionHistoryDto   {
    * @return deployStartedAt
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getDeployStartedAt() {
@@ -62,7 +59,6 @@ public class V1RevisionHistoryDto   {
    * @return deployedAt
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1TimeDto getDeployedAt() {
@@ -123,7 +119,6 @@ public class V1RevisionHistoryDto   {
    * @return source
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public V1WorkSpaceSourceDto getSource() {

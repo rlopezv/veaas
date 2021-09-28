@@ -1,21 +1,16 @@
 package com.github.rlopezv.veaas.api.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.github.rlopezv.veaas.api.model.ProviderAccessConfigDto;
-import com.github.rlopezv.veaas.api.model.ProviderHelpDto;
-import com.github.rlopezv.veaas.api.model.ProviderPluginDto;
-import com.github.rlopezv.veaas.api.model.V1ConfigManagementPluginDto;
-import com.github.rlopezv.veaas.api.model.V1ResourceOverrideDto;
-import io.swagger.v3.oas.annotations.media.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * ProviderSettingsDto
@@ -73,10 +68,8 @@ public class ProviderSettingsDto   {
    * Get appLabelKey
    * @return appLabelKey
   */
- @Schema(defaultValue = "")
-
-
-  public String getAppLabelKey() {
+ @Schema(defaultValue =  "")
+ public String getAppLabelKey() {
     return appLabelKey;
   }
 
@@ -102,7 +95,6 @@ public class ProviderSettingsDto   {
    * @return configManagementPlugins
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<V1ConfigManagementPluginDto> getConfigManagementPlugins() {
@@ -123,7 +115,6 @@ public class ProviderSettingsDto   {
    * @return help
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public ProviderHelpDto getHelp() {
@@ -144,7 +135,6 @@ public class ProviderSettingsDto   {
    * @return accessConfig
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public ProviderAccessConfigDto getAccessConfig() {
@@ -164,10 +154,8 @@ public class ProviderSettingsDto   {
    * Get passwordPattern
    * @return passwordPattern
   */
- @Schema(defaultValue = "")
-
-
-  public String getPasswordPattern() {
+ @Schema(defaultValue =  "")
+ public String getPasswordPattern() {
     return passwordPattern;
   }
 
@@ -193,7 +181,6 @@ public class ProviderSettingsDto   {
    * @return plugins
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public List<ProviderPluginDto> getPlugins() {
@@ -222,7 +209,6 @@ public class ProviderSettingsDto   {
    * @return resourceOverrides
   */
  @Schema(defaultValue = "")
-
   @Valid
 
   public Map<String, V1ResourceOverrideDto> getResourceOverrides() {
@@ -242,10 +228,8 @@ public class ProviderSettingsDto   {
    * Get statusBadgeEnabled
    * @return statusBadgeEnabled
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getStatusBadgeEnabled() {
+ @Schema(defaultValue =  "")
+ public Boolean getStatusBadgeEnabled() {
     return statusBadgeEnabled;
   }
 
@@ -262,10 +246,8 @@ public class ProviderSettingsDto   {
    * Get uiBannerContent
    * @return uiBannerContent
   */
- @Schema(defaultValue = "")
-
-
-  public String getUiBannerContent() {
+ @Schema(defaultValue =  "")
+ public String getUiBannerContent() {
     return uiBannerContent;
   }
 
@@ -282,10 +264,8 @@ public class ProviderSettingsDto   {
    * Get uiBannerURL
    * @return uiBannerURL
   */
- @Schema(defaultValue = "")
-
-
-  public String getUiBannerURL() {
+ @Schema(defaultValue =  "")
+ public String getUiBannerURL() {
     return uiBannerURL;
   }
 
@@ -302,10 +282,8 @@ public class ProviderSettingsDto   {
    * Get uiCssURL
    * @return uiCssURL
   */
- @Schema(defaultValue = "")
-
-
-  public String getUiCssURL() {
+ @Schema(defaultValue =  "")
+ public String getUiCssURL() {
     return uiCssURL;
   }
 
@@ -322,10 +300,8 @@ public class ProviderSettingsDto   {
    * Get url
    * @return url
   */
- @Schema(defaultValue = "")
-
-
-  public String getUrl() {
+ @Schema(defaultValue =  "")
+ public String getUrl() {
     return url;
   }
 
@@ -342,10 +318,8 @@ public class ProviderSettingsDto   {
    * Get userLoginsDisabled
    * @return userLoginsDisabled
   */
- @Schema(defaultValue = "")
-
-
-  public Boolean getUserLoginsDisabled() {
+ @Schema(defaultValue =  "")
+ public Boolean getUserLoginsDisabled() {
     return userLoginsDisabled;
   }
 
