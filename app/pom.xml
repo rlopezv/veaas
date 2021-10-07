@@ -93,7 +93,7 @@
 									<inputSpec>${project.basedir}/src/main/resources/api.yml</inputSpec>
 									<generatorName>spring</generatorName>
 									<library>spring-boot</library>
-									<modelNameSuffix>Dto</modelNameSuffix>
+									<modelNameSuffix></modelNameSuffix>
 									<generateApiTests>false</generateApiTests>
 									<generateModelTests>false</generateModelTests>
 									<configOptions>

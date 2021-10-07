@@ -13,6 +13,16 @@ public class VeaasApplication {
 	}
 
 	@Bean
+	public GroupedOpenApi infrastructureOpenApi() {
+	 	return GroupedOpenApi.builder().group("account").pathsToMatch("/infrastructure/**").build();
+	}
+
+	@Bean
+	public GroupedOpenApi environmentOpenApi() {
+	 	return GroupedOpenApi.builder().group("environment").pathsToMatch("/environment/**").build();
+	}
+
+	@Bean
 	public GroupedOpenApi accountOpenApi() {
 	 	return GroupedOpenApi.builder().group("account").pathsToMatch("/account/**").build();
 	}

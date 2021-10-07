@@ -1,0 +1,98 @@
+package com.github.rlopezv.veaas.api.model;
+
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+/**
+ * WorkSpaceInfo contains workSpace type and app file path
+ */
+@Schema(description = "WorkSpaceInfo contains workSpace type and app file path")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-26T12:04:00.942225+02:00[Europe/Madrid]")
+public class RepositoryWorkSpaceInfo   {
+  @JsonProperty("path")
+  private String path;
+
+  @JsonProperty("type")
+  private String type;
+
+  public RepositoryWorkSpaceInfo path(String path) {
+    this.path = path;
+    return this;
+  }
+
+  /**
+   * Get path
+   * @return path
+  */
+ @Schema(defaultValue =  "")
+ public String getPath() {
+    return path;
+  }
+
+  public void setPath(String path) {
+    this.path = path;
+  }
+
+  public RepositoryWorkSpaceInfo type(String type) {
+    this.type = type;
+    return this;
+  }
+
+  /**
+   * Get type
+   * @return type
+  */
+ @Schema(defaultValue =  "")
+ public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    RepositoryWorkSpaceInfo repositoryWorkSpaceInfo = (RepositoryWorkSpaceInfo) o;
+    return Objects.equals(this.path, repositoryWorkSpaceInfo.path) &&
+        Objects.equals(this.type, repositoryWorkSpaceInfo.type);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(path, type);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class RepositoryWorkSpaceInfo {\n");
+    
+    sb.append("    path: ").append(toIndentedString(path)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
+}
+

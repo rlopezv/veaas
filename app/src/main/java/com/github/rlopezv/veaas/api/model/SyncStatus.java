@@ -1,0 +1,129 @@
+package com.github.rlopezv.veaas.api.model;
+
+import java.util.Objects;
+
+import javax.validation.Valid;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+/**
+ * SyncStatus contains information about the currently observed live and desired states of an workSpace
+ */
+@Schema(description = "SyncStatus contains information about the currently observed live and desired states of an workSpace")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-26T12:04:00.942225+02:00[Europe/Madrid]")
+public class SyncStatus   {
+  @JsonProperty("comparedTo")
+  private ComparedTo comparedTo;
+
+  @JsonProperty("revision")
+  private String revision;
+
+  @JsonProperty("status")
+  private String status;
+
+  public SyncStatus comparedTo(ComparedTo comparedTo) {
+    this.comparedTo = comparedTo;
+    return this;
+  }
+
+  /**
+   * Get comparedTo
+   * @return comparedTo
+  */
+ @Schema(defaultValue = "")
+  @Valid
+
+  public ComparedTo getComparedTo() {
+    return comparedTo;
+  }
+
+  public void setComparedTo(ComparedTo comparedTo) {
+    this.comparedTo = comparedTo;
+  }
+
+  public SyncStatus revision(String revision) {
+    this.revision = revision;
+    return this;
+  }
+
+  /**
+   * Revision contains information about the revision the comparison has been performed to
+   * @return revision
+  */
+ @Schema(defaultValue = "Revision contains information about the revision the comparison has been performed to")
+
+
+  public String getRevision() {
+    return revision;
+  }
+
+  public void setRevision(String revision) {
+    this.revision = revision;
+  }
+
+  public SyncStatus status(String status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * Status is the sync state of the comparison
+   * @return status
+  */
+ @Schema(defaultValue = "Status is the sync state of the comparison")
+
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    SyncStatus SyncStatus = (SyncStatus) o;
+    return Objects.equals(this.comparedTo, SyncStatus.comparedTo) &&
+        Objects.equals(this.revision, SyncStatus.revision) &&
+        Objects.equals(this.status, SyncStatus.status);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(comparedTo, revision, status);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class SyncStatus {\n");
+    
+    sb.append("    comparedTo: ").append(toIndentedString(comparedTo)).append("\n");
+    sb.append("    revision: ").append(toIndentedString(revision)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
+}
+

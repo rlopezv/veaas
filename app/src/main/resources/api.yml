@@ -7,7 +7,7 @@ info:
 servers:
 - url: /
 paths:
-  /api/v1/account:
+  /api//account:
     get:
       tags:
       - AccountService
@@ -26,7 +26,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/account/check/{resource}/{action}/{subresource}:
+  /api//account/check/{resource}/{action}/{subresource}:
     get:
       tags:
       - AccountService
@@ -61,7 +61,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/account/password:
+  /api//account/password:
     put:
       tags:
       - AccountService
@@ -87,7 +87,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/account/{name}:
+  /api//account/{name}:
     get:
       tags:
       - AccountService
@@ -112,7 +112,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/account/{name}/token:
+  /api//account/{name}/token:
     post:
       tags:
       - AccountService
@@ -144,7 +144,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/account/{name}/token/{id}:
+  /api//account/{name}/token/{id}:
     delete:
       tags:
       - AccountService
@@ -174,7 +174,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/workSpaces:
+  /api//workSpaces:
     get:
       tags:
       - WorkSpaceService
@@ -214,7 +214,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1WorkSpaceList'
+                $ref: '#/components/schemas/WorkSpaceList'
         default:
           description: An unexpected error response.
           content:
@@ -241,7 +241,7 @@ paths:
         content:
           workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1WorkSpace'
+              $ref: '#/components/schemas/WorkSpace'
         required: true
       responses:
         200:
@@ -249,7 +249,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1WorkSpace'
+                $ref: '#/components/schemas/WorkSpace'
         default:
           description: An unexpected error response.
           content:
@@ -257,7 +257,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/workSpaces/{workSpace.metadata.name}:
+  /api//workSpaces/{workSpace.metadata.name}:
     put:
       tags:
       - WorkSpaceService
@@ -285,7 +285,7 @@ paths:
         content:
           workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1WorkSpace'
+              $ref: '#/components/schemas/WorkSpace'
         required: true
       responses:
         200:
@@ -293,7 +293,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1WorkSpace'
+                $ref: '#/components/schemas/WorkSpace'
         default:
           description: An unexpected error response.
           content:
@@ -301,7 +301,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/workSpaces/{workSpaceName}/managed-resources:
+  /api//workSpaces/{workSpaceName}/managed-resources:
     get:
       tags:
       - WorkSpaceService
@@ -346,7 +346,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/workSpaces/{workSpaceName}/resource-tree:
+  /api//workSpaces/{workSpaceName}/resource-tree:
     get:
       tags:
       - WorkSpaceService
@@ -384,14 +384,14 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1WorkSpaceTree'
+                $ref: '#/components/schemas/WorkSpaceTree'
         default:
           description: An unexpected error response.
           content:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/workSpaces/{name}:
+  /api//workSpaces/{name}:
     get:
       tags:
       - WorkSpaceService
@@ -432,7 +432,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1WorkSpace'
+                $ref: '#/components/schemas/WorkSpace'
         default:
           description: An unexpected error response.
           content:
@@ -494,7 +494,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1WorkSpace'
+                $ref: '#/components/schemas/WorkSpace'
         default:
           description: An unexpected error response.
           content:
@@ -502,7 +502,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/workSpaces/{name}/events:
+  /api//workSpaces/{name}/events:
     get:
       tags:
       - WorkSpaceService
@@ -532,14 +532,14 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1EventList'
+                $ref: '#/components/schemas/EventList'
         default:
           description: An unexpected error response.
           content:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/workSpaces/{name}/logs:
+  /api//workSpaces/{name}/logs:
     get:
       tags:
       - WorkSpaceService
@@ -635,7 +635,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/workSpaces/{name}/manifests:
+  /api//workSpaces/{name}/manifests:
     get:
       tags:
       - WorkSpaceService
@@ -664,7 +664,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/workSpaces/{name}/operation:
+  /api//workSpaces/{name}/operation:
     delete:
       tags:
       - WorkSpaceService
@@ -689,7 +689,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/workSpaces/{name}/device/{resource}/logs:
+  /api//workSpaces/{name}/device/{resource}/logs:
     get:
       tags:
       - WorkSpaceService
@@ -784,7 +784,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/workSpaces/{name}/resource:
+  /api//workSpaces/{name}/resource:
     get:
       tags:
       - WorkSpaceService
@@ -936,7 +936,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/workSpaces/{name}/resource/actions:
+  /api//workSpaces/{name}/resource/actions:
     get:
       tags:
       - WorkSpaceService
@@ -1032,7 +1032,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/workSpaces/{name}/revisions/{revision}/metadata:
+  /api//workSpaces/{name}/revisions/{revision}/metadata:
     get:
       tags:
       - WorkSpaceService
@@ -1058,14 +1058,14 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1RevisionMetadata'
+                $ref: '#/components/schemas/RevisionMetadata'
         default:
           description: An unexpected error response.
           content:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/workSpaces/{name}/rollback:
+  /api//workSpaces/{name}/rollback:
     post:
       tags:
       - WorkSpaceService
@@ -1089,7 +1089,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1WorkSpace'
+                $ref: '#/components/schemas/WorkSpace'
         default:
           description: An unexpected error response.
           content:
@@ -1097,7 +1097,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/workSpaces/{name}/spec:
+  /api//workSpaces/{name}/spec:
     put:
       tags:
       - WorkSpaceService
@@ -1117,7 +1117,7 @@ paths:
         content:
           workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1WorkSpaceSpec'
+              $ref: '#/components/schemas/WorkSpaceSpec'
         required: true
       responses:
         200:
@@ -1125,7 +1125,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1WorkSpaceSpec'
+                $ref: '#/components/schemas/WorkSpaceSpec'
         default:
           description: An unexpected error response.
           content:
@@ -1133,7 +1133,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/workSpaces/{name}/sync:
+  /api//workSpaces/{name}/sync:
     post:
       tags:
       - WorkSpaceService
@@ -1157,7 +1157,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1WorkSpace'
+                $ref: '#/components/schemas/WorkSpace'
         default:
           description: An unexpected error response.
           content:
@@ -1165,7 +1165,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/workSpaces/{name}/syncwindows:
+  /api//workSpaces/{name}/syncwindows:
     get:
       tags:
       - WorkSpaceService
@@ -1191,7 +1191,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
 
-  /api/v1/providers:
+  /api//providers:
     get:
       tags:
       - ProviderService
@@ -1212,7 +1212,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1ProviderList'
+                $ref: '#/components/schemas/ProviderList'
         default:
           description: An unexpected error response.
           content:
@@ -1233,7 +1233,7 @@ paths:
         content:
           workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1Provider'
+              $ref: '#/components/schemas/Provider'
         required: true
       responses:
         200:
@@ -1241,7 +1241,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1Provider'
+                $ref: '#/components/schemas/Provider'
         default:
           description: An unexpected error response.
           content:
@@ -1249,7 +1249,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/providers/{provider.server}:
+  /api//providers/{provider.server}:
     put:
       tags:
       - ProviderService
@@ -1274,7 +1274,7 @@ paths:
         content:
           workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1Provider'
+              $ref: '#/components/schemas/Provider'
         required: true
       responses:
         200:
@@ -1282,7 +1282,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1Provider'
+                $ref: '#/components/schemas/Provider'
         default:
           description: An unexpected error response.
           content:
@@ -1290,7 +1290,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/providers/{server}:
+  /api//providers/{server}:
     get:
       tags:
       - ProviderService
@@ -1312,7 +1312,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1Provider'
+                $ref: '#/components/schemas/Provider'
         default:
           description: An unexpected error response.
           content:
@@ -1347,7 +1347,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/providers/{server}/invalidate-cache:
+  /api//providers/{server}/invalidate-cache:
     post:
       tags:
       - ProviderService
@@ -1365,14 +1365,14 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1Provider'
+                $ref: '#/components/schemas/Provider'
         default:
           description: An unexpected error response.
           content:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/providers/{server}/rotate-auth:
+  /api//providers/{server}/rotate-auth:
     post:
       tags:
       - ProviderService
@@ -1397,7 +1397,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/repocreds:
+  /api//repocreds:
     get:
       tags:
       - RepoCredsService
@@ -1416,7 +1416,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1RepoCredsList'
+                $ref: '#/components/schemas/RepoCredsList'
         default:
           description: An unexpected error response.
           content:
@@ -1439,7 +1439,7 @@ paths:
         content:
           workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1RepoCreds'
+              $ref: '#/components/schemas/RepoCreds'
         required: true
       responses:
         200:
@@ -1447,7 +1447,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1RepoCreds'
+                $ref: '#/components/schemas/RepoCreds'
         default:
           description: An unexpected error response.
           content:
@@ -1455,7 +1455,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/repocreds/{creds.url}:
+  /api//repocreds/{creds.url}:
     put:
       tags:
       - RepoCredsService
@@ -1472,7 +1472,7 @@ paths:
         content:
           workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1RepoCreds'
+              $ref: '#/components/schemas/RepoCreds'
         required: true
       responses:
         200:
@@ -1480,7 +1480,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1RepoCreds'
+                $ref: '#/components/schemas/RepoCreds'
         default:
           description: An unexpected error response.
           content:
@@ -1488,7 +1488,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/repocreds/{url}:
+  /api//repocreds/{url}:
     delete:
       tags:
       - RepoCredsService
@@ -1514,7 +1514,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/repositories:
+  /api//repositories:
     get:
       tags:
       - RepositoryService
@@ -1537,7 +1537,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1RepositoryList'
+                $ref: '#/components/schemas/RepositoryList'
         default:
           description: An unexpected error response.
           content:
@@ -1565,7 +1565,7 @@ paths:
         content:
           workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1Repository'
+              $ref: '#/components/schemas/Repository'
         required: true
       responses:
         200:
@@ -1573,7 +1573,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1Repository'
+                $ref: '#/components/schemas/Repository'
         default:
           description: An unexpected error response.
           content:
@@ -1581,7 +1581,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/repositories/{repo.repo}:
+  /api//repositories/{repo.repo}:
     put:
       tags:
       - RepositoryService
@@ -1598,7 +1598,7 @@ paths:
         content:
           workSpace/json:
             schema:
-              $ref: '#/components/schemas/v1Repository'
+              $ref: '#/components/schemas/Repository'
         required: true
       responses:
         200:
@@ -1606,7 +1606,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1Repository'
+                $ref: '#/components/schemas/Repository'
         default:
           description: An unexpected error response.
           content:
@@ -1614,7 +1614,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/repositories/{repo}:
+  /api//repositories/{repo}:
     get:
       tags:
       - RepositoryService
@@ -1638,7 +1638,7 @@ paths:
           content:
             workSpace/json:
               schema:
-                $ref: '#/components/schemas/v1Repository'
+                $ref: '#/components/schemas/Repository'
         default:
           description: An unexpected error response.
           content:
@@ -1675,7 +1675,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/repositories/{repo}/workSpaces:
+  /api//repositories/{repo}/workSpaces:
     get:
       tags:
       - RepositoryService
@@ -1704,7 +1704,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/repositories/{repo}/refs:
+  /api//repositories/{repo}/refs:
     get:
       tags:
       - RepositoryService
@@ -1734,7 +1734,7 @@ paths:
             workSpace/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
-  /api/v1/repositories/{repo}/validate:
+  /api//repositories/{repo}/validate:
     post:
       tags:
       - RepositoryService
@@ -1813,7 +1813,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/repositories/{source.repoURL}/appdetails:
+  /api//repositories/{source.repoURL}/appdetails:
     post:
       tags:
       - RepositoryService
@@ -1847,7 +1847,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/runtimeError'
       x-codegen-request-body-name: body
-  /api/v1/settings:
+  /api//settings:
     get:
       tags:
       - SettingsService
@@ -1888,7 +1888,7 @@ paths:
 components:
   schemas:
     # Host
-    v1HostInfo:
+    HostInfo:
       description: |-
         HostInfo holds host name and resources included with information regarding its characteristics
       type: object
@@ -1898,10 +1898,10 @@ components:
         resourcesInfo:
           type: array
           items:
-            $ref: '#/components/schemas/v1HostResourceInfo'
+            $ref: '#/components/schemas/HostResourceInfo'
         systemInfo:
-          $ref: '#/components/schemas/v1HostSystemInfo'
-    v1HostResourceInfo:
+          $ref: '#/components/schemas/HostSystemInfo'
+    HostResourceInfo:
       description: 'TODO: describe this type'
       type: object
       properties:
@@ -1916,7 +1916,7 @@ components:
           format: int64
         resourceName:
           type: string
-    v1HostSystemInfo:
+    HostSystemInfo:
       type: object
       properties:
         architecture:
@@ -1958,7 +1958,7 @@ components:
             https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/uuid
           type: string
       description: NodeSystemInfo is a set of ids/uuids to uniquely identify the node. TODO this should be included in provider
-    v1NetworkIngress:
+    NetworkIngress:
       type: object
       properties:
         hostname:
@@ -1976,11 +1976,11 @@ components:
             If used, every port defined in the service should have an entry in it
           type: array
           items:
-            $ref: '#/components/schemas/v1PortStatus'
+            $ref: '#/components/schemas/PortStatus'
       description: |-
         NetworkIngress represents the status of an ingress point:
         traffic intended for the service should be sent to an ingress point.
-    v1PortStatus:
+    PortStatus:
       type: object
       properties:
         error:
@@ -2003,7 +2003,7 @@ components:
             Candidate values are: "TCP", "UDP", "SCTP"
           type: string
     # Provider
-    v1Provider:
+    Provider:
       description: Provider is the definition of a resource provider
       type: object
       properties:
@@ -2017,11 +2017,11 @@ components:
           description: Indicates if provider level resources should be managed. This
             setting is used only if provider is connected in a namespaced mode.
         config:
-          $ref: '#/components/schemas/v1ProviderConfig'
+          $ref: '#/components/schemas/ProviderConfig'
         connectionState:
-          $ref: '#/components/schemas/v1ConnectionState'
+          $ref: '#/components/schemas/ConnectionState'
         info:
-          $ref: '#/components/schemas/v1ProviderInfo'
+          $ref: '#/components/schemas/ProviderInfo'
         labels:
           description: Labels for provider secret metadata
           type: object
@@ -2037,7 +2037,7 @@ components:
           items:
             type: string
         refreshRequestedAt:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         server:
           description: Server is the API server URL of the provider
           type: string
@@ -2046,7 +2046,7 @@ components:
           description: Shard contains optional shard number. Calculated on the fly
             by the workSpace controller if not specified.
           format: int64
-    v1ProviderCacheInfo:
+    ProviderCacheInfo:
       description: ProviderCacheInfo contains information about the provider cache
       type: object
       properties:
@@ -2055,12 +2055,12 @@ components:
           type: string
           format: int64
         lastCacheSyncTime:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         resourcesCount:
           description: ResourcesCount holds number of observed Kubernetes resources
           type: string
           format: int64
-    v1ProviderConfig:
+    ProviderConfig:
       type: object
       properties:
         bearerToken:
@@ -2069,18 +2069,18 @@ components:
             Server requires Bearer authentication. This client will not attempt to use
             refresh tokens for an OAuth2 flow.
         execProviderConfig:
-          $ref: '#/components/schemas/v1ExecProviderConfig'
+          $ref: '#/components/schemas/ExecProviderConfig'
         password:
           type: string
         tlsClientConfig:
-          $ref: '#/components/schemas/v1TLSClientConfig'
+          $ref: '#/components/schemas/TLSClientConfig'
         username:
           description: Server requires Basic authentication
           type: string
       description: |-
         ProviderConfig is the configuration attributes. This structure is subset of the go-client
         rest.Config with annotations added for marshalling.
-    v1ProviderInfo:
+    ProviderInfo:
       description: ProviderInfo contains information about the provider
       type: object
       properties:
@@ -2094,50 +2094,50 @@ components:
           type: string
           format: int64
         cacheInfo:
-          $ref: '#/components/schemas/v1ProviderCacheInfo'
+          $ref: '#/components/schemas/ProviderCacheInfo'
         connectionState:
-          $ref: '#/components/schemas/v1ConnectionState'
+          $ref: '#/components/schemas/ConnectionState'
         serverVersion:
           description: ServerVersion contains information about the version of
             the provider
           type: string
-    v1ProviderList:
+    ProviderList:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1Provider'
+            $ref: '#/components/schemas/Provider'
         metadata:
-          $ref: '#/components/schemas/v1ListMeta'
+          $ref: '#/components/schemas/ListMeta'
       description: ProviderList is a collection of Providers.
 
 # Workspace
-    v1WorkSpace:
+    WorkSpace:
       description: |-
         WorkSpace description. Includes all information regarding contents
       type: object
       properties:
         metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
+          $ref: '#/components/schemas/ObjectMeta'
         operation:
-          $ref: '#/components/schemas/v1Operation'
+          $ref: '#/components/schemas/Operation'
         spec:
-          $ref: '#/components/schemas/v1WorkSpaceSpec'
+          $ref: '#/components/schemas/WorkSpaceSpec'
           description: information for managing the workSpace
         status:
-          $ref: '#/components/schemas/v1WorkSpaceStatus'
+          $ref: '#/components/schemas/WorkSpaceStatus'
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1Resource'
-    v1WorkSpaceCondition:
+            $ref: '#/components/schemas/Resource'
+    WorkSpaceCondition:
       description: WorkSpaceCondition contains details about an workSpace condition,
         which ishould be usally an error or warning
       type: object
       properties:
         lastTransitionTime:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         message:
           description: Message contains human-readable message indicating details about
             condition
@@ -2145,7 +2145,7 @@ components:
         type:
           description: Type is an workSpace condition type
           type: string
-    v1WorkSpaceDestination:
+    WorkSpaceDestination:
       description: WorkSpaceDestination holds information about the workSpace's destination
       type: object
       properties:
@@ -2162,7 +2162,7 @@ components:
           description: Server specifies the URL of the target provider and must be set to
             the Kubernetes control plane API
           type: string
-    v1WorkSpaceList:
+    WorkSpaceList:
       description: |-
         WorkSpaceList is list of WorkSpaces
       type: object
@@ -2170,22 +2170,22 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1WorkSpace'
+            $ref: '#/components/schemas/WorkSpace'
         metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-    v1WorkSpaceSource:
+          $ref: '#/components/schemas/ListMeta'
+    WorkSpaceSource:
       description: WorkSpaceSource contains all required information about the source
         of an workSpace
       type: object
       properties:
         directory:
-          $ref: '#/components/schemas/v1WorkSpaceSourceDirectory'
+          $ref: '#/components/schemas/WorkSpaceSourceDirectory'
         path:
           type: string
           description: Path is a directory path within the Git repository, and is
             only valid for workSpaces sourced from Git.
         plugin:
-          $ref: '#/components/schemas/v1WorkSpaceSourcePlugin'
+          $ref: '#/components/schemas/WorkSpaceSourcePlugin'
         repoURL:
           description: RepoURL is the URL to the repository (Git) that contains
             the workSpace manifests
@@ -2194,7 +2194,7 @@ components:
           type: string
           description: |-
             TargetRevision defines the revision of the source to sync the workSpace to.
-    v1WorkSpaceSourceDirectory:
+    WorkSpaceSourceDirectory:
       description: WorkSpaceSourceDirectory holds options for workSpaces of type plain
         YAML
       type: object
@@ -2210,33 +2210,33 @@ components:
         recurse:
           description: Recurse specifies whether to scan a directory recursively for manifests
           type: boolean
-    v1WorkSpaceSourcePlugin:
+    WorkSpaceSourcePlugin:
       description: WorkSpaceSourcePlugin holds options specific to config management plugins
       type: object
       properties:
         env:
           type: array
           items:
-            $ref: '#/components/schemas/workSpacev1EnvEntry'
+            $ref: '#/components/schemas/workSpaceEnvEntry'
         name:
           type: string
-    v1WorkSpaceSpec:
+    WorkSpaceSpec:
       type: object
       properties:
         destination:
-          $ref: '#/components/schemas/v1WorkSpaceDestination'
+          $ref: '#/components/schemas/WorkSpaceDestination'
         ignoreDifferences:
           description: IgnoreDifferences is a list of resources and their fields which should
             be ignored during comparison
           type: array
           items:
-            $ref: '#/components/schemas/v1ResourceIgnoreDifferences'
+            $ref: '#/components/schemas/ResourceIgnoreDifferences'
         info:
           description: Info contains a list of information (URLs, email addresses, and plain
             text) that relates to the workSpace
           type: array
           items:
-            $ref: '#/components/schemas/v1Info'
+            $ref: '#/components/schemas/Info'
         revisionHistoryLimit:
           type: string
           description: |-
@@ -2247,13 +2247,13 @@ components:
             Default is 10.
           format: int64
         source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
+          $ref: '#/components/schemas/WorkSpaceSource'
         syncPolicy:
-          $ref: '#/components/schemas/v1SyncPolicy'
+          $ref: '#/components/schemas/SyncPolicy'
       description: WorkSpaceSpec represents desired workSpace state. Contains
         link to repository with workSpace definition and additional parameters link
         definition revision.
-    v1WorkSpaceStatus:
+    WorkSpaceStatus:
       description: WorkSpaceStatus contains status information for the workSpace
       type: object
       properties:
@@ -2261,33 +2261,33 @@ components:
           description: Conditions is a list of currently observed workSpace conditions
           type: array
           items:
-            $ref: '#/components/schemas/v1WorkSpaceCondition'
+            $ref: '#/components/schemas/WorkSpaceCondition'
         health:
-          $ref: '#/components/schemas/v1HealthStatus'
+          $ref: '#/components/schemas/HealthStatus'
         history:
           description: History contains information about the workSpace's sync history
           type: array
           items:
-            $ref: '#/components/schemas/v1RevisionHistory'
+            $ref: '#/components/schemas/RevisionHistory'
         observedAt:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         operationState:
-          $ref: '#/components/schemas/v1OperationState'
+          $ref: '#/components/schemas/OperationState'
         reconciledAt:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         resources:
           description: Resources is a list of Kubernetes resources managed by this workSpace
           type: array
           items:
-            $ref: '#/components/schemas/v1ResourceStatus'
+            $ref: '#/components/schemas/ResourceStatus'
         sourceType:
           description: SourceType specifies the type of this workSpace
           type: string
         summary:
-          $ref: '#/components/schemas/v1WorkSpaceSummary'
+          $ref: '#/components/schemas/WorkSpaceSummary'
         sync:
-          $ref: '#/components/schemas/v1SyncStatus'
-    v1WorkSpaceSummary:
+          $ref: '#/components/schemas/SyncStatus'
+    WorkSpaceSummary:
       description: WorkSpaceSummary contains information about URLs and container images
         used by an workSpace
       type: object
@@ -2302,7 +2302,7 @@ components:
           description: Images holds all images of workSpace child resources.
           items:
             type: string
-    v1WorkSpaceTree:
+    WorkSpaceTree:
       description: |-
         WorkSpaceTree holds nodes which belongs to the workSpace
       type: object
@@ -2312,54 +2312,54 @@ components:
             pods
           type: array
           items:
-            $ref: '#/components/schemas/v1HostInfo'
+            $ref: '#/components/schemas/HostInfo'
         nodes:
           type: array
           description: Nodes contains list of nodes which either directly managed
             by the workSpace and children of directly managed nodes.
           items:
-            $ref: '#/components/schemas/v1Resource'
+            $ref: '#/components/schemas/Resource'
     # Resource
-    v1Resource:
+    Resource:
       description: |-
         Resource contains information about live resource and its children
       type: object
       properties:
         metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
+          $ref: '#/components/schemas/ObjectMeta'
         createdAt:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         health:
-          $ref: '#/components/schemas/v1HealthStatus'
+          $ref: '#/components/schemas/HealthStatus'
         # images:
         #   type: array
         #   items:
         #     type: string
         spec:
-          $ref: '#/components/schemas/v1ResourceSpec'
+          $ref: '#/components/schemas/ResourceSpec'
           description: information for managing the resource
         networkingInfo:
-          $ref: '#/components/schemas/v1ResourceNetworkingInfo'
+          $ref: '#/components/schemas/ResourceNetworkingInfo'
         parentRefs:
           type: array
           items:
-            $ref: '#/components/schemas/v1ResourceRef'
+            $ref: '#/components/schemas/ResourceRef'
         resourceRef:
-          $ref: '#/components/schemas/v1ResourceRef'
+          $ref: '#/components/schemas/ResourceRef'
         resourceVersion:
           type: string
-    v1ResourceSpec:
+    ResourceSpec:
       type: object
       properties:
         destination:
-          $ref: '#/components/schemas/v1HostInfo'
+          $ref: '#/components/schemas/HostInfo'
           description: May be templating required
         info:
           description: Info contains a list of information (URLs, email addresses, and plain
             text) that relates to the workSpace
           type: array
           items:
-            $ref: '#/components/schemas/v1Info'
+            $ref: '#/components/schemas/Info'
         revisionHistoryLimit:
           type: string
           description: |-
@@ -2370,13 +2370,13 @@ components:
             Default is 10.
           format: int64
         source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
+          $ref: '#/components/schemas/WorkSpaceSource'
         syncPolicy:
-          $ref: '#/components/schemas/v1SyncPolicy'
+          $ref: '#/components/schemas/SyncPolicy'
       description: ResourceSpec represents desired Resource state. Contains
         link to repository with workSpace definition and additional parameters link
         definition revision.
-    v1ResourceOverride:
+    ResourceOverride:
       description: |-
         ResourceOverride holds configuration to customize resource diffing and health assessment
         TODO: describe the members of this type
@@ -2387,8 +2387,8 @@ components:
         healthLua:
           type: string
         ignoreDifferences:
-          $ref: '#/components/schemas/v1OverrideIgnoreDiff'
-    v1ResourceRef:
+          $ref: '#/components/schemas/OverrideIgnoreDiff'
+    ResourceRef:
       description: ResourceRef includes fields which uniquely identify a resource
       type: object
       properties:
@@ -2404,7 +2404,7 @@ components:
           type: string
         version:
           type: string
-    v1ResourceResult:
+    ResourceResult:
       description: ResourceResult holds the operation result details of a specific resource
       type: object
       properties:
@@ -2443,7 +2443,7 @@ components:
         version:
           description: Version specifies the API version of the resource
           type: string
-    v1ResourceStatus:
+    ResourceStatus:
       description: |-
         ResourceStatus holds the current sync and health status of a resource
       type: object
@@ -2451,7 +2451,7 @@ components:
         group:
           type: string
         health:
-          $ref: '#/components/schemas/v1HealthStatus'
+          $ref: '#/components/schemas/HealthStatus'
         hook:
           type: boolean
         kind:
@@ -2466,7 +2466,7 @@ components:
           type: string
         version:
           type: string
-    v1ResourceNetworkingInfo:
+    ResourceNetworkingInfo:
       description: |-
         ResourceNetworkingInfo holds networking resource related information
         TODO: describe members of this type
@@ -2481,7 +2481,7 @@ components:
         ingress:
           type: array
           items:
-            $ref: '#/components/schemas/v1NetworkIngress'
+            $ref: '#/components/schemas/NetworkIngress'
         labels:
           type: object
           additionalProperties:
@@ -2493,8 +2493,8 @@ components:
         targetRefs:
           type: array
           items:
-            $ref: '#/components/schemas/v1ResourceRef'
-    v1HealthStatus:
+            $ref: '#/components/schemas/ResourceRef'
+    HealthStatus:
       description: HealthStatus contains information about the currently observed health
         state of an workSpace or resource
       type: object
@@ -2506,13 +2506,13 @@ components:
         status:
           description: Status holds the status code of the workSpace or resource
           type: string
-    v1ConnectionState:
+    ConnectionState:
       description: ConnectionState contains information about remote resource connection
         state, currently used for providers and repositories
       type: object
       properties:
         attemptedAt:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         message:
           description: Message contains human readable information about the connection
             status
@@ -2520,16 +2520,16 @@ components:
         status:
           description: Status contains the current status indicator for the connection
           type: string
-    v1WorkSpaceWatchEvent:
+    WorkSpaceWatchEvent:
       type: object
       properties:
         workSpace:
-          $ref: '#/components/schemas/v1WorkSpace'
+          $ref: '#/components/schemas/WorkSpace'
         type:
           type: string
       description: WorkSpaceWatchEvent contains information about workSpace change.
     # Control
-    v1Event:
+    Event:
       type: object
       properties:
         action:
@@ -2544,13 +2544,13 @@ components:
           type: integer
           format: int32
         eventTime:
-          $ref: '#/components/schemas/v1MicroTime'
+          $ref: '#/components/schemas/MicroTime'
         firstTimestamp:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         involvedObject:
-          $ref: '#/components/schemas/v1ObjectReference'
+          $ref: '#/components/schemas/ObjectReference'
         lastTimestamp:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         message:
           description: |-
             A human-readable description of the status of this operation.
@@ -2558,7 +2558,7 @@ components:
             +optional
           type: string
         metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
+          $ref: '#/components/schemas/ObjectMeta'
         reason:
           description: |-
             This should be a short, machine understandable string that gives the reason
@@ -2567,7 +2567,7 @@ components:
             +optional
           type: string
         related:
-          $ref: '#/components/schemas/v1ObjectReference'
+          $ref: '#/components/schemas/ObjectReference'
         reportingComponent:
           description: |-
             Name of the controller that emitted the Event.
@@ -2579,9 +2579,9 @@ components:
             +optional
           type: string
         series:
-          $ref: '#/components/schemas/v1EventSeries'
+          $ref: '#/components/schemas/EventSeries'
         source:
-          $ref: '#/components/schemas/v1EventSource'
+          $ref: '#/components/schemas/EventSource'
         type:
           description: |-
             Type of this event (Normal, Warning), new types could be added in the future
@@ -2594,18 +2594,18 @@ components:
         with a given Reason reflecting a consistent underlying trigger, or the
         continued existence of events with that Reason.  Events should be
         treated as informative, best-effort, supplemental data.
-    v1EventList:
+    EventList:
       type: object
       properties:
         items:
           description: List of events
           type: array
           items:
-            $ref: '#/components/schemas/v1Event'
+            $ref: '#/components/schemas/Event'
         metadata:
-          $ref: '#/components/schemas/v1ListMeta'
+          $ref: '#/components/schemas/ListMeta'
       description: EventList is a list of events.
-    v1EventSeries:
+    EventSeries:
       type: object
       properties:
         count:
@@ -2613,11 +2613,11 @@ components:
           type: integer
           format: int32
         lastObservedTime:
-          $ref: '#/components/schemas/v1MicroTime'
+          $ref: '#/components/schemas/MicroTime'
       description: |-
         EventSeries contain information on series of events, i.e. thing that was/is happening
         continuously for some time.
-    v1EventSource:
+    EventSource:
       type: object
       properties:
         component:
@@ -2632,7 +2632,7 @@ components:
           type: string
       description: EventSource contains information for an event.
     
-    v1Operation:
+    Operation:
       description: Operation contains information about a requested or running operation
       type: object
       properties:
@@ -2640,14 +2640,14 @@ components:
           description: Info is a list of informational items for this operation
           type: array
           items:
-            $ref: '#/components/schemas/v1Info'
+            $ref: '#/components/schemas/Info'
         initiatedBy:
-          $ref: '#/components/schemas/v1OperationInitiator'
+          $ref: '#/components/schemas/OperationInitiator'
         retry:
-          $ref: '#/components/schemas/v1RetryStrategy'
+          $ref: '#/components/schemas/RetryStrategy'
         sync:
-          $ref: '#/components/schemas/v1SyncOperation'
-    v1OperationInitiator:
+          $ref: '#/components/schemas/SyncOperation'
+    OperationInitiator:
       description: OperationInitiator contains information about the initiator of an operation
       type: object
       properties:
@@ -2658,18 +2658,18 @@ components:
         username:
           description: Username contains the name of a user who started operation
           type: string
-    v1OperationState:
+    OperationState:
       description: OperationState contains information about state of a running operation
       type: object
       properties:
         finishedAt:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         message:
           type: string
           description: Message holds any pertinent messages when attempting to perform
             operation (typically errors).
         operation:
-          $ref: '#/components/schemas/v1Operation'
+          $ref: '#/components/schemas/Operation'
         phase:
           description: Phase is the current phase of the operation
           type: string
@@ -2678,10 +2678,10 @@ components:
           type: string
           format: int64
         startedAt:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         syncResult:
-          $ref: '#/components/schemas/v1SyncOperationResult'
-    v1Command:
+          $ref: '#/components/schemas/SyncOperationResult'
+    Command:
       description: Command holds binary path and arguments list
       type: object
       properties:
@@ -2693,16 +2693,16 @@ components:
           type: array
           items:
             type: string
-    v1ComparedTo:
+    ComparedTo:
       description: ComparedTo contains workSpace source and target which was used for
         resources comparison
       type: object
       properties:
         destination:
-          $ref: '#/components/schemas/v1WorkSpaceDestination'
+          $ref: '#/components/schemas/WorkSpaceDestination'
         source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
-    v1ResourceAction:
+          $ref: '#/components/schemas/WorkSpaceSource'
+    ResourceAction:
       description: |-
         Describes the action to execute on a resource
       type: object
@@ -2714,8 +2714,8 @@ components:
         params:
           type: array
           items:
-            $ref: '#/components/schemas/v1ResourceActionParam'
-    v1ResourceActionParam:
+            $ref: '#/components/schemas/ResourceActionParam'
+    ResourceActionParam:
       description: |-
         TODO: describe this type
         TODO: describe members of this type
@@ -2729,7 +2729,7 @@ components:
           type: string
         value:
           type: string
-    v1ResourceDiff:
+    ResourceDiff:
       description: |-
         ResourceDiff holds the diff of a live and target resource object
         TODO: describe members of this type
@@ -2769,7 +2769,7 @@ components:
           description: TargetState contains the JSON serialized resource manifest defined
             in the Git
           type: string
-    v1ResourceIgnoreDifferences:
+    ResourceIgnoreDifferences:
       type: object
       properties:
         group:
@@ -2790,7 +2790,7 @@ components:
           type: string
       description: ResourceIgnoreDifferences contains resource filter and list of
         json paths which should be ignored during comparison with live state.
-    v1SyncOperation:
+    SyncOperation:
       type: object
       properties:
         dryRun:
@@ -2810,23 +2810,23 @@ components:
           description: Resources describes which resources shall be part of the sync
           type: array
           items:
-            $ref: '#/components/schemas/v1SyncOperationResource'
+            $ref: '#/components/schemas/SyncOperationResource'
         revision:
           type: string
           description: |-
             Revision is the revision (Git) or chart version (Helm) which to sync the workSpace to
             If omitted, will use the revision specified in app spec.
         source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
+          $ref: '#/components/schemas/WorkSpaceSource'
         syncOptions:
           description: SyncOptions provide per-sync sync-options, e.g. Validate=false
           type: array
           items:
             type: string
         syncStrategy:
-          $ref: '#/components/schemas/v1SyncStrategy'
+          $ref: '#/components/schemas/SyncStrategy'
       description: SyncOperation contains details about a sync operation.
-    v1SyncOperationResource:
+    SyncOperationResource:
       type: object
       properties:
         group:
@@ -2838,7 +2838,7 @@ components:
         namespace:
           type: string
       description: SyncOperationResource contains resources to sync.
-    v1SyncOperationResult:
+    SyncOperationResult:
       description: SyncOperationResult represent result of sync operation
       type: object
       properties:
@@ -2847,27 +2847,27 @@ components:
             resource in a sync operation
           type: array
           items:
-            $ref: '#/components/schemas/v1ResourceResult'
+            $ref: '#/components/schemas/ResourceResult'
         revision:
           description: Revision holds the revision this sync operation was performed to
           type: string
         source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
-    v1SyncPolicy:
+          $ref: '#/components/schemas/WorkSpaceSource'
+    SyncPolicy:
       description: SyncPolicy controls when a sync will be performed in response to updates
         in git
       type: object
       properties:
         automated:
-          $ref: '#/components/schemas/v1SyncPolicyAutomated'
+          $ref: '#/components/schemas/SyncPolicyAutomated'
         retry:
-          $ref: '#/components/schemas/v1RetryStrategy'
+          $ref: '#/components/schemas/RetryStrategy'
         syncOptions:
           description: Options allow you to specify whole app sync-options
           type: array
           items:
             type: string
-    v1SyncPolicyAutomated:
+    SyncPolicyAutomated:
       description: SyncPolicyAutomated controls the behavior of an automated sync
       type: object
       properties:
@@ -2883,13 +2883,13 @@ components:
           description: 'SelfHeal specifes whether to revert resources back to their desired
             state upon modification in the provider (default: false)'
           type: boolean
-    v1SyncStatus:
+    SyncStatus:
       description: SyncStatus contains information about the currently observed live and
         desired states of an workSpace
       type: object
       properties:
         comparedTo:
-          $ref: '#/components/schemas/v1ComparedTo'
+          $ref: '#/components/schemas/ComparedTo'
         revision:
           description: Revision contains information about the revision the comparison has
             been performed to
@@ -2897,15 +2897,15 @@ components:
         status:
           description: Status is the sync state of the comparison
           type: string
-    v1SyncStrategy:
+    SyncStrategy:
       description: SyncStrategy controls the manner in which a sync is performed
       type: object
       properties:
         apply:
-          $ref: '#/components/schemas/v1SyncStrategyApply'
+          $ref: '#/components/schemas/SyncStrategyApply'
         hook:
-          $ref: '#/components/schemas/v1SyncStrategyHook'
-    v1SyncStrategyApply:
+          $ref: '#/components/schemas/SyncStrategyHook'
+    SyncStrategyApply:
       description: SyncStrategyApply uses `kubectl apply` to perform the apply
       type: object
       properties:
@@ -2914,14 +2914,14 @@ components:
           description: |-
             The --force flag deletes and re-create the resource, when PATCH encounters conflict and has
             retried for 5 times.
-    v1SyncStrategyHook:
+    SyncStrategyHook:
       type: object
       properties:
         syncStrategyApply:
-          $ref: '#/components/schemas/v1SyncStrategyApply'
+          $ref: '#/components/schemas/SyncStrategyApply'
       description: |-
         SyncStrategyHook will perform a sync using hooks annotations.
-    v1SyncWindow:
+    SyncWindow:
       description: SyncWindow contains the kind, time, duration and attributes that are
         used to assign the syncWindows to workSpaces
       type: object
@@ -2955,7 +2955,7 @@ components:
         schedule:
           description: Schedule is the time the window will begin, specified in cron format
           type: string
-    v1Backoff:
+    Backoff:
       description: Backoff is the backoff strategy to use on subsequent retries for failing syncs
       type: object
       properties:
@@ -2972,19 +2972,19 @@ components:
           description: MaxDuration is the maximum amount of time allowed for the backoff
             strategy
           type: string
-    v1RetryStrategy:
+    RetryStrategy:
       description: RetryStrategy contains information about the strategy to apply when a
         sync failed
       type: object
       properties:
         backoff:
-          $ref: '#/components/schemas/v1Backoff'
+          $ref: '#/components/schemas/Backoff'
         limit:
           type: string
           description: Limit is the maximum number of attempts for retrying a failed
             sync. If set to 0, no retries will be performed.
           format: int64
-    v1OrphanedResourceKey:
+    OrphanedResourceKey:
       description: OrphanedResourceKey is a reference to a resource to be ignored
       type: object
       properties:
@@ -2994,7 +2994,7 @@ components:
           type: string
         name:
           type: string
-    v1OrphanedResourcesMonitorSettings:
+    OrphanedResourcesMonitorSettings:
       description: OrphanedResourcesMonitorSettings holds settings of orphaned resources
         monitoring
       type: object
@@ -3004,19 +3004,19 @@ components:
             orphaned resources monitoring
           type: array
           items:
-            $ref: '#/components/schemas/v1OrphanedResourceKey'
+            $ref: '#/components/schemas/OrphanedResourceKey'
         warn:
           description: Warn indicates if warning condition should be created for workSpaces which
             have orphaned resources
           type: boolean
-    v1RevisionHistory:
+    RevisionHistory:
       description: RevisionHistory contains history information about a previous sync
       type: object
       properties:
         deployStartedAt:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         deployedAt:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         id:
           description: ID is an auto incrementing identifier of the Revision History
           type: string
@@ -3025,8 +3025,8 @@ components:
           description: Revision holds the revision the sync was performed against
           type: string
         source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
-    v1RevisionMetadata:
+          $ref: '#/components/schemas/WorkSpaceSource'
+    RevisionMetadata:
       description: RevisionMetadata contains metadata for a specific revision in a Git repository
       type: object
       properties:
@@ -3036,7 +3036,7 @@ components:
             typically their name and email, e.g. "John Doe <john_doe@my-company.com>",
           type: string
         date:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         message:
           description: |-
             Message contains the message associated with the revision, most likely the commit message.
@@ -3050,7 +3050,7 @@ components:
           items:
             type: string    
     #Git
-    v1RepoCreds:
+    RepoCreds:
       description: RepoCreds holds the definition for repository credentials
       type: object
       properties:
@@ -3079,22 +3079,22 @@ components:
         username:
           description: Username for authenticating at the repo server
           type: string
-    v1RepoCredsList:
+    RepoCredsList:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1RepoCreds'
+            $ref: '#/components/schemas/RepoCreds'
         metadata:
-          $ref: '#/components/schemas/v1ListMeta'
+          $ref: '#/components/schemas/ListMeta'
       description: RepositoryList is a collection of Repositories.
-    v1Repository:
+    Repository:
       description: Repository is a repository holding workSpace configurations
       type: object
       properties:
         connectionState:
-          $ref: '#/components/schemas/v1ConnectionState'
+          $ref: '#/components/schemas/ConnectionState'
         enableLfs:
           type: boolean
           description: EnableLFS specifies whether git-lfs support should be enabled
@@ -3145,18 +3145,18 @@ components:
           description: Username contains the user name used for authenticating at the remote
             repository
           type: string
-    v1RepositoryList:
+    RepositoryList:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1Repository'
+            $ref: '#/components/schemas/Repository'
         metadata:
-          $ref: '#/components/schemas/v1ListMeta'
+          $ref: '#/components/schemas/ListMeta'
       description: RepositoryList is a collection of Repositories
   #Common
-    v1ListMeta:
+    ListMeta:
       type: object
       properties:
         continue:
@@ -3190,7 +3190,7 @@ components:
       description: |-
         ListMeta describes metadata that synthetic resources must have, including lists and
         various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
-    v1MicroTime:
+    MicroTime:
       type: object
       properties:
         nanos:
@@ -3210,7 +3210,7 @@ components:
           format: int64
       description: |-
         MicroTime is version of Time with microsecond level precision.
-    v1ObjectMeta:
+    ObjectMeta:
       type: object
       properties:
         annotations:
@@ -3222,7 +3222,7 @@ components:
           additionalProperties:
             type: string
         creationTimestamp:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         deletionGracePeriodSeconds:
           description: |-
             Number of seconds allowed for this object to gracefully terminate before
@@ -3233,7 +3233,7 @@ components:
           type: string
           format: int64
         deletionTimestamp:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         finalizers:
           description: |-
             Must be empty before the object is deleted from the registry. Each entry
@@ -3311,7 +3311,7 @@ components:
             +patchStrategy=merge
           type: array
           items:
-            $ref: '#/components/schemas/v1OwnerReference'
+            $ref: '#/components/schemas/OwnerReference'
         resourceVersion:
           type: string
           description: |-
@@ -3334,7 +3334,7 @@ components:
       description: |-
         ObjectMeta is metadata that all persisted resources must have, which includes all objects
         users must create.
-    v1ObjectReference:
+    ObjectReference:
       description: |-
         ObjectReference contains enough information to let you inspect or modify the referred object.
       type: object
@@ -3377,7 +3377,7 @@ components:
             More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
             +optional
           type: string
-    v1OwnerReference:
+    OwnerReference:
       type: object
       properties:
         apiVersion:
@@ -3417,7 +3417,7 @@ components:
         OwnerReference contains enough information to let you identify an owning
         object. An owning object must be in the same namespace as the dependent, or
         be provider-scoped, so there is no namespace field.
-    v1Time:
+    Time:
       type: object
       properties:
         nanos:
@@ -3439,7 +3439,7 @@ components:
         Time is a wrapper around time.Time which supports correct
         marshaling to YAML and JSON.  Wrappers are provided for many
         of the factory methods that the time package offers.
-    v1Info:
+    Info:
       description: Contains arbitrary, human readable information as pair name value
       type: object
       properties:
@@ -3449,7 +3449,7 @@ components:
         value:
           type: string
           description: Value is human readable content.  
-    v1JWTToken:
+    JWTToken:
       description: JWTToken holds the issuedAt and expiresAt values of a token
       type: object
       properties:
@@ -3461,15 +3461,15 @@ components:
           format: int64
         id:
           type: string
-    v1JWTTokens:
+    JWTTokens:
       description: JWTTokens represents a list of JWT tokens
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1JWTToken'
-    v1TLSClientConfig:
+            $ref: '#/components/schemas/JWTToken'
+    TLSClientConfig:
       description: TLSClientConfig contains settings to enable transport layer security
       type: object
       properties:
@@ -3617,7 +3617,7 @@ components:
         infos:
           type: array
           items:
-            $ref: '#/components/schemas/v1Info'
+            $ref: '#/components/schemas/Info'
         manifests:
           type: array
           items:
@@ -3629,13 +3629,13 @@ components:
         resources:
           type: array
           items:
-            $ref: '#/components/schemas/v1SyncOperationResource'
+            $ref: '#/components/schemas/SyncOperationResource'
         retryStrategy:
-          $ref: '#/components/schemas/v1RetryStrategy'
+          $ref: '#/components/schemas/RetryStrategy'
         revision:
           type: string
         strategy:
-          $ref: '#/components/schemas/v1SyncStrategy'
+          $ref: '#/components/schemas/SyncStrategy'
         syncOptions:
           $ref: '#/components/schemas/workSpaceSyncOptions'
     workSpaceWorkSpaceSyncWindow:
@@ -3672,7 +3672,7 @@ components:
         deviceName:
           type: string
         timeStamp:
-          $ref: '#/components/schemas/v1Time'
+          $ref: '#/components/schemas/Time'
         timeStampStr:
           type: string
     workSpaceManagedResourcesResponse:
@@ -3681,7 +3681,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/v1ResourceDiff'
+            $ref: '#/components/schemas/ResourceDiff'
     workSpaceOperationTerminateResponse:
       type: object
     workSpaceResourceActionsListResponse:
@@ -3690,7 +3690,7 @@ components:
         actions:
           type: array
           items:
-            $ref: '#/components/schemas/v1ResourceAction'
+            $ref: '#/components/schemas/ResourceAction'
     workSpaceSyncOptions:
       type: object
       properties:
@@ -3698,7 +3698,7 @@ components:
           type: array
           items:
             type: string
-    workSpacev1EnvEntry:
+    workSpaceEnvEntry:
       description: EnvEntry represents an entry in the workSpace's workSpace
       type: object
       properties:
@@ -3762,7 +3762,7 @@ components:
         configManagementPlugins:
           type: array
           items:
-            $ref: '#/components/schemas/v1ConfigManagementPlugin'
+            $ref: '#/components/schemas/ConfigManagementPlugin'
         help:
           $ref: '#/components/schemas/providerHelp'
         accessConfig:
@@ -3776,7 +3776,7 @@ components:
         resourceOverrides:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/v1ResourceOverride'
+            $ref: '#/components/schemas/ResourceOverride'
         statusBadgeEnabled:
           type: boolean
         uiBannerContent:
@@ -3861,7 +3861,7 @@ components:
         appName:
           type: string
         source:
-          $ref: '#/components/schemas/v1WorkSpaceSource'
+          $ref: '#/components/schemas/WorkSpaceSource'
     repositoryRepoWorkSpaceDetailsResponse:
       description: RepoWorkSpaceDetailsResponse workSpace details
       type: object
@@ -3894,17 +3894,17 @@ components:
           type: string
         message:
           type: string
-    v1ConfigManagementPlugin:
+    ConfigManagementPlugin:
       description: ConfigManagementPlugin contains config management plugin configuration
       type: object
       properties:
         generate:
-          $ref: '#/components/schemas/v1Command'
+          $ref: '#/components/schemas/Command'
         init:
-          $ref: '#/components/schemas/v1Command'
+          $ref: '#/components/schemas/Command'
         name:
           type: string
-    v1ExecProviderConfig:
+    ExecProviderConfig:
       description: |-
         ExecProviderConfig is config used to call an external command to perform provider authentication
       type: object
@@ -3929,7 +3929,7 @@ components:
           description: This text is shown to the user when the executable doesn't seem to
             be present
           type: string
-    v1OverrideIgnoreDiff:
+    OverrideIgnoreDiff:
       description: Identifies elements to be ignored where checking differences amond desired and current status
       type: object
       properties:

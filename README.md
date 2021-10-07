@@ -14,111 +14,110 @@ Four data domains have been identified. Each regarding
 - Infrastructure, the physical/virtual computing resources where the environments will be created and the service providers.
 
   - Phisical/Virtual infrastructure
-
-s   - v1HostInfo
-    - v1HostSystemInfo
-    - v1HostResourceInfo
-    - v1NetworkIngress
-    - v1PortStatus
+    - HostInfo
+    - HostSystemInfo
+    - HostResourceInfo
+    - NetworkIngress
+    - PortStatus
 
   - Providers
-    - v1Provider
-    - v1ProviderConfig
-    - v1ProviderInfo
-    - v1ProviderList
-    - v1ProviderCacheInfo
+    - Provider
+    - ProviderConfig
+    - ProviderInfo
+    - ProviderList
+    - ProviderCacheInfo
 
  
 - Environment, this includes the resources required to create the desired environment/workspace with the required resources (devices).
 
   - Workspace
-    - v1WorkSpace
-    - v1WorkSpaceSpec
-    - v1WorkSpaceStatus
-    - v1WorkSpaceCondition
-    - v1WorkSpaceDestination
-    - v1WorkSpaceSource
-    - v1WorkSpaceSourceDirectory
-    - v1WorkSpaceSourcePlugin
-    - v1WorkSpaceSummary
-    - v1WorkSpaceTree
-    - v1WorkSpaceList
+    - WorkSpace
+    - WorkSpaceSpec
+    - WorkSpaceStatus
+    - WorkSpaceCondition
+    - WorkSpaceDestination
+    - WorkSpaceSource
+    - WorkSpaceSourceDirectory
+    - WorkSpaceSourcePlugin
+    - WorkSpaceSummary
+    - WorkSpaceTree
+    - WorkSpaceList
 
   - Resource (requires Spec?)
-    - v1Resource
-    - v1ResourceStatus
-    - v1ResourceRef
-    - v1ResourceDiff
-    - v1ResourceIgnoreDifferences
-    - v1ResourceNetworkingInfo
-    - v1ResourceOverride
-    - v1ResourceResult
+    - Resource
+    - ResourceStatus
+    - ResourceRef
+    - ResourceDiff
+    - ResourceIgnoreDifferences
+    - ResourceNetworkingInfo
+    - ResourceOverride
+    - ResourceResult
 
   - Status
-    - v1WorkSpaceWatchEvent (Git)
-    - v1ConnectionState
-    - v1HealthStatus
+    - WorkSpaceWatchEvent (Git)
+    - ConnectionState
+    - HealthStatus
 
 
 - Control, that should include operation & managment data structures.
 
-  - v1Operation
-  - v1OperationInitiator
-  - v1OperationState
+  - Operation
+  - OperationInitiator
+  - OperationState
 
-  - v1Command
-  - v1ComparedTo
+  - Command
+  - ComparedTo
 
-  - v1ResourceAction
-  - v1ResourceActionParam
+  - ResourceAction
+  - ResourceActionParam
 
-  - v1SyncOperation
-  - v1SyncOperationResource
-  - v1SyncOperationResult
-  - v1SyncPolicy
-  - v1SyncPolicyAutomated
-  - v1SyncStatus
-  - v1SyncStrategy
-  - v1SyncStrategyApply
-  - v1SyncStrategyHook
-  - v1SyncWindow
-  - v1Backoff
-  - v1OverrideIgnoreDiff
-  - v1RetryStrategy
+  - SyncOperation
+  - SyncOperationResource
+  - SyncOperationResult
+  - SyncPolicy
+  - SyncPolicyAutomated
+  - SyncStatus
+  - SyncStrategy
+  - SyncStrategyApply
+  - SyncStrategyHook
+  - SyncWindow
+  - Backoff
+  - OverrideIgnoreDiff
+  - RetryStrategy
 
 
-  - v1RevisionHistory
-  - v1RevisionMetadata
-  - v1OrphanedResourcesMonitorSettings
+  - RevisionHistory
+  - RevisionMetadata
+  - OrphanedResourcesMonitorSettings
 
-  - v1Event
-  - v1EventList
-  - v1EventSeries
-  - v1EventSource
+  - Event
+  - EventList
+  - EventSeries
+  - EventSource
 
 
 - Git,  required to implement the flow associated with GitOps.
 
-  - v1RepoCreds
-  - v1RepoCredsList
-  - v1Repository
-  - v1RepositoryList
+  - RepoCreds
+  - RepoCredsList
+  - Repository
+  - RepositoryList
 
 
 - Common
-  - v1MicroTime
-  - v1Time
-  - v1ObjectMeta
-  - v1ListMeta
-  - v1ObjectReference
-  - v1OwnerReference
-  - v1Info
-  - v1InfoItem
+  - MicroTime
+  - Time
+  - ObjectMeta
+  - ListMeta
+  - ObjectReference
+  - OwnerReference
+  - Info
+  - InfoItem
 
 - Support
- - v1JWTToken
- - v1JWTTokens
- - v1TLSClientConfig
+ - JWTToken
+ - JWTTokens
+ - TLSClientConfig
 
 
 ## References
