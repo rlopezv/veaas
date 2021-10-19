@@ -27,17 +27,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @Validated
-@Tag(name = "api", description = "Service API")
+@Tag(name = "api", description = "Application Information API")
 public interface ApplicationApi {
 
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
     }
 
-
-
-
- 
     /**
      * GET /api//settings : Get returns API Service settings
      *
@@ -49,8 +45,8 @@ public interface ApplicationApi {
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  ProviderSettings.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//settings",
-        produces = { "workSpace/json" }
+        value = "/settings",
+        produces = { "application/json" }
     )
     default ResponseEntity<ProviderSettings> _settingsServiceGet() {
         return settingsServiceGet();
@@ -83,8 +79,8 @@ public interface ApplicationApi {
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  VersionVersionMessage.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api/version",
-        produces = { "workSpace/json" }
+        value = "/version",
+        produces = { "application/json" }
     )
     default ResponseEntity<VersionVersionMessage> _versionServiceVersion() {
         return versionServiceVersion();

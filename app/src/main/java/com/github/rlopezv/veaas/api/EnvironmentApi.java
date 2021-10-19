@@ -5,18 +5,18 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.github.rlopezv.veaas.api.model.EventList;
 import com.github.rlopezv.veaas.api.model.InlineResponse200;
 import com.github.rlopezv.veaas.api.model.InlineResponse2001;
 import com.github.rlopezv.veaas.api.model.RepositoryManifestResponse;
-import com.github.rlopezv.veaas.api.model.RuntimeError;
-import com.github.rlopezv.veaas.api.model.EventList;
 import com.github.rlopezv.veaas.api.model.RevisionMetadata;
+import com.github.rlopezv.veaas.api.model.RuntimeError;
 import com.github.rlopezv.veaas.api.model.WorkSpace;
 import com.github.rlopezv.veaas.api.model.WorkSpaceList;
-import com.github.rlopezv.veaas.api.model.WorkSpaceSpec;
-import com.github.rlopezv.veaas.api.model.WorkSpaceTree;
 import com.github.rlopezv.veaas.api.model.WorkSpaceManagedResourcesResponse;
 import com.github.rlopezv.veaas.api.model.WorkSpaceResourceActionsListResponse;
+import com.github.rlopezv.veaas.api.model.WorkSpaceSpec;
+import com.github.rlopezv.veaas.api.model.WorkSpaceTree;
 import com.github.rlopezv.veaas.api.model.WorkSpaceWorkSpacePatchRequest;
 import com.github.rlopezv.veaas.api.model.WorkSpaceWorkSpaceResourceResponse;
 import com.github.rlopezv.veaas.api.model.WorkSpaceWorkSpaceResponse;
@@ -45,7 +45,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Environment", description = "Environment Service API")
+@Tag(name = "environment", description = "Environment Service API")
 public interface EnvironmentApi {
     
 
@@ -54,29 +54,29 @@ public interface EnvironmentApi {
     }
 
     /**
-     * POST /api//workSpaces : Creates an workSpace
+     * POST workspaces : Creates an workspace
      *
      * @param body  (required)
      * @param upsert update if already created (optional)
      * @param validate validates and execute a dry run (optional)
-     * @return A successful response with the created workSpace (status code 200)
+     * @return A successful response with the created workspace (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Creates an workSpace", operationId = "workSpaceServiceCreate",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Creates an workspace", operationId = "workspaceServiceCreate",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "A successful response with the created workSpace", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpace.class))}),
+        @ApiResponse(responseCode = "200", description = "A successful response with the created workspace", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpace.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @PostMapping(
-        value = "/api//workSpaces",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
+        value = "workspaces",
+        produces = { "application/json" },
+        consumes = { "application/json" }
     )
-    default ResponseEntity<WorkSpace> _workSpaceServiceCreate(@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpace body,@Parameter(example = "update if already created") @Valid @RequestParam(value = "upsert", required = false) Boolean upsert,@Parameter(example = "validates and execute a dry run") @Valid @RequestParam(value = "validate", required = false) Boolean validate) {
-        return workSpaceServiceCreate(body, upsert, validate);
+    default ResponseEntity<WorkSpace> _workspaceServiceCreate(@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpace body,@Parameter(example = "update if already created") @Valid @RequestParam(value = "upsert", required = false) Boolean upsert,@Parameter(example = "validates and execute a dry run") @Valid @RequestParam(value = "validate", required = false) Boolean validate) {
+        return workspaceServiceCreate(body, upsert, validate);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpace> workSpaceServiceCreate(WorkSpace body, Boolean upsert, Boolean validate) {
+    default  ResponseEntity<WorkSpace> workspaceServiceCreate(WorkSpace body, Boolean upsert, Boolean validate) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -92,7 +92,7 @@ public interface EnvironmentApi {
 
 
     /**
-     * DELETE /api//workSpaces/{name} : Delete deletes an workSpace
+     * DELETE workspaces/{name} : Delete deletes an workspace
      *
      * @param name  (required)
      * @param cascade  (optional)
@@ -100,20 +100,20 @@ public interface EnvironmentApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Delete deletes an workSpace", operationId = "workSpaceServiceDelete",  tags={ "WorkSpaceService" })
+    @Operation(summary = "Deletes a workspace", operationId = "workspaceServiceDelete",  tags={ "WorkSpaceService" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceWorkSpaceResponse.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @DeleteMapping(
-        value = "/api//workSpaces/{name}",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}",
+        produces = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceWorkSpaceResponse> _workSpaceServiceDelete(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "cascade", required = false) Boolean cascade,@Parameter(example = "") @Valid @RequestParam(value = "propagationPolicy", required = false) String propagationPolicy) {
-        return workSpaceServiceDelete(name, cascade, propagationPolicy);
+    default ResponseEntity<WorkSpaceWorkSpaceResponse> _workspaceServiceDelete(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "cascade", required = false) Boolean cascade,@Parameter(example = "") @Valid @RequestParam(value = "propagationPolicy", required = false) String propagationPolicy) {
+        return workspaceServiceDelete(name, cascade, propagationPolicy);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceWorkSpaceResponse> workSpaceServiceDelete(String name, Boolean cascade, String propagationPolicy) {
+    default  ResponseEntity<WorkSpaceWorkSpaceResponse> workspaceServiceDelete(String name, Boolean cascade, String propagationPolicy) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -129,7 +129,7 @@ public interface EnvironmentApi {
 
 
     /**
-     * DELETE /api//workSpaces/{name}/resource : DeleteResource deletes a single workSpace resource
+     * DELETE workspaces/{name}/resource : DeleteResource deletes a single workspace resource
      *
      * @param name  (required)
      * @param namespace  (optional)
@@ -142,20 +142,20 @@ public interface EnvironmentApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Deletes a single workSpace resource", operationId = "workSpaceServiceDeleteResource",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Deletes a single workspace resource", operationId = "workspaceServiceDeleteResource",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceWorkSpaceResponse.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @DeleteMapping(
-        value = "/api//workSpaces/{name}/resource",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}/resources",
+        produces = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceWorkSpaceResponse> _workSpaceServiceDeleteResource(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind,@Parameter(example = "") @Valid @RequestParam(value = "force", required = false) Boolean force,@Parameter(example = "") @Valid @RequestParam(value = "orphan", required = false) Boolean orphan) {
-        return workSpaceServiceDeleteResource(name, namespace, resourceName, version, group, kind, force, orphan);
+    default ResponseEntity<WorkSpaceWorkSpaceResponse> _workspaceServiceDeleteResource(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind,@Parameter(example = "") @Valid @RequestParam(value = "force", required = false) Boolean force,@Parameter(example = "") @Valid @RequestParam(value = "orphan", required = false) Boolean orphan) {
+        return workspaceServiceDeleteResource(name, namespace, resourceName, version, group, kind, force, orphan);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceWorkSpaceResponse> workSpaceServiceDeleteResource(String name, String namespace, String resourceName, String version, String group, String kind, Boolean force, Boolean orphan) {
+    default  ResponseEntity<WorkSpaceWorkSpaceResponse> workspaceServiceDeleteResource(String name, String namespace, String resourceName, String version, String group, String kind, Boolean force, Boolean orphan) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -171,7 +171,7 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{name}/device/{resource}/logs : DeviceLogs returns stream of log entries for the specified device.
+     * GET workspaces/{name}/resource/{resource}/logs : ResourceLogs returns stream of log entries for the specified resource.
      *
      * @param name  (required)
      * @param resource  (required)
@@ -190,20 +190,20 @@ public interface EnvironmentApi {
      * @return A successful response.(streaming responses) (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "DeviceLogs returns stream of log entries for the specified device.", operationId = "workSpaceServiceDeviceLogs",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Returns stream of log entries for the specified resource.", operationId = "workspaceServiceResourceLogs",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.(streaming responses)", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =   InlineResponse2001.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{name}/device/{resource}/logs",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}/resources/{resource}/logs",
+        produces = { "application/json" }
     )
-    default ResponseEntity<InlineResponse2001> _workSpaceServiceDeviceLogs(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "",required=true) @PathVariable("resource") String resource,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "container", required = false) String container,@Parameter(example = "") @Valid @RequestParam(value = "sinceSeconds", required = false) String sinceSeconds,@Parameter(example = "Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.") @Valid @RequestParam(value = "sinceTime.seconds", required = false) String sinceTimeSeconds,@Parameter(example = "Non-negative fractions of a second at nanosecond resolution. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be from 0 to 999,999,999 inclusive. This field may be limited in precision depending on context.") @Valid @RequestParam(value = "sinceTime.nanos", required = false) Integer sinceTimeNanos,@Parameter(example = "") @Valid @RequestParam(value = "tailLines", required = false) String tailLines,@Parameter(example = "") @Valid @RequestParam(value = "follow", required = false) Boolean follow,@Parameter(example = "") @Valid @RequestParam(value = "untilTime", required = false) String untilTime,@Parameter(example = "") @Valid @RequestParam(value = "filter", required = false) String filter,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName) {
-        return workSpaceServiceDeviceLogs(name, resource, namespace, container, sinceSeconds, sinceTimeSeconds, sinceTimeNanos, tailLines, follow, untilTime, filter, kind, group, resourceName);
+    default ResponseEntity<InlineResponse2001> _workspaceServiceResourceLogs(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "",required=true) @PathVariable("resource") String resource,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "container", required = false) String container,@Parameter(example = "") @Valid @RequestParam(value = "sinceSeconds", required = false) String sinceSeconds,@Parameter(example = "Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.") @Valid @RequestParam(value = "sinceTime.seconds", required = false) String sinceTimeSeconds,@Parameter(example = "Non-negative fractions of a second at nanosecond resolution. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be from 0 to 999,999,999 inclusive. This field may be limited in precision depending on context.") @Valid @RequestParam(value = "sinceTime.nanos", required = false) Integer sinceTimeNanos,@Parameter(example = "") @Valid @RequestParam(value = "tailLines", required = false) String tailLines,@Parameter(example = "") @Valid @RequestParam(value = "follow", required = false) Boolean follow,@Parameter(example = "") @Valid @RequestParam(value = "untilTime", required = false) String untilTime,@Parameter(example = "") @Valid @RequestParam(value = "filter", required = false) String filter,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName) {
+        return workspaceServiceResourceLogs(name, resource, namespace, container, sinceSeconds, sinceTimeSeconds, sinceTimeNanos, tailLines, follow, untilTime, filter, kind, group, resourceName);
     }
 
     // Override this method
-    default  ResponseEntity<InlineResponse2001> workSpaceServiceDeviceLogs(String name, String resource, String namespace, String container, String sinceSeconds, String sinceTimeSeconds, Integer sinceTimeNanos, String tailLines, Boolean follow, String untilTime, String filter, String kind, String group, String resourceName) {
+    default  ResponseEntity<InlineResponse2001> workspaceServiceResourceLogs(String name, String resource, String namespace, String container, String sinceSeconds, String sinceTimeSeconds, Integer sinceTimeNanos, String tailLines, Boolean follow, String untilTime, String filter, String kind, String group, String resourceName) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -219,30 +219,30 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{name} : Get returns an workSpace by name
+     * GET workspaces/{name} : Get returns an workspace by name
      *
-     * @param name the workSpace&#39;s name (required)
-     * @param refresh forces workSpace reconciliation if set to true. (optional)
+     * @param name the workspace&#39;s name (required)
+     * @param refresh forces workspace reconciliation if set to true. (optional)
      * @param resourceVersion when specified with a watch call, shows changes that occur after that particular version of a resource. (optional)
-     * @param selector the selector to to restrict returned list to workSpaces only with matched labels. (optional)
-     * @param repo the repoURL to restrict returned list workSpaces. (optional)
+     * @param selector the selector to to restrict returned list to workspaces only with matched labels. (optional)
+     * @param repo the repoURL to restrict returned list workspaces. (optional)
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Get returns an workSpace by name", operationId = "workSpaceServiceGet",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Returns an workspace by name", operationId = "workspaceServiceGet",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpace.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{name}",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}",
+        produces = { "application/json" }
     )
-    default ResponseEntity<WorkSpace> _workSpaceServiceGet(@Parameter(example = "the workSpace's name",required=true) @PathVariable("name") String name,@Parameter(example = "forces workSpace reconciliation if set to true.") @Valid @RequestParam(value = "refresh", required = false) String refresh,@Parameter(example = "when specified with a watch call, shows changes that occur after that particular version of a resource.") @Valid @RequestParam(value = "resourceVersion", required = false) String resourceVersion,@Parameter(example = "the selector to to restrict returned list to workSpaces only with matched labels.") @Valid @RequestParam(value = "selector", required = false) String selector,@Parameter(example = "the repoURL to restrict returned list workSpaces.") @Valid @RequestParam(value = "repo", required = false) String repo) {
-        return workSpaceServiceGet(name, refresh, resourceVersion, selector, repo);
+    default ResponseEntity<WorkSpace> _workspaceServiceGet(@Parameter(example = "the workspace's name",required=true) @PathVariable("name") String name,@Parameter(example = "forces workspace reconciliation if set to true.") @Valid @RequestParam(value = "refresh", required = false) String refresh,@Parameter(example = "when specified with a watch call, shows changes that occur after that particular version of a resource.") @Valid @RequestParam(value = "resourceVersion", required = false) String resourceVersion,@Parameter(example = "the selector to to restrict returned list to workspaces only with matched labels.") @Valid @RequestParam(value = "selector", required = false) String selector,@Parameter(example = "the repoURL to restrict returned list workspaces.") @Valid @RequestParam(value = "repo", required = false) String repo) {
+        return workspaceServiceGet(name, refresh, resourceVersion, selector, repo);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpace> workSpaceServiceGet(String name, String refresh, String resourceVersion, String selector, String repo) {
+    default  ResponseEntity<WorkSpace> workspaceServiceGet(String name, String refresh, String resourceVersion, String selector, String repo) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -258,27 +258,27 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{name}/manifests : GetManifests returns workSpace manifests
+     * GET workspaces/{name}/manifests : GetManifests returns workspace manifests
      *
      * @param name  (required)
      * @param revision  (optional)
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "GetManifests returns workSpace manifests", operationId = "workSpaceServiceGetManifests",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Returns workspace manifests", operationId = "workspaceServiceGetManifests",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RepositoryManifestResponse.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{name}/manifests",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}/manifests",
+        produces = { "application/json" }
     )
-    default ResponseEntity<RepositoryManifestResponse> _workSpaceServiceGetManifests(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "revision", required = false) String revision) {
-        return workSpaceServiceGetManifests(name, revision);
+    default ResponseEntity<RepositoryManifestResponse> _workspaceServiceGetManifests(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "revision", required = false) String revision) {
+        return workspaceServiceGetManifests(name, revision);
     }
 
     // Override this method
-    default  ResponseEntity<RepositoryManifestResponse> workSpaceServiceGetManifests(String name, String revision) {
+    default  ResponseEntity<RepositoryManifestResponse> workspaceServiceGetManifests(String name, String revision) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -294,7 +294,7 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{name}/resource : GetResource returns single workSpace resource
+     * GET workspaces/{name}/resource : GetResource returns single workspace resource
      *
      * @param name  (required)
      * @param namespace  (optional)
@@ -305,20 +305,20 @@ public interface EnvironmentApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "GetResource returns single workSpace resource", operationId = "workSpaceServiceGetResource",   tags={ "WorkSpaceService", })
+    @Operation(summary = "Returns single workspace resource", operationId = "workspaceServiceGetResource",   tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceWorkSpaceResourceResponse.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{name}/resource",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}/resources",
+        produces = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceWorkSpaceResourceResponse> _workSpaceServiceGetResource(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind) {
-        return workSpaceServiceGetResource(name, namespace, resourceName, version, group, kind);
+    default ResponseEntity<WorkSpaceWorkSpaceResourceResponse> _workspaceServiceGetResource(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind) {
+        return workspaceServiceGetResource(name, namespace, resourceName, version, group, kind);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceWorkSpaceResourceResponse> workSpaceServiceGetResource(String name, String namespace, String resourceName, String version, String group, String kind) {
+    default  ResponseEntity<WorkSpaceWorkSpaceResourceResponse> workspaceServiceGetResource(String name, String namespace, String resourceName, String version, String group, String kind) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -334,26 +334,26 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{name}/syncwindows : Get returns sync windows of the workSpace
+     * GET workspaces/{name}/syncwindows : Get returns sync windows of the workspace
      *
      * @param name  (required)
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Get returns sync windows of the workSpace", operationId = "workSpaceServiceGetWorkSpaceSyncWindows",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Get returns sync windows of the workspace", operationId = "workspaceServiceGetWorkSpaceSyncWindows",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceWorkSpaceSyncWindowsResponse.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{name}/syncwindows",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}/syncwindows",
+        produces = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceWorkSpaceSyncWindowsResponse> _workSpaceServiceGetWorkSpaceSyncWindows(@Parameter(example = "",required=true) @PathVariable("name") String name) {
-        return workSpaceServiceGetWorkSpaceSyncWindows(name);
+    default ResponseEntity<WorkSpaceWorkSpaceSyncWindowsResponse> _workspaceServiceGetWorkSpaceSyncWindows(@Parameter(example = "",required=true) @PathVariable("name") String name) {
+        return workspaceServiceGetWorkSpaceSyncWindows(name);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceWorkSpaceSyncWindowsResponse> workSpaceServiceGetWorkSpaceSyncWindows(String name) {
+    default  ResponseEntity<WorkSpaceWorkSpaceSyncWindowsResponse> workspaceServiceGetWorkSpaceSyncWindows(String name) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -369,30 +369,30 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces : Returns list of available workSpaces. It supports parameters to limit the obtained results
+     * GET workspaces : Returns list of available workspaces. It supports parameters to limit the obtained results
      *
-     * @param name the workSpace&#39;s name. (optional)
-     * @param refresh forces workSpace reconciliation if set to true. (optional)
+     * @param name the workspace&#39;s name. (optional)
+     * @param refresh forces workspace reconciliation if set to true. (optional)
      * @param resourceVersion when specified with a watch call, shows changes that occur after that particular version of a resource. (optional)
-     * @param selector the selector to restrict returned list to workSpaces only with matched labels. (optional)
-     * @param repo the repoURL to restrict returned list workSpaces. (optional)
+     * @param selector the selector to restrict returned list to workspaces only with matched labels. (optional)
+     * @param repo the repoURL to restrict returned list workspaces. (optional)
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Returns list of available workSpaces. It supports parameters to limit the obtained results", operationId = "workSpaceServiceList",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Returns list of available workspaces. It supports parameters to limit the obtained results", operationId = "workspaceServiceList",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceList.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces",
-        produces = { "workSpace/json" }
+        value = "workspaces",
+        produces = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceList> _workSpaceServiceList(@Parameter(example = "the workSpace's name.") @Valid @RequestParam(value = "name", required = false) String name,@Parameter(example = "forces workSpace reconciliation if set to true.") @Valid @RequestParam(value = "refresh", required = false) String refresh,@Parameter(example = "when specified with a watch call, shows changes that occur after that particular version of a resource.") @Valid @RequestParam(value = "resourceVersion", required = false) String resourceVersion,@Parameter(example = "the selector to restrict returned list to workSpaces only with matched labels.") @Valid @RequestParam(value = "selector", required = false) String selector,@Parameter(example = "the repoURL to restrict returned list workSpaces.") @Valid @RequestParam(value = "repo", required = false) String repo) {
-        return workSpaceServiceList(name, refresh, resourceVersion, selector, repo);
+    default ResponseEntity<WorkSpaceList> _workspaceServiceList(@Parameter(example = "the workspace's name.") @Valid @RequestParam(value = "name", required = false) String name,@Parameter(example = "forces workspace reconciliation if set to true.") @Valid @RequestParam(value = "refresh", required = false) String refresh,@Parameter(example = "when specified with a watch call, shows changes that occur after that particular version of a resource.") @Valid @RequestParam(value = "resourceVersion", required = false) String resourceVersion,@Parameter(example = "the selector to restrict returned list to workspaces only with matched labels.") @Valid @RequestParam(value = "selector", required = false) String selector,@Parameter(example = "the repoURL to restrict returned list workspaces.") @Valid @RequestParam(value = "repo", required = false) String repo) {
+        return workspaceServiceList(name, refresh, resourceVersion, selector, repo);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceList> workSpaceServiceList(String name, String refresh, String resourceVersion, String selector, String repo) {
+    default  ResponseEntity<WorkSpaceList> workspaceServiceList(String name, String refresh, String resourceVersion, String selector, String repo) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -408,7 +408,7 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{name}/resource/actions : Returns a list of resource actions
+     * GET workspaces/{name}/resource/actions : Returns a list of resource actions
      *
      * @param name  (required)
      * @param namespace  (optional)
@@ -419,20 +419,20 @@ public interface EnvironmentApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Returns a list of resource actions", operationId = "workSpaceServiceListResourceActions",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Returns a list of resource actions to complete on a resource", operationId = "workspaceServiceListResourceActions",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceResourceActionsListResponse.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{name}/resource/actions",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}/resource/actions",
+        produces = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceResourceActionsListResponse> _workSpaceServiceListResourceActions(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind) {
-        return workSpaceServiceListResourceActions(name, namespace, resourceName, version, group, kind);
+    default ResponseEntity<WorkSpaceResourceActionsListResponse> _workspaceServiceListResourceActions(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind) {
+        return workspaceServiceListResourceActions(name, namespace, resourceName, version, group, kind);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceResourceActionsListResponse> workSpaceServiceListResourceActions(String name, String namespace, String resourceName, String version, String group, String kind) {
+    default  ResponseEntity<WorkSpaceResourceActionsListResponse> workspaceServiceListResourceActions(String name, String namespace, String resourceName, String version, String group, String kind) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -448,7 +448,7 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{name}/events : ListResourceEvents returns a list of event resources
+     * GET workspaces/{name}/events : ListResourceEvents returns a list of event resources
      *
      * @param name  (required)
      * @param resourceNamespace  (optional)
@@ -457,20 +457,20 @@ public interface EnvironmentApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "ListResourceEvents returns a list of event resources", operationId = "workSpaceServiceListResourceEvents",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Returns a list of recsource events", operationId = "workspaceServiceListResourceEvents",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  EventList.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{name}/events",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}/events",
+        produces = { "application/json" }
     )
-    default ResponseEntity<EventList> _workSpaceServiceListResourceEvents(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "resourceNamespace", required = false) String resourceNamespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "resourceUID", required = false) String resourceUID) {
-        return workSpaceServiceListResourceEvents(name, resourceNamespace, resourceName, resourceUID);
+    default ResponseEntity<EventList> _workspaceServiceListResourceEvents(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "resourceNamespace", required = false) String resourceNamespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "resourceUID", required = false) String resourceUID) {
+        return workspaceServiceListResourceEvents(name, resourceNamespace, resourceName, resourceUID);
     }
 
     // Override this method
-    default  ResponseEntity<EventList> workSpaceServiceListResourceEvents(String name, String resourceNamespace, String resourceName, String resourceUID) {
+    default  ResponseEntity<EventList> workspaceServiceListResourceEvents(String name, String resourceNamespace, String resourceName, String resourceUID) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -486,9 +486,9 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{workSpaceName}/managed-resources : ManagedResources returns list of managed resources
+     * GET workspaces/{workspaceName}/managed-resources : ManagedResources returns list of managed resources
      *
-     * @param workSpaceName  (required)
+     * @param workspaceName  (required)
      * @param namespace  (optional)
      * @param name  (optional)
      * @param version  (optional)
@@ -497,20 +497,20 @@ public interface EnvironmentApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "ManagedResources returns list of managed resources", operationId = "workSpaceServiceManagedResources",  tags={ "WorkSpaceService", })
+    @Operation(summary = "ManagedResources returns list of managed resources", operationId = "workspaceServiceManagedResources",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceManagedResourcesResponse.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{workSpaceName}/managed-resources",
-        produces = { "workSpace/json" }
+        value = "workspaces/{workspaceName}/managed-resources",
+        produces = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceManagedResourcesResponse> _workSpaceServiceManagedResources(@Parameter(example = "",required=true) @PathVariable("workSpaceName") String workSpaceName,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "name", required = false) String name,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind) {
-        return workSpaceServiceManagedResources(workSpaceName, namespace, name, version, group, kind);
+    default ResponseEntity<WorkSpaceManagedResourcesResponse> _workspaceServiceManagedResources(@Parameter(example = "",required=true) @PathVariable("workspaceName") String workspaceName,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "name", required = false) String name,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind) {
+        return workspaceServiceManagedResources(workspaceName, namespace, name, version, group, kind);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceManagedResourcesResponse> workSpaceServiceManagedResources(String workSpaceName, String namespace, String name, String version, String group, String kind) {
+    default  ResponseEntity<WorkSpaceManagedResourcesResponse> workspaceServiceManagedResources(String workspaceName, String namespace, String name, String version, String group, String kind) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -526,28 +526,28 @@ public interface EnvironmentApi {
 
 
     /**
-     * PATCH /api//workSpaces/{name} : Patch patch an workSpace
+     * PATCH workspaces/{name} : Patch patch an workspace
      *
      * @param name  (required)
      * @param body  (required)
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Patch patch an workSpace", operationId = "workSpaceServicePatch",  tags={ "WorkSpaceService", })
+    @Operation(summary = "patch an workspace", operationId = "workspaceServicePatch",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpace.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @PatchMapping(
-        value = "/api//workSpaces/{name}",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
+        value = "workspaces/{name}",
+        produces = { "application/json" },
+        consumes = { "application/json" }
     )
-    default ResponseEntity<WorkSpace> _workSpaceServicePatch(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpaceWorkSpacePatchRequest body) {
-        return workSpaceServicePatch(name, body);
+    default ResponseEntity<WorkSpace> _workspaceServicePatch(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpaceWorkSpacePatchRequest body) {
+        return workspaceServicePatch(name, body);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpace> workSpaceServicePatch(String name, WorkSpaceWorkSpacePatchRequest body) {
+    default  ResponseEntity<WorkSpace> workspaceServicePatch(String name, WorkSpaceWorkSpacePatchRequest body) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -563,7 +563,7 @@ public interface EnvironmentApi {
 
 
     /**
-     * POST /api//workSpaces/{name}/resource : PatchResource patch single workSpace resource
+     * POST workspaces/{name}/resources : PatchResource patch single workspace resource
      *
      * @param name  (required)
      * @param body  (required)
@@ -576,21 +576,21 @@ public interface EnvironmentApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "PatchResource patch single workSpace resource", operationId = "workSpaceServicePatchResource",  tags={ "WorkSpaceService", })
+    @Operation(summary = "PatchResource patch single workspace resource", operationId = "workspaceServicePatchResource",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceWorkSpaceResourceResponse.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @PostMapping(
-        value = "/api//workSpaces/{name}/resource",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
+        value = "workspaces/{name}/resources",
+        produces = { "application/json" },
+        consumes = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceWorkSpaceResourceResponse> _workSpaceServicePatchResource(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody String body,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind,@Parameter(example = "") @Valid @RequestParam(value = "patchType", required = false) String patchType) {
-        return workSpaceServicePatchResource(name, body, namespace, resourceName, version, group, kind, patchType);
+    default ResponseEntity<WorkSpaceWorkSpaceResourceResponse> _workspaceServicePatchResource(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody String body,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind,@Parameter(example = "") @Valid @RequestParam(value = "patchType", required = false) String patchType) {
+        return workspaceServicePatchResource(name, body, namespace, resourceName, version, group, kind, patchType);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceWorkSpaceResourceResponse> workSpaceServicePatchResource(String name, String body, String namespace, String resourceName, String version, String group, String kind, String patchType) {
+    default  ResponseEntity<WorkSpaceWorkSpaceResourceResponse> workspaceServicePatchResource(String name, String body, String namespace, String resourceName, String version, String group, String kind, String patchType) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -606,9 +606,9 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{workSpaceName}/resource-tree : ResourceTree returns resource tree
+     * GET workspaces/{workspaceName}/resource-tree : ResourceTree returns resource tree
      *
-     * @param workSpaceName  (required)
+     * @param workspaceName  (required)
      * @param namespace  (optional)
      * @param name  (optional)
      * @param version  (optional)
@@ -617,20 +617,20 @@ public interface EnvironmentApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "ResourceTree returns resource tree", operationId = "workSpaceServiceResourceTree",  tags={ "WorkSpaceService", })
+    @Operation(summary = "ResourceTree returns resource tree", operationId = "workspaceServiceResourceTree",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceTree.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{workSpaceName}/resource-tree",
-        produces = { "workSpace/json" }
+        value = "workspaces/{workspaceName}/resource-tree",
+        produces = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceTree> _workSpaceServiceResourceTree(@Parameter(example = "",required=true) @PathVariable("workSpaceName") String workSpaceName,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "name", required = false) String name,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind) {
-        return workSpaceServiceResourceTree(workSpaceName, namespace, name, version, group, kind);
+    default ResponseEntity<WorkSpaceTree> _workspaceServiceResourceTree(@Parameter(example = "",required=true) @PathVariable("workspaceName") String workspaceName,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "name", required = false) String name,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind) {
+        return workspaceServiceResourceTree(workspaceName, namespace, name, version, group, kind);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceTree> workSpaceServiceResourceTree(String workSpaceName, String namespace, String name, String version, String group, String kind) {
+    default  ResponseEntity<WorkSpaceTree> workspaceServiceResourceTree(String workspaceName, String namespace, String name, String version, String group, String kind) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -646,27 +646,27 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{name}/revisions/{revision}/metadata : Get the meta-data (author, date, tags, message) for a specific revision of the workSpace
+     * GET workspaces/{name}/revisions/{revision}/metadata : Get the meta-data (author, date, tags, message) for a specific revision of the workspace
      *
-     * @param name the workSpace&#39;s name (required)
+     * @param name the workspace&#39;s name (required)
      * @param revision the revision of the app (required)
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Get the meta-data (author, date, tags, message) for a specific revision of the workSpace", operationId = "workSpaceServiceRevisionMetadata", tags={ "WorkSpaceService", })
+    @Operation(summary = "Get the meta-data (author, date, tags, message) for a specific revision of the workspace", operationId = "workspaceServiceRevisionMetadata", tags={ "WorkSpaceService" })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RevisionMetadata.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{name}/revisions/{revision}/metadata",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}/revisions/{revision}/metadata",
+        produces = { "application/json" }
     )
-    default ResponseEntity<RevisionMetadata> _workSpaceServiceRevisionMetadata(@Parameter(example = "the workSpace's name",required=true) @PathVariable("name") String name,@Parameter(example = "the revision of the app",required=true) @PathVariable("revision") String revision) {
-        return workSpaceServiceRevisionMetadata(name, revision);
+    default ResponseEntity<RevisionMetadata> _workspaceServiceRevisionMetadata(@Parameter(example = "the workspace's name",required=true) @PathVariable("name") String name,@Parameter(example = "the revision of the app",required=true) @PathVariable("revision") String revision) {
+        return workspaceServiceRevisionMetadata(name, revision);
     }
 
     // Override this method
-    default  ResponseEntity<RevisionMetadata> workSpaceServiceRevisionMetadata(String name, String revision) {
+    default  ResponseEntity<RevisionMetadata> workspaceServiceRevisionMetadata(String name, String revision) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -682,28 +682,28 @@ public interface EnvironmentApi {
 
 
     /**
-     * POST /api//workSpaces/{name}/rollback : Rollback syncs an workSpace to its target state
+     * POST workspaces/{name}/rollback : Rollback syncs an workspace to its target state
      *
      * @param name  (required)
      * @param body  (required)
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Rollback syncs an workSpace to its target state", operationId = "workSpaceServiceRollback",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Rollback syncs an workspace to its target state", operationId = "workspaceServiceRollback",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpace.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @PostMapping(
-        value = "/api//workSpaces/{name}/rollback",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
+        value = "workspaces/{name}/rollback",
+        produces = { "application/json" },
+        consumes = { "application/json" }
     )
-    default ResponseEntity<WorkSpace> _workSpaceServiceRollback(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpaceWorkSpaceRollbackRequest body) {
-        return workSpaceServiceRollback(name, body);
+    default ResponseEntity<WorkSpace> _workspaceServiceRollback(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpaceWorkSpaceRollbackRequest body) {
+        return workspaceServiceRollback(name, body);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpace> workSpaceServiceRollback(String name, WorkSpaceWorkSpaceRollbackRequest body) {
+    default  ResponseEntity<WorkSpace> workspaceServiceRollback(String name, WorkSpaceWorkSpaceRollbackRequest body) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -719,7 +719,7 @@ public interface EnvironmentApi {
 
 
     /**
-     * POST /api//workSpaces/{name}/resource/actions : Run resource action
+     * POST workspaces/{name}/resource/actions : Run resource action
      *
      * @param name  (required)
      * @param body  (required)
@@ -731,21 +731,21 @@ public interface EnvironmentApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Run resource action", operationId = "workSpaceServiceRunResourceAction",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Run resource action", operationId = "workspaceServiceRunResourceAction",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceWorkSpaceResponse.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @PostMapping(
-        value = "/api//workSpaces/{name}/resource/actions",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
+        value = "workspaces/{name}/resource/actions",
+        produces = { "application/json" },
+        consumes = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceWorkSpaceResponse> _workSpaceServiceRunResourceAction(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody String body,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind) {
-        return workSpaceServiceRunResourceAction(name, body, namespace, resourceName, version, group, kind);
+    default ResponseEntity<WorkSpaceWorkSpaceResponse> _workspaceServiceRunResourceAction(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody String body,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName,@Parameter(example = "") @Valid @RequestParam(value = "version", required = false) String version,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind) {
+        return workspaceServiceRunResourceAction(name, body, namespace, resourceName, version, group, kind);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceWorkSpaceResponse> workSpaceServiceRunResourceAction(String name, String body, String namespace, String resourceName, String version, String group, String kind) {
+    default  ResponseEntity<WorkSpaceWorkSpaceResponse> workspaceServiceRunResourceAction(String name, String body, String namespace, String resourceName, String version, String group, String kind) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -761,28 +761,28 @@ public interface EnvironmentApi {
 
 
     /**
-     * POST /api//workSpaces/{name}/sync : Sync syncs an workSpace to its target state
+     * POST workspaces/{name}/sync : syncs an workspace to its target state
      *
      * @param name  (required)
      * @param body  (required)
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Sync syncs an workSpace to its target state", operationId = "workSpaceServiceSync", tags={ "WorkSpaceService", })
+    @Operation(summary = "Syncs an workspace to its target state", operationId = "workspaceServiceSync", tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpace.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @PostMapping(
-        value = "/api//workSpaces/{name}/sync",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
+        value = "workspaces/{name}/sync",
+        produces = { "application/json" },
+        consumes = { "application/json" }
     )
-    default ResponseEntity<WorkSpace> _workSpaceServiceSync(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpaceWorkSpaceSyncRequest body) {
-        return workSpaceServiceSync(name, body);
+    default ResponseEntity<WorkSpace> _workspaceServiceSync(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpaceWorkSpaceSyncRequest body) {
+        return workspaceServiceSync(name, body);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpace> workSpaceServiceSync(String name, WorkSpaceWorkSpaceSyncRequest body) {
+    default  ResponseEntity<WorkSpace> workspaceServiceSync(String name, WorkSpaceWorkSpaceSyncRequest body) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -798,55 +798,55 @@ public interface EnvironmentApi {
 
 
     /**
-     * DELETE /api//workSpaces/{name}/operation : Terminates the currently running operation
+     * DELETE workspaces/{name}/operation : Terminates the currently running operation
      *
      * @param name  (required)
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Terminates the currently running operation", operationId = "workSpaceServiceTerminateOperation",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Terminates the currently running operation", operationId = "workspaceServiceTerminateOperation",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  Object.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @DeleteMapping(
-        value = "/api//workSpaces/{name}/operation",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}/operation",
+        produces = { "application/json" }
     )
-    default ResponseEntity<Object> _workSpaceServiceTerminateOperation(@Parameter(example = "",required=true) @PathVariable("name") String name) {
-        return workSpaceServiceTerminateOperation(name);
+    default ResponseEntity<Object> _workspaceServiceTerminateOperation(@Parameter(example = "",required=true) @PathVariable("name") String name) {
+        return workspaceServiceTerminateOperation(name);
     }
 
     // Override this method
-    default  ResponseEntity<Object> workSpaceServiceTerminateOperation(String name) {
+    default  ResponseEntity<Object> workspaceServiceTerminateOperation(String name) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 
 
     /**
-     * PUT /api//workSpaces/{workSpace.metadata.name} : Update updates an workSpace
+     * PUT workspaces/{name} : Update updates an workspace
      *
-     * @param workSpaceMetadataName Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names +optional (required)
+     * @param workspaceMetadataName Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. 
      * @param body  (required)
      * @param validate  (optional)
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Update updates an workSpace", operationId = "workSpaceServiceUpdate",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Updates an workspace", operationId = "workspaceServiceUpdate",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpace.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @PutMapping(
-        value = "/api//workSpaces/{workSpace.metadata.name}",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
+        value = "workspaces/{name}",
+        produces = { "application/json" },
+        consumes = { "application/json" }
     )
-    default ResponseEntity<WorkSpace> _workSpaceServiceUpdate(@Parameter(example = "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names +optional",required=true) @PathVariable("workSpace.metadata.name") String workSpaceMetadataName,@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpace body,@Parameter(example = "") @Valid @RequestParam(value = "validate", required = false) Boolean validate) {
-        return workSpaceServiceUpdate(workSpaceMetadataName, body, validate);
+    default ResponseEntity<WorkSpace> _workspaceServiceUpdate(@Parameter(example = "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated",required=true) @PathVariable("name") String workspaceMetadataName,@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpace body,@Parameter(example = "") @Valid @RequestParam(value = "validate", required = false) Boolean validate) {
+        return workspaceServiceUpdate(workspaceMetadataName, body, validate);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpace> workSpaceServiceUpdate(String workSpaceMetadataName, WorkSpace body, Boolean validate) {
+    default  ResponseEntity<WorkSpace> workspaceServiceUpdate(String workspaceMetadataName, WorkSpace body, Boolean validate) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -862,7 +862,7 @@ public interface EnvironmentApi {
 
 
     /**
-     * PUT /api//workSpaces/{name}/spec : UpdateSpec updates an workSpace spec
+     * PUT workspaces/{name}/spec : UpdateSpec updates an workspace spec
      *
      * @param name  (required)
      * @param body  (required)
@@ -870,21 +870,21 @@ public interface EnvironmentApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "UpdateSpec updates an workSpace spec", operationId = "workSpaceServiceUpdateSpec",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Updates an workspace spec", operationId = "workspaceServiceUpdateSpec",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  WorkSpaceSpec.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @PutMapping(
-        value = "/api//workSpaces/{name}/spec",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
+        value = "workspaces/{name}/spec",
+        produces = { "application/json" },
+        consumes = { "application/json" }
     )
-    default ResponseEntity<WorkSpaceSpec> _workSpaceServiceUpdateSpec(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpaceSpec body,@Parameter(example = "") @Valid @RequestParam(value = "validate", required = false) Boolean validate) {
-        return workSpaceServiceUpdateSpec(name, body, validate);
+    default ResponseEntity<WorkSpaceSpec> _workspaceServiceUpdateSpec(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody WorkSpaceSpec body,@Parameter(example = "") @Valid @RequestParam(value = "validate", required = false) Boolean validate) {
+        return workspaceServiceUpdateSpec(name, body, validate);
     }
 
     // Override this method
-    default  ResponseEntity<WorkSpaceSpec> workSpaceServiceUpdateSpec(String name, WorkSpaceSpec body, Boolean validate) {
+    default  ResponseEntity<WorkSpaceSpec> workspaceServiceUpdateSpec(String name, WorkSpaceSpec body, Boolean validate) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
@@ -900,7 +900,7 @@ public interface EnvironmentApi {
 
 
     /**
-     * GET /api//workSpaces/{name}/logs : Returns stream of log entries for the specified workSpace
+     * GET workspaces/{name}/logs : Returns stream of log entries for the specified workspace
      *
      * @param name  (required)
      * @param namespace  (optional)
@@ -919,20 +919,20 @@ public interface EnvironmentApi {
      * @return A successful response.(streaming responses) (status code 200)
      *         or An unexpected error response. (status code 500)
      */
-    @Operation(summary = "Returns stream of log entries for the specified workSpace", operationId = "workSpaceServiceWorkSpaceLogs",  tags={ "WorkSpaceService", })
+    @Operation(summary = "Returns stream of log entries for the specified workspace", operationId = "workspaceServiceWorkSpaceLogs",  tags={ "WorkSpaceService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.(streaming responses)", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  InlineResponse200.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//workSpaces/{name}/logs",
-        produces = { "workSpace/json" }
+        value = "workspaces/{name}/logs",
+        produces = { "application/json" }
     )
-    default ResponseEntity<InlineResponse200> _workSpaceServiceWorkSpaceLogs(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "podName", required = false) String podName,@Parameter(example = "") @Valid @RequestParam(value = "container", required = false) String container,@Parameter(example = "") @Valid @RequestParam(value = "sinceSeconds", required = false) String sinceSeconds,@Parameter(example = "Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.") @Valid @RequestParam(value = "sinceTime.seconds", required = false) String sinceTimeSeconds,@Parameter(example = "Non-negative fractions of a second at nanosecond resolution. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be from 0 to 999,999,999 inclusive. This field may be limited in precision depending on context.") @Valid @RequestParam(value = "sinceTime.nanos", required = false) Integer sinceTimeNanos,@Parameter(example = "") @Valid @RequestParam(value = "tailLines", required = false) String tailLines,@Parameter(example = "") @Valid @RequestParam(value = "follow", required = false) Boolean follow,@Parameter(example = "") @Valid @RequestParam(value = "untilTime", required = false) String untilTime,@Parameter(example = "") @Valid @RequestParam(value = "filter", required = false) String filter,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName) {
-        return workSpaceServiceWorkSpaceLogs(name, namespace, podName, container, sinceSeconds, sinceTimeSeconds, sinceTimeNanos, tailLines, follow, untilTime, filter, kind, group, resourceName);
+    default ResponseEntity<InlineResponse200> _workspaceServiceWorkSpaceLogs(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "") @Valid @RequestParam(value = "namespace", required = false) String namespace,@Parameter(example = "") @Valid @RequestParam(value = "podName", required = false) String podName,@Parameter(example = "") @Valid @RequestParam(value = "container", required = false) String container,@Parameter(example = "") @Valid @RequestParam(value = "sinceSeconds", required = false) String sinceSeconds,@Parameter(example = "Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.") @Valid @RequestParam(value = "sinceTime.seconds", required = false) String sinceTimeSeconds,@Parameter(example = "Non-negative fractions of a second at nanosecond resolution. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be from 0 to 999,999,999 inclusive. This field may be limited in precision depending on context.") @Valid @RequestParam(value = "sinceTime.nanos", required = false) Integer sinceTimeNanos,@Parameter(example = "") @Valid @RequestParam(value = "tailLines", required = false) String tailLines,@Parameter(example = "") @Valid @RequestParam(value = "follow", required = false) Boolean follow,@Parameter(example = "") @Valid @RequestParam(value = "untilTime", required = false) String untilTime,@Parameter(example = "") @Valid @RequestParam(value = "filter", required = false) String filter,@Parameter(example = "") @Valid @RequestParam(value = "kind", required = false) String kind,@Parameter(example = "") @Valid @RequestParam(value = "group", required = false) String group,@Parameter(example = "") @Valid @RequestParam(value = "resourceName", required = false) String resourceName) {
+        return workspaceServiceWorkSpaceLogs(name, namespace, podName, container, sinceSeconds, sinceTimeSeconds, sinceTimeNanos, tailLines, follow, untilTime, filter, kind, group, resourceName);
     }
 
     // Override this method
-    default  ResponseEntity<InlineResponse200> workSpaceServiceWorkSpaceLogs(String name, String namespace, String podName, String container, String sinceSeconds, String sinceTimeSeconds, Integer sinceTimeNanos, String tailLines, Boolean follow, String untilTime, String filter, String kind, String group, String resourceName) {
+    default  ResponseEntity<InlineResponse200> workspaceServiceWorkSpaceLogs(String name, String namespace, String podName, String container, String sinceSeconds, String sinceTimeSeconds, Integer sinceTimeNanos, String tailLines, Boolean follow, String untilTime, String filter, String kind, String group, String resourceName) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {

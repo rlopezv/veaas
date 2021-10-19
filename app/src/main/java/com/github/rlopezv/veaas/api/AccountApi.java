@@ -47,7 +47,7 @@ public interface AccountApi {
     }
 
     /**
-     * GET /api//account/check/{resource}/{action}/{subresource} : Checks if the current account has permission to perform an action
+     * GET account/check/{resource}/{action}/{subresource} : Checks if the current account has permission to perform an action
      *
      * @param resource  (required)
      * @param action  (required)
@@ -55,6 +55,17 @@ public interface AccountApi {
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
      */
+    
+//     @Operation(summary = "Add a new pet to the store", description = "Add a new pet to the store", security = {
+//         @SecurityRequirement(name = "petstore_auth", scopes = { "write:pets", "read:pets" }) }, tags = { "pet" })
+// @ApiResponses(value = {
+//         @ApiResponse(responseCode = "200", description = "Successful operation", content = { @Content(mediaType = "application/xml", schema = @Schema(implementation = Pet.class)), @Content(mediaType = "application/json", schema = @Schema(implementation = Pet.class)) }),
+//         @ApiResponse(responseCode = "405", description = "Invalid input")
+// })
+// @PostMapping(value = "/pet", consumes = { "application/json", "application/xml", "application/x-www-form-urlencoded" })
+// default void addPet(
+//         @Parameter(description = "Create a new pet in the store", required = true) @Valid @RequestBody Pet pet) {
+
     @Operation(summary = "Checks if the current account has permission to perform an action", operationId = "accountServiceCheck",  tags={ "AccountService", })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", 
@@ -62,8 +73,8 @@ public interface AccountApi {
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", 
         schema = @Schema(implementation =   RuntimeError.class))})})
     @GetMapping(
-        value = "/api//account/check/{resource}/{action}/{subresource}",
-        produces = { "workSpace/json" }
+        value = "check/{resource}/{action}/{subresource}",
+        produces = { "application/json" }
     )
     default ResponseEntity<AccountCheckResponse> _accountServiceCheck(@Parameter(example = "",required=true) @PathVariable("resource") String resource,@Parameter(example = "",required=true) @PathVariable("action") String action,@Parameter(example = "",required=true) @PathVariable("subresource") String subresource) {
         return accountServiceCheck(resource, action, subresource);
@@ -86,7 +97,7 @@ public interface AccountApi {
 
 
     /**
-     * POST /api//account/{name}/token : Creates a token for the account
+     * POST account/{name}/token : Creates a token for the account
      *
      * @param name  (required)
      * @param body  (required)
@@ -98,9 +109,9 @@ public interface AccountApi {
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  AccountCreateTokenResponse.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @PostMapping(
-        value = "/api//account/{name}/token",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
+        value = "{name}/token",
+        produces = { "application/json" },
+        consumes = { "application/json" }
     )
     default ResponseEntity<AccountCreateTokenResponse> _accountServiceCreateToken(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "" ,required=true )  @Valid @RequestBody AccountCreateTokenRequest body) {
         return accountServiceCreateToken(name, body);
@@ -123,7 +134,7 @@ public interface AccountApi {
 
 
     /**
-     * DELETE /api//account/{name}/token/{id} : Deletes a token for the account
+     * DELETE account/{name}/token/{id} : Deletes a token for the account
      *
      * @param name  (required)
      * @param id  (required)
@@ -135,8 +146,8 @@ public interface AccountApi {
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  Object.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @DeleteMapping(
-        value = "/api//account/{name}/token/{id}",
-        produces = { "workSpace/json" }
+        value = "{name}/token/{id}",
+        produces = { "application/json" }
     )
     default ResponseEntity<Object> _accountServiceDeleteToken(@Parameter(example = "",required=true) @PathVariable("name") String name,@Parameter(example = "",required=true) @PathVariable("id") String id) {
         return accountServiceDeleteToken(name, id);
@@ -150,7 +161,7 @@ public interface AccountApi {
 
 
     /**
-     * GET /api//account/{name} : GetAccount returns an account
+     * GET account/{name} : GetAccount returns an account
      *
      * @param name  (required)
      * @return A successful response. (status code 200)
@@ -161,8 +172,8 @@ public interface AccountApi {
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  AccountAccount.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//account/{name}",
-        produces = { "workSpace/json" }
+        value = "{name}",
+        produces = { "application/json" }
     )
     default ResponseEntity<AccountAccount> _accountServiceGetAccount(@Parameter(example = "",required=true) @PathVariable("name") String name) {
         return accountServiceGetAccount(name);
@@ -185,7 +196,7 @@ public interface AccountApi {
 
 
     /**
-     * GET /api//account : Returns the list of accounts
+     * GET account : Returns the list of accounts
      *
      * @return A successful response. (status code 200)
      *         or An unexpected error response. (status code 500)
@@ -195,8 +206,8 @@ public interface AccountApi {
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  AccountAccountsList.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @GetMapping(
-        value = "/api//account",
-        produces = { "workSpace/json" }
+        value = "",
+        produces = { "application/json" }
     )
     default ResponseEntity<AccountAccountsList> _accountServiceListAccounts() {
         return accountServiceListAccounts();
@@ -219,7 +230,7 @@ public interface AccountApi {
 
 
     /**
-     * PUT /api//account/password : Updates an account&#39;s password to a new value
+     * PUT account/password : Updates an account&#39;s password to a new value
      *
      * @param body  (required)
      * @return A successful response. (status code 200)
@@ -230,9 +241,9 @@ public interface AccountApi {
         @ApiResponse(responseCode = "200", description = "A successful response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  Object.class))}),
         @ApiResponse(responseCode = "500", description = "An unexpected error response.", content = { @Content(mediaType = "application/json", schema = @Schema(implementation =  RuntimeError.class))})})
     @PutMapping(
-        value = "/api//account/password",
-        produces = { "workSpace/json" },
-        consumes = { "workSpace/json" }
+        value = "password",
+        produces = { "application/json" },
+        consumes = { "application/json" }
     )
     default ResponseEntity<Object> _accountServiceUpdatePassword(@Parameter(example = "" ,required=true )  @Valid @RequestBody AccountUpdatePasswordRequest body) {
         return accountServiceUpdatePassword(body);

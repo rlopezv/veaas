@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "api/accounts")
-public class AccountApiController implements AccountApi {
+@RequestMapping(path = "api/environment")
+public class EnvironmentApiController implements EnvironmentApi {
 
 
 }
